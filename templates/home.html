@@ -6,7 +6,7 @@
         {% load static %}
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-        <link rel="icon" href="{% static 'img/favicon.png' %}" type="image/png">
+        <link rel="icon" href="{% static '/img/favicon.png' %}" type="image/png">
         <title>Real State Multi</title>
         <!-- Bootstrap CSS -->
         <link rel="stylesheet" href="{% static '/css/bootstrap.css' %}">
@@ -38,7 +38,7 @@
 						</button>
 						<!-- Collect the nav links, forms, and other content for toggling -->
 						<div class="collapse navbar-collapse offset" id="navbarSupportedContent">
-							<ul class="nav navbar-nav menu_nav ml-auto">
+							<ul class="nav navbar-nav menu_nav ml-auto nav-background">
 								<li class="nav-item active"><a class="nav-link" href="{% url 'home' %}">Home</a></li>
 								<li class="nav-item"><a class="nav-link" href="{% url 'about' %}">About</a></li>
 								<li class="nav-item"><a class="nav-link" href="properties.html">Properties</a></li>
