@@ -1,6 +1,7 @@
 
 /* Welcome Area css
 ============================================================================================ */
+
 .welcome_area{
 	padding-top: 150px;
 }
@@ -20,6 +21,8 @@
 		font-size: 36px;
 		margin-bottom: 18px;
 	}
+
+
 	p{
 		max-width: 495px;
 		line-height: 24px;
@@ -28,6 +31,19 @@
 		font-weight: normal;
 		margin-bottom: 40px;
 	}
+
+
+}
+
+
+#aboutUSParagraph{
+
+		max-width: 495px;
+		line-height: 24px;
+		font-family: $rob;
+		font-size: 14px;
+		font-weight: normal;
+		margin-bottom: 40px;
 }
 .wel_item{
 	border: 1px solid #eeeeee;
