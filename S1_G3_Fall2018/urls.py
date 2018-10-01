@@ -23,4 +23,8 @@ urlpatterns = [
     path('', views.home, name='home'),
 
     path('about', views.about, name='about'),
+
+    path('agents', views.agents, name='agents'),
+
+    path('properties', views.properties, name='properties'),
 ]
