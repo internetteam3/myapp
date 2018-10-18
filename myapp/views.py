@@ -9,8 +9,8 @@ def home(request):
 def about(request):
     return render(request, 'about.html')
 
-def agents(request):
-    return render(request, 'agents.html')
+def sportEquip(request):
+    return render(request, 'sportequip.html')
 
 def properties(request):
     return render(request, 'properties.html')
