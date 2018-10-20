@@ -94,4 +94,4 @@ class PropertyImages(models.Model):
     propertyImageDescription = models.TextField()
 
     def __str__(self):
-        return  self.propertyImageDescription
+        return self.propertyImageDescription
