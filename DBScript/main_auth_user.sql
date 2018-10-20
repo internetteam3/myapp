@@ -1,0 +1,1 @@
+INSERT INTO auth_user (id, password, last_login, is_superuser, username, first_name, email, is_staff, is_active, date_joined, last_name) VALUES (1, 'pbkdf2_sha256$120000$HbhkyQAKVsPo$799/K1hJWsykKDRNpL0OETghz6AlBjb53BiKWOqMDAM=', '2018-10-20 02:20:10.564009', 1, 'team3team', '', 'neel.4747@gmail.com', 1, 1, '2018-10-20 02:20:04.356351', '');

@@ -1,0 +1,1 @@
+INSERT INTO myapp_city (cityID, cityName, countryName_id, provinceID_id) VALUES (1, 'Windsor', 1, 1);
