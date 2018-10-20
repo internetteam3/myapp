@@ -1,6 +1,7 @@
 from django.db import models
 import datetime
 from django.contrib.auth.models import User
+from enum import Enum
 from django.urls import reverse
 from django.utils import timezone
 
@@ -35,67 +36,49 @@ class City(models.Model):
         return self.cityName
 
 
-class PropertyCategory(models.Model):
-    propertyCategory = models.IntegerField(primary_key=True)
-    SingleHouse = models.BooleanField(default=True)
-    AttachedHouse = models.BooleanField()
-    memberName = models.CharField(max_length=200)
-    TownHouse = models.BooleanField()
-    Appartment = models.BooleanField()
-    Store = models.BooleanField()
-    Farm = models.BooleanField()
-    Factory = models.BooleanField()
-    Mall = models.BooleanField()
-    Building = models.BooleanField()
-    Other = models.CharField(max_length=200)
-
-    def __str__(self):
-        return self.propertyCategory
+class PropertyCategory(Enum):
+    SingleHouse = "Single House"
+    AttachedHouse = "Attached House"
+    TownHouse = "Town House"
+    Appartment = "Appartment"
+    Store = "Store"
+    Farm = "Farm"
+    Factory = "Factory"
+    Mall = "Mall"
+    Building = "Building"
+    Other = "Other"
 
 
-class Property_Sector(models.Model):
-    propertySector = models.IntegerField(primary_key=True)
-    Private = models.BooleanField(default=True)
-    Residential = models.BooleanField()
-    Commerical = models.BooleanField()
-    Goevernment = models.BooleanField()
-    Rural = models.BooleanField()
-    Other = models.CharField(max_length=200)
 
-    def __str__(self):
-        return self.propertySector
+class Property_Sector(Enum):
+    Private = "Private"
+    Residential = "Residential"
+    Commerical = "Commercial"
+    Government = "Government"
+    Rural = "Rural"
+    Other = "Other"
 
 
-class Property_Facing(models.Model):
-    propertyFacing = models.IntegerField(primary_key=True)
-    North = models.BooleanField(default=True)
-    South = models.BooleanField()
-    East = models.BooleanField()
-    West = models.BooleanField()
-    Other = models.CharField(max_length=200)
 
-    def __str__(self):
-        return self.propertyFacing
+class Property_Facing(Enum):
+    North = "North"
+    South = "South"
+    East = "East"
+    West = "West"
+    Other = "Other"
 
 
-class PropertyImages(models.Model):
-    propertyImageID = models.IntegerField(primary_key=True)
-    # propertyID = models.ForeignKey(Property, on_delete=models.DO_NOTHING)
-    propertyImage = models.ImageField(blank=True, null=True)
-    propertyImageDescription = models.TextField()
 
-    def __str__(self):
-        return self.propertyImageID
 
 
 class Property(models.Model):
     propertyID = models.IntegerField(primary_key=True, null=False)
     propertyTitle = models.CharField(max_length=255)
-    propertyCategory = models.ForeignKey(PropertyCategory, on_delete=models.DO_NOTHING)
-    propertySector = models.ForeignKey(Property_Sector, on_delete=models.DO_NOTHING)
-    propertyFacing = models.ForeignKey(Property_Facing, on_delete=models.DO_NOTHING)
+    propertyCategory = models.CharField(max_length=255, null=False, choices=[(tag.name, tag.value) for tag in PropertyCategory])
+    propertySector = models.CharField(max_length=255, null=False, choices=[(tag.name, tag.value) for tag in Property_Sector])
+    propertyFacing = models.CharField(max_length=255, null=False, choices=[(tag.name, tag.value) for tag in Property_Facing])
     propertyCountry = models.ForeignKey(Country, on_delete=models.DO_NOTHING)
-    propertyImages = models.ForeignKey(PropertyImages, on_delete=models.DO_NOTHING)
+    # propertyImages = models.ForeignKey(PropertyImages, on_delete=models.DO_NOTHING)
     propertyProvince = models.ForeignKey(Province, on_delete=models.DO_NOTHING)
     propertyCity = models.ForeignKey(City, on_delete=models.DO_NOTHING)
     propertyStreet = models.CharField(max_length=255, null=False)
@@ -113,3 +96,14 @@ class Property(models.Model):
 
     def __str__(self):
         return self.propertyTitle
+
+
+
+class PropertyImages(models.Model):
+    propertyImageID = models.IntegerField(primary_key=True)
+    propertyID = models.ForeignKey(Property, on_delete=models.DO_NOTHING)
+    propertyImage = models.ImageField(blank=True, null=True)
+    propertyImageDescription = models.TextField()
+
+    def __str__(self):
+        return self.propertyImageDescription
