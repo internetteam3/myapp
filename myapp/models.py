@@ -90,7 +90,7 @@ class Property(models.Model):
 class PropertyImages(models.Model):
     propertyImageID = models.IntegerField(primary_key=True)
     propertyID = models.ForeignKey(Property, on_delete=models.DO_NOTHING)
-    propertyImage = models.BinaryField(blank=True)
+    propertyImage = models.ImageField(blank=True, null=True)
     propertyImageDescription = models.TextField()
 
     def __str__(self):
