@@ -1,0 +1,21 @@
+
+import django
+from myapp.models import Property, PropertyCategory, Property_Sector, Property_Facing, PropertyImages, Country, Province, City
+
+Property.objects.all()
+
+PropertyCategory.objects.all()
+
+Property_Sector.objects.all()
+
+Property_Facing.objects.all()
+
+PropertyImages.objects.all()
+
+Country.objects.all()
+
+Province.objects.all()
+
+City.objects.all()
+
+
