@@ -1,7 +1,6 @@
 from django.db import models
 import datetime
 from django.contrib.auth.models import User
-from enum import Enum
 from django.urls import reverse
 from django.utils import timezone
 
@@ -36,49 +35,39 @@ class City(models.Model):
         return self.cityName
 
 
-class PropertyCategory(Enum):
-    SingleHouse = "Single House"
-    AttachedHouse = "Attached House"
-    TownHouse = "Town House"
-    Appartment = "Appartment"
-    Store = "Store"
-    Farm = "Farm"
-    Factory = "Factory"
-    Mall = "Mall"
-    Building = "Building"
-    Other = "Other"
+class PropertyCategory(models.Model):
+    propertyCategory = models.IntegerField(primary_key=True)
+    propertyCategoryName = models.CharField(max_length=200)
+
+    def __str__(self):
+        return self.propertyCategoryName
+
+
+class Property_Sector(models.Model):
+    propertySector = models.IntegerField(primary_key=True)
+    propertySectorName = models.CharField(max_length=200)
+
+    def __str__(self):
+        return self.propertySectorName
 
 
 
-class Property_Sector(Enum):
-    Private = "Private"
-    Residential = "Residential"
-    Commerical = "Commercial"
-    Government = "Government"
-    Rural = "Rural"
-    Other = "Other"
+class Property_Facing(models.Model):
+    propertyFacing = models.IntegerField(primary_key=True)
+    propertyFacingName = models.CharField(max_length=200)
 
-
-
-class Property_Facing(Enum):
-    North = "North"
-    South = "South"
-    East = "East"
-    West = "West"
-    Other = "Other"
-
-
-
+    def __str__(self):
+        return self.propertyFacingName
 
 
 class Property(models.Model):
     propertyID = models.IntegerField(primary_key=True, null=False)
     propertyTitle = models.CharField(max_length=255)
-    propertyCategory = models.CharField(max_length=255, null=False, choices=[(tag.name, tag.value) for tag in PropertyCategory])
-    propertySector = models.CharField(max_length=255, null=False, choices=[(tag.name, tag.value) for tag in Property_Sector])
-    propertyFacing = models.CharField(max_length=255, null=False, choices=[(tag.name, tag.value) for tag in Property_Facing])
+    propertyCategory = models.ForeignKey(PropertyCategory, on_delete=models.DO_NOTHING)
+    propertySector = models.ForeignKey(Property_Sector, on_delete=models.DO_NOTHING)
+    propertyFacing = models.ForeignKey(Property_Facing, on_delete=models.DO_NOTHING)
     propertyCountry = models.ForeignKey(Country, on_delete=models.DO_NOTHING)
-    # propertyImages = models.ForeignKey(PropertyImages, on_delete=models.DO_NOTHING)
+    #propertyImages = models.ForeignKey(PropertyImages, on_delete=models.DO_NOTHING)
     propertyProvince = models.ForeignKey(Province, on_delete=models.DO_NOTHING)
     propertyCity = models.ForeignKey(City, on_delete=models.DO_NOTHING)
     propertyStreet = models.CharField(max_length=255, null=False)
@@ -98,12 +87,11 @@ class Property(models.Model):
         return self.propertyTitle
 
 
-
 class PropertyImages(models.Model):
     propertyImageID = models.IntegerField(primary_key=True)
     propertyID = models.ForeignKey(Property, on_delete=models.DO_NOTHING)
-    propertyImage = models.ImageField(blank=True, null=True)
+    propertyImage = models.BinaryField(blank=True)
     propertyImageDescription = models.TextField()
 
     def __str__(self):
-        return self.propertyImageDescription
+        return  self.propertyImageDescription
