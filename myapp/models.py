@@ -13,7 +13,7 @@ class Country(models.Model):
     countryName = models.TextField(unique=True)
 
     def __str__(self):
-        return self.countryName
+        return str(self.countryID)+"-"+self.countryName
 
 
 class Province(models.Model):
@@ -22,7 +22,7 @@ class Province(models.Model):
     provinceName = models.TextField()
 
     def __str__(self):
-        return self.provinceName
+        return str(self.provinceID)+"-"+self.provinceName
 
 
 class City(models.Model):
@@ -32,7 +32,7 @@ class City(models.Model):
     provinceID = models.ForeignKey(Province, on_delete=models.DO_NOTHING, )
 
     def __str__(self):
-        return self.cityName
+        return str(self.cityID)+"-"+self.cityName
 
 
 class PropertyCategory(models.Model):
@@ -84,7 +84,7 @@ class Property(models.Model):
     propertySellingPrice = models.FloatField(null=False)
 
     def __str__(self):
-        return self.propertyTitle
+        return str(self.propertyID)+"-"+self.propertyTitle+" -> "+str(self.propertyAskingPrice)+"$"
 
 
 class PropertyImages(models.Model):
@@ -94,4 +94,4 @@ class PropertyImages(models.Model):
     propertyImageDescription = models.TextField()
 
     def __str__(self):
-        return self.propertyImageDescription
+        return str(self.propertyImageID)+"-"+self.propertyImageDescription
