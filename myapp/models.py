@@ -40,7 +40,7 @@ class PropertyCategory(models.Model):
     propertyCategoryName = models.CharField(max_length=200)
 
     def __str__(self):
-        return self.propertyCategoryName
+        return str(self.propertyCategory)+"-"+self.propertyCategoryName
 
 
 class Property_Sector(models.Model):
@@ -48,7 +48,7 @@ class Property_Sector(models.Model):
     propertySectorName = models.CharField(max_length=200)
 
     def __str__(self):
-        return self.propertySectorName
+        return str(self.propertySector)+"-"+self.propertySectorName
 
 
 
@@ -57,7 +57,7 @@ class Property_Facing(models.Model):
     propertyFacingName = models.CharField(max_length=200)
 
     def __str__(self):
-        return self.propertyFacingName
+        return str(self.propertyFacing)+"-"+self.propertyFacingName
 
 
 class Property(models.Model):
