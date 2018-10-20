@@ -1,0 +1,1 @@
+INSERT INTO myapp_province (provinceID, provinceName, countryID_id) VALUES (1, 'Ontario', 1);

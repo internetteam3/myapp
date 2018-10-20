@@ -1,0 +1,2 @@
+INSERT INTO myapp_propertyimages (propertyImageID, propertyImageDescription, propertyID_id, propertyImage) VALUES (1, 'Facing 1', 1, 'images_1.jpg');
+INSERT INTO myapp_propertyimages (propertyImageID, propertyImageDescription, propertyID_id, propertyImage) VALUES (2, 'Facing 2', 1, 'images.jpg');
