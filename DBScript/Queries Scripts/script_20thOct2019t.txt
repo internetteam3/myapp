@@ -39,6 +39,7 @@ part-2
 
 9)
 
-10)City.objects.order_by('countryName','provinceID_id__provinceName','cityName')
+10)City.objects.order_by('countryName','provinceID__provinceName','cityName')
 
-11)
+11)from django.db.models import Q
+Property.objects.filter(Q(propertyCategory_id = PropertyCategory.objects.filter(propertyCategoryName = 'Single House')[0])|Q(propertyCategory_id = PropertyCategory.objects.filter(propertyCategoryName = 'Attached House')[0])|Q(propertyCategory_id = PropertyCategory.objects.filter(propertyCategoryName = 'Appartment')[0])).order_by('propertyCategory_id__propertyCategoryName','propertyAskingPrice')
