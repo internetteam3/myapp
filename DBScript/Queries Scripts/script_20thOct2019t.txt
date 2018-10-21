@@ -19,3 +19,8 @@ Province.objects.all()
 City.objects.all()
 
 
+part-2
+
+1) Property.objects.filter(propertyFacing_id = Property_Facing.objects.filter(propertyFacingName = 'North')[0])
+
+2)Property.objects.filter(propertyCity_id =   City.objects.filter(cityName = 'Windsor')[0])
