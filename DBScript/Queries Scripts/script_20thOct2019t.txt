@@ -38,3 +38,5 @@ part-2
 8)Property.objects.filter(propertyAskingPrice__gte = 200000.00).filter(propertyCategory_id = PropertyCategory.objects.filter(propertyCategoryName = 'Single House')[0])
 
 9)
+
+10)City.objects.order_by('countryName','provinceName','cityName')
