@@ -84,7 +84,7 @@ class Property(models.Model):
     propertySellingPrice = models.FloatField(null=False)
 
     def __str__(self):
-        return str(self.propertyID)+"-"+self.propertyTitle+" -> "+str(self.propertyAskingPrice)+"$"
+        return str(self.propertyID)+"-"+self.propertyTitle+" -> Asking Price: "+str(self.propertyAskingPrice)+"$"
 
 
 class PropertyImages(models.Model):
