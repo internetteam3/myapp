@@ -39,4 +39,6 @@ part-2
 
 9)
 
-10)City.objects.order_by('countryName','provinceName','cityName')
+10)City.objects.order_by('countryName','provinceID_id__provinceName','cityName')
+
+11)
