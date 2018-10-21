@@ -24,3 +24,17 @@ part-2
 1) Property.objects.filter(propertyFacing_id = Property_Facing.objects.filter(propertyFacingName = 'North')[0])
 
 2)Property.objects.filter(propertyCity_id =   City.objects.filter(cityName = 'Windsor')[0])
+
+3)Property.objects.filter(propertyTotalArea__gt = 1200)
+
+4)Property.objects.filter(propertyTotalArea__gt = 1200).filter(propertyCity_id = City.objects.filter(cityName = 'Windsor')[0])
+
+5)Property.objects.filter(propertyNumberofRooms__gt = 2).filter(propertyCity_id =   City.objects.filter(cityName = 'Toronto')[0])
+
+6)Property.objects.exclude(propertyProvince_id =   Province.objects.filter(provinceName = 'Ontario')[0])
+
+7)Property.objects.filter(propertyAskingPrice__lt = 100000.00)
+
+8)Property.objects.filter(propertyAskingPrice__gte = 200000.00).filter(propertyCategory_id = PropertyCategory.objects.filter(propertyCategoryName = 'Single House')[0])
+
+9)
