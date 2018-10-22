@@ -39,6 +39,9 @@ part-2
 
 9)
 
+idsOfPI=PropertyImages.objects.values('propertyID_id').annotate(user_count=Count('propertyID_id')).filter(user_count__gt=1).values('propertyID_id')
+Property.objects.filter(propertyID__in=idsOfPI)
+
 10)City.objects.order_by('countryName','provinceID__provinceName','cityName')
 
 11)from django.db.models import Q
