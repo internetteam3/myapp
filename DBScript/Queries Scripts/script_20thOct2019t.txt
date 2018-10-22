@@ -38,7 +38,7 @@ part-2
 8)Property.objects.filter(propertyAskingPrice__gte = 200000.00).filter(propertyCategory_id = PropertyCategory.objects.filter(propertyCategoryName = 'Single House')[0])
 
 9)
-
+from django.db.models import Count
 idsOfPI=PropertyImages.objects.values('propertyID_id').annotate(user_count=Count('propertyID_id')).filter(user_count__gt=1).values('propertyID_id')
 Property.objects.filter(propertyCategory_id__propertyCategoryName = 'Appartment').filter(propertyID__in=idsOfPI)
 
