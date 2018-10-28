@@ -46,3 +46,13 @@ Property.objects.filter(propertyCategory_id__propertyCategoryName = 'Appartment'
 
 11)from django.db.models import Q
 Property.objects.filter(Q(propertyCategory_id = PropertyCategory.objects.filter(propertyCategoryName = 'Single House')[0])|Q(propertyCategory_id = PropertyCategory.objects.filter(propertyCategoryName = 'Attached House')[0])|Q(propertyCategory_id = PropertyCategory.objects.filter(propertyCategoryName = 'Appartment')[0])).order_by('propertyCategory_id__propertyCategoryName','propertyAskingPrice')
+
+sequence of table:-
+1)property_category
+2)country
+3)province
+4)city
+5)property_facing
+6)propertysector
+7)property
+8)property_image

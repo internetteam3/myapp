@@ -114,7 +114,7 @@ class  UserRole(models.Model):
 
 class Password(models.Model):
     password_ID = models.IntegerField(primary_key=True)
-    user_ID = models.ForeignKey(User, on_delete=models.CASCADE)
+    user_ID = models.ForeignKey(Users, on_delete=models.CASCADE)
     userName = models.CharField(max_length=200)
     encryptedPassword = models.CharField(max_length=200)
     salt = models.CharField(max_length=200)
