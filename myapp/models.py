@@ -95,3 +95,43 @@ class PropertyImages(models.Model):
 
     def __str__(self):
         return str(self.propertyImageID)+"-"+self.propertyImageDescription
+
+class  Users(models.Model):
+    user_ID = models.IntegerField(primary_key=True)
+    firstName = models.CharField(max_length=200)
+    lastName = models.CharField(max_length=200)
+    email = models.EmailField(max_length=200)
+
+class RoleCode(models.Model):
+    roleCode_ID = models.IntegerField(primary_key=True)
+    name = models.CharField(max_length=200)
+
+class  UserRole(models.Model):
+    userRole_ID = models.IntegerField(primary_key=True)
+    user_ID = models.ForeignKey(User, on_delete=models.CASCADE)
+    roleCode_ID = models.ForeignKey(RoleCode, on_delete=models.CASCADE)
+    dateAssigned = models.DateField()
+
+class Password(models.Model):
+    password_ID = models.IntegerField(primary_key=True)
+    user_ID = models.ForeignKey(User, on_delete=models.CASCADE)
+    userName = models.CharField(max_length=200)
+    encryptedPassword = models.CharField(max_length=200)
+    salt = models.CharField(max_length=200)
+    userAccountExpiryDate = models.DateField()
+    passwordMustChanged = models.BooleanField()
+    passwordReset = models.BooleanField()
+
+class PermissionTyoe(models.Model):
+    permission_ID = models.IntegerField(primary_key=True)
+    name = models.CharField(max_length=200)
+
+
+class RolePermission(models.Model):
+    rolePermission_ID = models.IntegerField(primary_key=True)
+    roleCode_ID = models.ForeignKey(RoleCode, on_delete=models.CASCADE)
+    permissionType_ID = models.ForeignKey(PermissionTyoe, on_delete=models.CASCADE)
+    code = models.CharField(max_length=200)
+    sysFeature = models.CharField(max_length=200)
+
+
