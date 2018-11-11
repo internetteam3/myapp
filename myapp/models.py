@@ -102,15 +102,24 @@ class  Users(models.Model):
     lastName = models.CharField(max_length=200)
     email = models.EmailField(max_length=200)
 
+    def __str__(self):
+        return str(self.user_ID)+"-"+self.firstName+"-"+self.email
+
 class RoleCode(models.Model):
     roleCode_ID = models.IntegerField(primary_key=True)
     name = models.CharField(max_length=200)
+
+    def __str__(self):
+        return str(self.roleCode_ID)+"-"+self.name
 
 class  UserRole(models.Model):
     userRole_ID = models.IntegerField(primary_key=True)
     user_ID = models.ForeignKey(User, on_delete=models.CASCADE)
     roleCode_ID = models.ForeignKey(RoleCode, on_delete=models.CASCADE)
     dateAssigned = models.DateField()
+
+    def __str__(self):
+        return str(self.userRole_ID)+"-"+str(self.user_ID)+"-"+str(self.roleCode_ID)
 
 class Password(models.Model):
     password_ID = models.IntegerField(primary_key=True)
@@ -122,9 +131,15 @@ class Password(models.Model):
     passwordMustChanged = models.BooleanField()
     passwordReset = models.BooleanField()
 
+    def __str__(self):
+        return self.userName
+
 class PermissionTyoe(models.Model):
     permission_ID = models.IntegerField(primary_key=True)
     name = models.CharField(max_length=200)
+
+    def __str__(self):
+        return self.name
 
 
 class RolePermission(models.Model):
@@ -133,5 +148,8 @@ class RolePermission(models.Model):
     permissionType_ID = models.ForeignKey(PermissionTyoe, on_delete=models.CASCADE)
     code = models.CharField(max_length=200)
     sysFeature = models.CharField(max_length=200)
+
+    def __str__(self):
+        return self.code
 
 
