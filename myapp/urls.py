@@ -19,6 +19,7 @@ from myapp import views
 from django.conf.urls.static import static
 from django.conf import settings
 
+app_name = 'myapp'
 urlpatterns = [
 
                   path(r'', views.home, name='home'),

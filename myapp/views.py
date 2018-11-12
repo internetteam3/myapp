@@ -4,13 +4,13 @@ from django.shortcuts import render
 from django.shortcuts import render
 
 def home(request):
-    return render(request, 'home.html')
+    return render(request, 'myapp/home.html')
 
 def about(request):
-    return render(request, 'about.html')
+    return render(request, 'myapp/about.html')
 
 def sportEquip(request):
-    return render(request, 'sportequip.html')
+    return render(request, 'myapp/sportequip.html')
 
 def properties(request):
-    return render(request, 'properties.html')
+    return render(request, 'myapp/properties.html')

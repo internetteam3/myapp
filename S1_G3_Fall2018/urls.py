@@ -19,7 +19,10 @@ from django.conf.urls.static import static
 from django.conf import settings
 from django.conf.urls import url, include
 
+from S1_G3_Fall2018.views import redirect_root
+
 urlpatterns = [
+                  url(r'^$', redirect_root),
                   url(r'^admin/', admin.site.urls),
                   url(r'myapp/', include('myapp.urls')),
 
