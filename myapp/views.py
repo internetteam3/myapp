@@ -14,4 +14,7 @@ def sportEquip(request):
 
 def properties(request):
     return render(request, 'myapp/properties.html')
-
+def login(request):
+    return render(request, 'myapp/login.html')
+def reset(request):
+    return render(request, 'myapp/reset.html')

@@ -1,52 +1,35 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
-     <div class="container">
-				<div class="advanced_search">
-					<h3>Search Properties for</h3>
-					<div class="search_select">
-						<select class="s_select">
-							<option value="1">Choose Locations</option>
-							<option value="2">Property Type</option>
-							<option value="4">Bedrooms</option>
-						</select>
-						<select class="s_select">
-							<option value="1">Property Type</option>
-							<option value="2">Choose Locations</option>
-							<option value="4">Bedrooms</option>
-						</select>
-						<select class="s_select">
-							<option value="1">Bedrooms</option>
-							<option value="2">Property Type</option>
-							<option value="4">Choose Locations</option>
-						</select>
-						<select class="s_select">
-							<option value="1">Bathrooms</option>
-							<option value="2">Property Type</option>
-							<option value="4">Bedrooms</option>
-						</select>
-					</div>
-					<div class="search_range">
-						<div class="range_item">
-							<h5>Price Range</h5>
-							<div id="slider-range"></div>
-							<span class="d_text">$200</span>
-							<input type="text" id="amount" readonly style="border:0;" class="amount">
-						</div>
-						<div class="range_item">
-							<h5>property Area</h5>
-							<div id="slider-range2"></div>
-							<span class="d_text2">50sqm</span>
-							<input type="text" id="amount2" readonly style="border:0;" class="amount2">
-						</div>
-					</div>
-					<button type="submit" value="submit" class="btn submit_btn">Search Property</button>
+{% extends "template.html" %}
+{% block title %}Welcome{% endblock %}
+{% load static %}
+{% block content %}
+
+        <!--================Team Area =================-->
+      <section class="home_banner_area">
+
+            <div class="container">
+				<div class="advanced_search" style="margin-top: 2%!important; margin-right: 30%;box-shadow: 21.21px 21.21px 30px 21.21px rgba(158,158,158,0.3);">
+					<h3>LogIn</h3>
+
+                    <input type="text" name="usename" placeholder="Enter UserName" onfocus="this.placeholder = ''" onblur="this.placeholder = 'First Name'" required class="single-input">
+					<br>
+                    <input type="password" name="password" placeholder="Enter Password" onfocus="this.placeholder = ''" onblur="this.placeholder = 'First Name'" required class="single-input">
+
+
+
+
+					<button type="submit" value="submit" class="btn submit_btn">LogIn</button>
+                    <button type="submit" value="submit"  id ="reset"class="btn submit_btn">Reset</button>
+
+
+
 				</div>
             </div>
         </section>
-</body>
-</html>
+        <!--================End Team Area =================-->
+
+        <!--================Feature Area =================-->
+        <!--================End Feature Area =================-->
+
+
+
+{% endblock %}

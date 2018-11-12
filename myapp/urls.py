@@ -29,6 +29,9 @@ urlpatterns = [
                   path(r'sportEquip', views.sportEquip, name='sportEquip'),
 
                   path(r'properties', views.properties, name='properties'),
-                  path(r'template', views.template, name='template'),
+
+                  path(r'login', views.login, name='login'),
+
+                  path(r'reset', views.reset, name='reset'),
 
               ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
