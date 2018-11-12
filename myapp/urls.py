@@ -22,12 +22,13 @@ from django.conf import settings
 app_name = 'myapp'
 urlpatterns = [
 
-                  path(r'', views.home, name='home'),
+                  path(r'', views.home,name='home'),
 
                   path(r'about', views.about, name='about'),
 
                   path(r'sportEquip', views.sportEquip, name='sportEquip'),
 
                   path(r'properties', views.properties, name='properties'),
+                  path(r'template', views.template, name='template'),
 
-] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+              ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

@@ -14,3 +14,6 @@ def sportEquip(request):
 
 def properties(request):
     return render(request, 'myapp/properties.html')
+
+def template(request):
+    return render(request, 'myapp/../templates/template.html')
