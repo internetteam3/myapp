@@ -152,4 +152,7 @@ class RolePermission(models.Model):
     def __str__(self):
         return self.code
 
-
+class RolePermissionDetail(models.Model):
+    id = models.IntegerField(primary_key=True)
+    rolePermission_ID = models.ForeignKey(RolePermission,on_delete=models.CASCADE)
+    roleCode_ID = models.ForeignKey(RoleCode,on_delete=models.CASCADE)
