@@ -134,7 +134,7 @@ class Password(models.Model):
     def __str__(self):
         return self.userName
 
-class PermissionTyoe(models.Model):
+class PermissionType(models.Model):
     permission_ID = models.IntegerField(primary_key=True)
     name = models.CharField(max_length=200)
 
@@ -144,8 +144,7 @@ class PermissionTyoe(models.Model):
 
 class RolePermission(models.Model):
     rolePermission_ID = models.IntegerField(primary_key=True)
-    roleCode_ID = models.ForeignKey(RoleCode, on_delete=models.CASCADE)
-    permissionType_ID = models.ForeignKey(PermissionTyoe, on_delete=models.CASCADE)
+    permissionType_ID = models.ForeignKey(PermissionType, on_delete=models.CASCADE)
     code = models.CharField(max_length=200)
     sysFeature = models.CharField(max_length=200)
 
@@ -153,6 +152,10 @@ class RolePermission(models.Model):
         return self.code
 
 class RolePermissionDetail(models.Model):
-    id = models.IntegerField(primary_key=True)
+    rolePermissionDetail_ID = models.IntegerField(primary_key=True)
     rolePermission_ID = models.ForeignKey(RolePermission,on_delete=models.CASCADE)
     roleCode_ID = models.ForeignKey(RoleCode,on_delete=models.CASCADE)
+
+
+    def __str__(self):
+        return self.rolePermissionDetail_ID
