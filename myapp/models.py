@@ -9,7 +9,7 @@ from django.utils import timezone
 
 
 class Country(models.Model):
-    countryID = models.IntegerField(primary_key=True)
+    countryID = models.AutoField(primary_key=True)
     countryName = models.TextField(unique=True)
 
     def __str__(self):
@@ -17,7 +17,7 @@ class Country(models.Model):
 
 
 class Province(models.Model):
-    provinceID = models.IntegerField(primary_key=True)
+    provinceID = models.AutoField(primary_key=True)
     countryID = models.ForeignKey(Country, on_delete=models.DO_NOTHING, )
     provinceName = models.TextField()
 
@@ -26,7 +26,7 @@ class Province(models.Model):
 
 
 class City(models.Model):
-    cityID = models.IntegerField(primary_key=True)
+    cityID = models.AutoField(primary_key=True)
     cityName = models.TextField()
     countryName = models.ForeignKey(Country, on_delete=models.DO_NOTHING, )
     provinceID = models.ForeignKey(Province, on_delete=models.DO_NOTHING, )
@@ -36,7 +36,7 @@ class City(models.Model):
 
 
 class PropertyCategory(models.Model):
-    propertyCategory = models.IntegerField(primary_key=True)
+    propertyCategory = models.AutoField(primary_key=True)
     propertyCategoryName = models.CharField(max_length=200)
 
     def __str__(self):
@@ -44,7 +44,7 @@ class PropertyCategory(models.Model):
 
 
 class Property_Sector(models.Model):
-    propertySector = models.IntegerField(primary_key=True)
+    propertySector = models.AutoField(primary_key=True)
     propertySectorName = models.CharField(max_length=200)
 
     def __str__(self):
@@ -53,7 +53,7 @@ class Property_Sector(models.Model):
 
 
 class Property_Facing(models.Model):
-    propertyFacing = models.IntegerField(primary_key=True)
+    propertyFacing = models.AutoField(primary_key=True)
     propertyFacingName = models.CharField(max_length=200)
 
     def __str__(self):
@@ -61,7 +61,7 @@ class Property_Facing(models.Model):
 
 
 class Property(models.Model):
-    propertyID = models.IntegerField(primary_key=True, null=False)
+    propertyID = models.AutoField(primary_key=True)
     propertyTitle = models.CharField(max_length=255)
     propertyCategory = models.ForeignKey(PropertyCategory, on_delete=models.DO_NOTHING)
     propertySector = models.ForeignKey(Property_Sector, on_delete=models.DO_NOTHING)
@@ -88,7 +88,7 @@ class Property(models.Model):
 
 
 class PropertyImages(models.Model):
-    propertyImageID = models.IntegerField(primary_key=True)
+    propertyImageID = models.AutoField(primary_key=True)
     propertyID = models.ForeignKey(Property, on_delete=models.DO_NOTHING)
     propertyImage = models.ImageField(blank=True, null=True)
     propertyImageDescription = models.TextField()
@@ -97,7 +97,7 @@ class PropertyImages(models.Model):
         return str(self.propertyImageID)+"-"+self.propertyImageDescription
 
 class  Users(models.Model):
-    user_ID = models.IntegerField(primary_key=True)
+    user_ID = models.AutoField(primary_key=True)
     firstName = models.CharField(max_length=200)
     lastName = models.CharField(max_length=200)
     email = models.EmailField(max_length=200)
@@ -106,14 +106,14 @@ class  Users(models.Model):
         return str(self.user_ID)+"-"+self.firstName+"-"+self.email
 
 class RoleCode(models.Model):
-    roleCode_ID = models.IntegerField(primary_key=True)
+    roleCode_ID = models.AutoField(primary_key=True)
     name = models.CharField(max_length=200)
 
     def __str__(self):
         return str(self.roleCode_ID)+"-"+self.name
 
 class  UserRole(models.Model):
-    userRole_ID = models.IntegerField(primary_key=True)
+    userRole_ID = models.AutoField(primary_key=True)
     user_ID = models.ForeignKey(User, on_delete=models.CASCADE)
     roleCode_ID = models.ForeignKey(RoleCode, on_delete=models.CASCADE)
     dateAssigned = models.DateField()
@@ -122,7 +122,7 @@ class  UserRole(models.Model):
         return str(self.userRole_ID)+"-"+str(self.user_ID)+"-"+str(self.roleCode_ID)
 
 class Password(models.Model):
-    password_ID = models.IntegerField(primary_key=True)
+    password_ID = models.AutoField(primary_key=True)
     user_ID = models.ForeignKey(Users, on_delete=models.CASCADE)
     userName = models.CharField(max_length=200)
     encryptedPassword = models.CharField(max_length=200)
@@ -135,7 +135,7 @@ class Password(models.Model):
         return self.userName
 
 class PermissionType(models.Model):
-    permission_ID = models.IntegerField(primary_key=True)
+    permission_ID = models.AutoField(primary_key=True)
     name = models.CharField(max_length=200)
 
     def __str__(self):
@@ -143,7 +143,7 @@ class PermissionType(models.Model):
 
 
 class RolePermission(models.Model):
-    rolePermission_ID = models.IntegerField(primary_key=True)
+    rolePermission_ID = models.AutoField(primary_key=True)
     permissionType_ID = models.ForeignKey(PermissionType, on_delete=models.CASCADE)
     code = models.CharField(max_length=200)
     sysFeature = models.CharField(max_length=200)
@@ -152,7 +152,7 @@ class RolePermission(models.Model):
         return self.code
 
 class RolePermissionDetail(models.Model):
-    rolePermissionDetail_ID = models.IntegerField(primary_key=True)
+    rolePermissionDetail_ID = models.AutoField(primary_key=True)
     rolePermission_ID = models.ForeignKey(RolePermission,on_delete=models.CASCADE)
     roleCode_ID = models.ForeignKey(RoleCode,on_delete=models.CASCADE)
 
