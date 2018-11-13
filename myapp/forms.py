@@ -1,16 +1,16 @@
 from django import forms
 
-from .models import Users,Password
+from .models import Users, Password
 
 
 class UsersForm(forms.ModelForm):
     class Meta:
         model = Users
-        fields = '__all__'
+        fields = ['firstName', 'lastName', 'email']
 
 
-class Password(forms.ModelForm):
+class PasswordForm(forms.ModelForm):
     class Meta:
         model = Password
-        fields = '__all__'
+        fields = ['userName', 'userAccountExpiryDate']
 

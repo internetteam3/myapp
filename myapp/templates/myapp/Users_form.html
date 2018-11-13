@@ -1,0 +1,21 @@
+{% extends "template.html" %}
+
+{% load static %}
+
+{% block content %}
+  <div>
+    <div>
+      <form
+          action="{% url 'myapp:Users_create' %}"
+          method="post">
+        {% csrf_token %}
+        {{ formU.as_p }}
+          {{ formP.as_p }}
+        <button type="submit">
+          Create User</button>
+      </form>
+    </div>
+  </div>
+    <br>
+{% endblock %}
+
