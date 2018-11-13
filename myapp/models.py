@@ -128,8 +128,8 @@ class Password(models.Model):
     encryptedPassword = models.CharField(max_length=200)
     salt = models.CharField(max_length=200)
     userAccountExpiryDate = models.DateField()
-    passwordMustChanged = models.BooleanField()
-    passwordReset = models.BooleanField()
+    passwordMustChanged = models.BooleanField(default=False)
+    passwordReset = models.BooleanField(default=True)
 
     def __str__(self):
         return self.userName
