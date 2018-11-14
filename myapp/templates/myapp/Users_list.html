@@ -2,7 +2,9 @@
 
 {% load static %}
 
-
+{% block customCSS %}
+     <link rel="stylesheet" href="{% static '/css/sb-admin.css' %}">
+{% endblock %}
 
 {% block content %}
     <div  class="formPaddingBox">
@@ -95,7 +97,6 @@
 {% endblock %}
 
 {% block jsBlock %}
-    <link rel="stylesheet" href="{% static '/css/sb-admin.css' %}">
     <script src="{% static '/vendors/datatables/jquery.dataTables.js' %}"></script>
     <script src="{% static '/vendors/datatables/dataTables.bootstrap4.js' %}"></script>
     <script src="{% static '/js/sb-admin-datatables.js' %}"></script>

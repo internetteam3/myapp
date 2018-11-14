@@ -2,6 +2,11 @@
 
 {% load static %}
 
+{% block customCSS %}
+     <link rel="stylesheet" href="{% static '/css/sb-admin.css' %}">
+{% endblock %}
+
+
 {% block content %}
  <div  class="formPaddingBox">
      <div class="card mb-3">
@@ -28,7 +33,3 @@
  </div>
 
 {% endblock %}
-
-{% block jsBlock %}
-    <link rel="stylesheet" href="{% static '/css/sb-admin.css' %}">
- {% endblock %}
