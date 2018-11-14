@@ -1,7 +1,9 @@
 {% extends "template.html" %}
 
 {% load static %}
-
+{% block customCSS %}
+     <link rel="stylesheet" href="{% static '/css/sb-admin.css' %}">
+{% endblock %}
 
 {% block content %}
  <div  class="formPaddingBox">
@@ -14,7 +16,7 @@
           <div>
             <div>
               <form
-                  action="{% url 'myapp:Users_create' %}"
+                  action="{% url 'myapp:Users_update' userM.user_ID %}"
                   method="post">
                 {% csrf_token %}
                   {{ formU.as_p }}

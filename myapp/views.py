@@ -80,21 +80,28 @@ class UsersUpdate(View):
             'formU': self.form_class(
                 instance=userM),
             'formP': self.form_class_password(instance=passM),
+            'userM': userM
         }
         return render(
             request, self.template_name, context)
 
-    def post(self, request, year, month, slug):
-        post = self.get_object(year, month, slug)
-        bound_form = self.form_class(
-            request.POST, instance=post)
-        if bound_form.is_valid():
-            new_post = bound_form.save()
-            return redirect(new_post)
+    def post(self,request, uID):
+        userM = get_object_or_404(Users, user_ID=uID)
+        passM = get_object_or_404(Password, user_ID=userM)
+        bound_formU = self.form_class(
+            request.POST, instance=userM)
+        bound_formP = self.form_class_password(
+            request.POST, instance=passM)
+        if bound_formU.is_valid():
+            new_post = bound_formU.save()
+            if bound_formP.is_valid():
+                bound_formP.save()
+            return redirect('myapp:Users_List')
         else:
             context = {
-                'form': bound_form,
-                'post': post,
+                'formU': bound_formU,
+                'formP': bound_formP,
+                'userM': userM,
             }
             return render(
                 request,
