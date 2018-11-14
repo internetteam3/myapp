@@ -16,9 +16,9 @@ class UsersForm(forms.ModelForm):
 class PasswordForm(forms.ModelForm):
     class Meta:
         model = Password
-        fields = ['userName', 'userAccountExpiryDate']
+        fields = ['userName', 'encryptedPassword', 'userAccountExpiryDate']
         widgets = {
             'userName': forms.TextInput(attrs={'class': 'single-input'}),
-
+            'encryptedPassword': forms.PasswordInput(attrs={'class': 'single-input'})
 
         }
