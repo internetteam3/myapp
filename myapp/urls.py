@@ -39,4 +39,8 @@ urlpatterns = [
                       views.UsersCreate.as_view(),
                       name='Users_create'),
 
+                  url(r'^usersList/$',
+                      views.UsersList.as_view(),
+                      name='Users_List'),
+
               ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
