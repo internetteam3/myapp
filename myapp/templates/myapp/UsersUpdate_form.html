@@ -4,16 +4,29 @@
 
 
 {% block content %}
-  <div>
-    <div>
-      <form
-          action="{{ post.get_update_url }}"
-          method="post">
-        {% csrf_token %}
-        {{ form.as_p }}
-        <button type="submit">
-          Update Blog Post</button>
-      </form>
-    </div>
-  </div>
+ <div  class="formPaddingBox">
+     <div class="card mb-3">
+         <div class="card-header">
+					<i class="fa fa-table"></i> Create New User Account
+         </div>
+                <br>
+
+          <div>
+            <div>
+              <form
+                  action="{% url 'myapp:Users_create' %}"
+                  method="post">
+                {% csrf_token %}
+                  {{ formU.as_p }}
+                  {{ formP.as_p }}
+                <button type="submit"class="btn btn-primary">
+                  Update User</button>
+              </form>
+            </div>
+          </div>
+
+
+     </div>
+ </div>
+
 {% endblock %}

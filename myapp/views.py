@@ -66,3 +66,37 @@ class UsersList(View):
             request,
             'myapp/Users_list.html',
             {'users_list': Users.objects.all().order_by('-user_ID')})
+
+
+class UsersUpdate(View):
+    form_class = UsersForm
+    form_class_password = PasswordForm
+    template_name = 'myapp/UsersUpdate_form.html'
+
+    def get(self, request, uID):
+        userM = get_object_or_404(Users, user_ID=uID)
+        passM = get_object_or_404(Password, user_ID=userM)
+        context = {
+            'formU': self.form_class(
+                instance=userM),
+            'formP': self.form_class_password(instance=passM),
+        }
+        return render(
+            request, self.template_name, context)
+
+    def post(self, request, year, month, slug):
+        post = self.get_object(year, month, slug)
+        bound_form = self.form_class(
+            request.POST, instance=post)
+        if bound_form.is_valid():
+            new_post = bound_form.save()
+            return redirect(new_post)
+        else:
+            context = {
+                'form': bound_form,
+                'post': post,
+            }
+            return render(
+                request,
+                self.template_name,
+                context)

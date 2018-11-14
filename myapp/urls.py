@@ -43,4 +43,8 @@ urlpatterns = [
                       views.UsersList.as_view(),
                       name='Users_List'),
 
+                  url(r'^usersUpdate/(?P<uID>\d+)$',
+                      views.UsersUpdate.as_view(),
+                      name='Users_update'),
+
               ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
