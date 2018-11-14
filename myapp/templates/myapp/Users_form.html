@@ -3,19 +3,32 @@
 {% load static %}
 
 {% block content %}
-  <div>
-    <div>
-      <form
-          action="{% url 'myapp:Users_create' %}"
-          method="post">
-        {% csrf_token %}
-        {{ formU.as_p }}
-          {{ formP.as_p }}
-        <button type="submit">
-          Create User</button>
-      </form>
-    </div>
-  </div>
-    <br>
+ <div  class="formPaddingBox">
+     <div class="card mb-3">
+         <div class="card-header">
+					<i class="fa fa-table"></i> User Form
+         </div>
+                <br>
+          <div>
+            <div>
+              <form
+                  action="{% url 'myapp:Users_create' %}"
+                  method="post">
+                {% csrf_token %}
+                {{ formU.as_p }}
+                  {{ formP.as_p }}
+                  <br>
+                <button type="submit">
+                  Create User</button>
+                  <br>
+              </form>
+            </div>
+          </div>
+     </div>
+ </div>
+
 {% endblock %}
 
+{% block jsBlock %}
+    <link rel="stylesheet" href="{% static '/css/sb-admin.css' %}">
+ {% endblock %}
