@@ -3,8 +3,8 @@
 from django.shortcuts import (
     get_object_or_404, redirect, render)
 from django.views.generic import View
-from .forms import UsersForm, PasswordForm, RoleCodeForm
-from .models import Users, Password, RoleCode
+from .forms import UsersForm, PasswordForm, RoleCodeForm, PermissionTypeForm
+from .models import Users, Password, RoleCode, PermissionType
 from django.forms import inlineformset_factory
 
 
@@ -194,3 +194,85 @@ class RoleCodeDelete(View):
         userM = get_object_or_404(RoleCode, roleCode_ID=uID)
         userM.delete()
         return redirect('myapp:RoleCode_List')
+
+
+#######################################################################################################################
+
+class PermissionTypeCreate(View):
+    form_class = PermissionTypeForm
+    template_name = 'myapp/PermissionType_form.html'
+
+    def get(self, request):
+        return render(
+            request,
+            self.template_name,
+            {'formU': self.form_class()})
+
+    def post(self, request):
+        bound_formU = self.form_class(request.POST)
+
+
+        if bound_formU.is_valid():
+            new_post = bound_formU.save()
+
+            return redirect('myapp:PermissionType_List')
+        else:
+            return render(
+                request,
+                self.template_name,
+                {'formU': bound_formU})
+
+
+
+class PermissionTypeList(View):
+
+    def get(self, request):
+        return render(
+            request,
+            'myapp/PermissionType_list.html',
+            {'permissionType_list': PermissionType.objects.all().order_by('-permission_ID')})
+
+
+class PermissionTypeUpdate(View):
+    form_class = PermissionTypeForm
+    template_name = 'myapp/PermissionTypeUpdate_form.html'
+
+    def get(self, request, uID):
+        userM = get_object_or_404(PermissionType, permission_ID=uID)
+        context = {
+            'formU': self.form_class(
+                instance=userM),
+            'userM': userM
+        }
+        return render(
+            request, self.template_name, context)
+
+    def post(self, request, uID):
+        userM = get_object_or_404(PermissionType, permission_ID=uID)
+        bound_formU = self.form_class(
+            request.POST, instance=userM)
+        if bound_formU.is_valid():
+            new_post = bound_formU.save()
+
+            return redirect('myapp:PermissionType_List')
+        else:
+            context = {
+                'formU': bound_formU,
+                'userM': userM,
+            }
+            return render(
+                request,
+                self.template_name,
+                context)
+
+class PermissionTypeDelete(View):
+
+    def get(self, request, uID):
+        userM = get_object_or_404(PermissionType, permission_ID=uID)
+        userM.delete()
+        return redirect('myapp:PermissionType_List')
+
+
+#######################################################################################################################
+
+
