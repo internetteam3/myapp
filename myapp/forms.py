@@ -1,6 +1,6 @@
 from django import forms
 
-from .models import Users, Password, RoleCode, PermissionType
+from .models import Users, Password, RoleCode, PermissionType, RolePermission
 
 
 class UsersForm(forms.ModelForm):
@@ -37,3 +37,14 @@ class PermissionTypeForm(forms.ModelForm):
         widgets = {
             'name': forms.TextInput(attrs={'class': 'single-input'}),
         }
+
+class RolePermissionForm(forms.ModelForm):
+    class Meta:
+        model = RolePermission
+        fields = ['rolePermission_ID', 'permissionType_ID', 'code', 'sysFeature']
+        widgets = {
+            'code': forms.TextInput(attrs={'class': 'single-input'}),
+            'sysFeature': forms.TextInput(attrs={'class': 'single-input'}),
+
+        }
+
