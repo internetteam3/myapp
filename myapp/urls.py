@@ -51,6 +51,22 @@ urlpatterns = [
                       views.UsersDelete.as_view(),
                       name='Users_delete'),
 
+                  url(r'^roleCodeCreate/$',
+                      views.RoleCodeCreate.as_view(),
+                      name='RoleCode_create'),
+
+                  url(r'^roleCodeList/$',
+                      views.RoleCodeList.as_view(),
+                      name='RoleCode_List'),
+
+                  url(r'^roleCodeUpdate/(?P<uID>\d+)$',
+                      views.RoleCodeUpdate.as_view(),
+                      name='RoleCode_update'),
+
+                  url(r'^roleCodeDelete/(?P<uID>\d+)$',
+                      views.RoleCodeDelete.as_view(),
+                      name='RoleCode_delete'),
+
 
 
               ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

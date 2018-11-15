@@ -21,8 +21,9 @@
                 {% csrf_token %}
                   {{ formU.as_p }}
                   {{ formP.as_p }}
+                  <a href="{% url 'myapp:Users_List' %}" class="btn btn-primary"> Cancel </a>
                 <button type="submit"class="btn btn-primary">
-                  Update User</button>
+                  Save </button>
               </form>
             </div>
           </div>

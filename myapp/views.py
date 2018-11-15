@@ -3,8 +3,8 @@
 from django.shortcuts import (
     get_object_or_404, redirect, render)
 from django.views.generic import View
-from .forms import UsersForm, PasswordForm
-from .models import Users, Password
+from .forms import UsersForm, PasswordForm, RoleCodeForm
+from .models import Users, Password, RoleCode
 from django.forms import inlineformset_factory
 
 
@@ -25,6 +25,8 @@ def login(request):
 
 def reset(request):
     return render(request, 'myapp/reset.html')
+
+######################################################################################################################
 
 class UsersCreate(View):
     form_class = UsersForm
@@ -117,3 +119,78 @@ class UsersDelete(View):
         passM.delete()
         return redirect('myapp:Users_List')
 
+#######################################################################################################################
+
+class RoleCodeCreate(View):
+    form_class = RoleCodeForm
+    template_name = 'myapp/RoleCode_form.html'
+
+    def get(self, request):
+        return render(
+            request,
+            self.template_name,
+            {'formU': self.form_class()})
+
+    def post(self, request):
+        bound_formU = self.form_class(request.POST)
+
+
+        if bound_formU.is_valid():
+            new_post = bound_formU.save()
+
+            return redirect('myapp:RoleCode_List')
+        else:
+            return render(
+                request,
+                self.template_name,
+                {'formU': bound_formU})
+
+
+
+class RoleCodeList(View):
+
+    def get(self, request):
+        return render(
+            request,
+            'myapp/RoleCode_list.html',
+            {'roleCode_list': RoleCode.objects.all().order_by('-roleCode_ID')})
+
+
+class RoleCodeUpdate(View):
+    form_class = RoleCodeForm
+    template_name = 'myapp/RoleCodeUpdate_form.html'
+
+    def get(self, request, uID):
+        userM = get_object_or_404(RoleCode, roleCode_ID=uID)
+        context = {
+            'formU': self.form_class(
+                instance=userM),
+            'userM': userM
+        }
+        return render(
+            request, self.template_name, context)
+
+    def post(self,request, uID):
+        userM = get_object_or_404(RoleCode, roleCode_ID=uID)
+        bound_formU = self.form_class(
+            request.POST, instance=userM)
+        if bound_formU.is_valid():
+            new_post = bound_formU.save()
+
+            return redirect('myapp:RoleCode_List')
+        else:
+            context = {
+                'formU': bound_formU,
+                'userM': userM,
+            }
+            return render(
+                request,
+                self.template_name,
+                context)
+
+class RoleCodeDelete(View):
+
+    def get(self, request, uID):
+        userM = get_object_or_404(RoleCode, roleCode_ID=uID)
+        userM.delete()
+        return redirect('myapp:RoleCode_List')
