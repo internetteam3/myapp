@@ -80,7 +80,9 @@
 										<td>{{ user.firstName }}</td>
 										<td>{{ user.lastName }}</td>
 										<td>{{ user.email }}</td>
-										<td> <a href="{% url 'myapp:Users_update' user.user_ID %}">Edit</a> </td>
+										<td> <a href="{% url 'myapp:Users_update' user.user_ID %}">Edit</a> &nbsp;
+                                        <a href="javascript:deleteFromURL('{% url 'myapp:Users_delete' user.user_ID %}', 'User')">Delete</a>
+                                        </td>
 
 									</tr>
 								 {% endfor %}

@@ -107,3 +107,13 @@ class UsersUpdate(View):
                 request,
                 self.template_name,
                 context)
+
+class UsersDelete(View):
+
+    def get(self, request, uID):
+        userM = get_object_or_404(Users, user_ID=uID)
+        passM = get_object_or_404(Password, user_ID=userM)
+        userM.delete()
+        passM.delete()
+        return redirect('myapp:Users_List')
+

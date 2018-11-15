@@ -22,6 +22,49 @@
     {% block customCSS %}
     {% endblock %}
 
+    <script type="text/javascript">
+    function deleteFromURL(url,deleteMsg,wt,ht){
+	var dM = "Are you sure you want to delete this "+deleteMsg+"?";
+	var title="Please Confirm";
+	console.log(url);
+	if(wt == undefined){
+			wt = 700;
+		}
+		if(ht == undefined){
+			ht = 160;
+		}
+		$("#modalbox").dialog({
+
+				width:wt,
+				height:ht,
+				title:title,
+				modal:true,
+	      	    resizable: false,
+	      	   draggable: false,
+	      	   closeOnEscape: false,
+			   buttons: {
+                  OK: function() {$(this).dialog("close");  window.location.href = url; },
+                  Cancel: function() {$(this).dialog("close");}
+               },
+	      	   close: function(event, ui) {
+				    $("#modalContent").html();
+				$("#modalbox").dialog("close");
+	      	   }
+			});
+
+		$("#modalContent").html(dM);
+	  		$("#modalbox").dialog("open");
+
+
+	}
+
+
+
+        {% block insideJavaScript %}
+    {% endblock %}
+
+    </script>
+
     </head>
     <body>
 
@@ -178,7 +221,9 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
     {% endblock %}
 
 
-
+ <div id="modalbox" style="display: none;">
+		<div id="modalContent"></div>
+ </div>
 
     </body>
 </html>

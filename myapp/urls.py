@@ -47,4 +47,10 @@ urlpatterns = [
                       views.UsersUpdate.as_view(),
                       name='Users_update'),
 
+                  url(r'^usersDelete/(?P<uID>\d+)$',
+                      views.UsersDelete.as_view(),
+                      name='Users_delete'),
+
+
+
               ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

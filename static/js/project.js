@@ -27,4 +27,10 @@ function openMemo(url,type,wt,ht){
 	  		$("#modalbox").dialog("open");
 	   	});
 
-}})
+}
+
+
+
+
+
+})
