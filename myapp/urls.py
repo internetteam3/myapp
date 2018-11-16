@@ -115,4 +115,20 @@ urlpatterns = [
                       views.RolePermissionDetailDelete.as_view(),
                       name='RolePermissionDetail_delete'),
 
+                  url(r'^userRoleCreate/$',
+                      views.UserRoleCreate.as_view(),
+                      name='UserRole_create'),
+
+                  url(r'^userRoleList/$',
+                      views.UserRoleList.as_view(),
+                      name='UserRole_List'),
+
+                  url(r'^userRoleUpdate/(?P<uID>\d+)$',
+                      views.UserRoleUpdate.as_view(),
+                      name='UserRole_update'),
+
+                  url(r'^userRoleDelete/(?P<uID>\d+)$',
+                      views.UserRoleDelete.as_view(),
+                      name='UserRole_delete'),
+
               ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

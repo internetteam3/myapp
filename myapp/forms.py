@@ -1,6 +1,6 @@
 from django import forms
 
-from .models import Users, Password, RoleCode, PermissionType, RolePermission, RolePermissionDetail
+from .models import Users, Password, RoleCode, PermissionType, RolePermission, RolePermissionDetail, UserRole
 
 class DateInput(forms.DateInput):
     input_type = 'date'
@@ -71,3 +71,10 @@ class RolePermissionDetailForm(forms.ModelForm):
 
         }
 
+class UserRoleForm(forms.ModelForm):
+    class Meta:
+        model = UserRole
+        fields = ['userRole_ID', 'user_ID', 'roleCode_ID',  'dateAssigned']
+        widgets = {
+            'dateAssigned': DateInput(),
+        }
