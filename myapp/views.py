@@ -3,8 +3,8 @@
 from django.shortcuts import (
     get_object_or_404, redirect, render)
 from django.views.generic import View
-from .forms import UsersForm, PasswordForm, RoleCodeForm, PermissionTypeForm, RolePermissionForm
-from .models import Users, Password, RoleCode, PermissionType, RolePermission
+from .forms import UsersForm, PasswordForm, RoleCodeForm, PermissionTypeForm, RolePermissionForm, RolePermissionDetailForm
+from .models import Users, Password, RoleCode, PermissionType, RolePermission, RolePermissionDetail
 from django.forms import inlineformset_factory
 
 
@@ -353,5 +353,85 @@ class RolePermissionDelete(View):
 
 
 #######################################################################################################################
+
+#######################################################################################################################
+
+class RolePermissionDetailCreate(View):
+    form_class = RolePermissionDetailForm
+    template_name = 'myapp/RolePermissionDetail_form.html'
+
+    def get(self, request):
+        return render(
+            request,
+            self.template_name,
+            {'formU': self.form_class()})
+
+    def post(self, request):
+        bound_formU = self.form_class(request.POST)
+
+
+        if bound_formU.is_valid():
+            new_post = bound_formU.save()
+
+            return redirect('myapp:RolePermissionDetail_List')
+        else:
+            return render(
+                request,
+                self.template_name,
+                {'formU': bound_formU})
+
+
+
+class RolePermissionDetailList(View):
+
+    def get(self, request):
+        return render(
+            request,
+            'myapp/RolePermissionDetail_list.html',
+            {'rolePermission_list': RolePermissionDetail.objects.all().order_by('-rolePermissionDetail_ID')})
+
+
+class RolePermissionDetailUpdate(View):
+    form_class = RolePermissionDetailForm
+    template_name = 'myapp/RolePermissionDetailUpdate_form.html'
+
+    def get(self, request, uID):
+        userM = get_object_or_404(RolePermissionDetail, rolePermissionDetail_ID=uID)
+        context = {
+            'formU': self.form_class(
+                instance=userM),
+            'userM': userM
+        }
+        return render(
+            request, self.template_name, context)
+
+    def post(self, request, uID):
+        userM = get_object_or_404(RolePermissionDetail, rolePermissionDetail_ID=uID)
+        bound_formU = self.form_class(
+            request.POST, instance=userM)
+        if bound_formU.is_valid():
+            new_post = bound_formU.save()
+
+            return redirect('myapp:RolePermissionDetail_List')
+        else:
+            context = {
+                'formU': bound_formU,
+                'userM': userM,
+            }
+            return render(
+                request,
+                self.template_name,
+                context)
+
+class RolePermissionDetailDelete(View):
+
+    def get(self, request, uID):
+        userM = get_object_or_404(RolePermissionDetail, rolePermissionDetail_ID=uID)
+        userM.delete()
+        return redirect('myapp:RolePermissionDetail_List')
+
+
+#######################################################################################################################
+
 
 
