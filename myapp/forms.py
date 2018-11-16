@@ -49,6 +49,9 @@ class RolePermissionForm(forms.ModelForm):
         }
 
 class RolePermissionDetailForm(forms.ModelForm):
+    #rolePermission_ID = forms.ModelMultipleChoiceField(queryset=RolePermission.objects.all())
+    rolePermission_ID = forms.ModelMultipleChoiceField(widget=forms.CheckboxSelectMultiple(), queryset=RolePermission.objects.all())
+
     class Meta:
         model = RolePermissionDetail
         fields = ['rolePermissionDetail_ID', 'roleCode_ID', 'rolePermission_ID']
