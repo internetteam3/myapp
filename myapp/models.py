@@ -114,7 +114,7 @@ class RoleCode(models.Model):
 
 class  UserRole(models.Model):
     userRole_ID = models.AutoField(primary_key=True)
-    user_ID = models.ForeignKey(User, on_delete=models.CASCADE)
+    user_ID = models.ForeignKey(Users, on_delete=models.CASCADE)
     roleCode_ID = models.ForeignKey(RoleCode, on_delete=models.CASCADE)
     dateAssigned = models.DateField()
 
