@@ -77,7 +77,7 @@
 
 										<td>{{ role.roleCode_ID }}</td>
                                         <td>{{ role.rolePermission_ID }}</td>
-										<td> <a href="{% url 'myapp:RolePermissionDetail_update' role.rolePermissionDetail_ID%}">Edit</a> &nbsp;
+										<td>
                                         <a href="javascript:deleteFromURL('{% url 'myapp:RolePermissionDetail_delete' role.rolePermissionDetail_ID %}', 'Capabilities')">Delete</a>
                                         </td>
 
