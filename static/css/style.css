@@ -2857,12 +2857,17 @@ h6 {
 
 .single-input {
   display: block;
-  width: 100%;
+
   line-height: 40px;
   border: none;
   outline: none;
   background: #f9f9ff;
   padding: 0 20px;
+  float: right;
+  width: 75%;
+
+
+
 }
 
 .single-input:focus {
@@ -4197,6 +4202,8 @@ h6 {
 .nav-background {
   background-color: #FFFFFF;
 }
+
+
 /*---------------------------------------------------- */
 
 /*# sourceMappingURL=style.css.map */

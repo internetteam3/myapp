@@ -424,6 +424,7 @@ body.sidenav-toggled .navbar-sidenav-tooltip.show {
   top: -25px;
   right: -25px;
   font-size: 5rem;
+
   -webkit-transform: rotate(15deg);
   -ms-transform: rotate(15deg);
   transform: rotate(15deg);
@@ -479,4 +480,8 @@ footer.sticky-footer {
 
 .formPaddingBox {
   padding: 0 5% 0 5%
+}
+
+.card{
+  min-width: 1000px; !important;
 }
