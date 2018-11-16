@@ -5,7 +5,7 @@ from django.shortcuts import (
 from django.views.generic import View
 from .forms import UsersForm, PasswordForm, RoleCodeForm, PermissionTypeForm, RolePermissionForm, RolePermissionDetailForm
 from .models import Users, Password, RoleCode, PermissionType, RolePermission, RolePermissionDetail
-from django.forms import inlineformset_factory
+from django.forms import modelformset_factory, inlineformset_factory
 
 
 def home(request):
@@ -369,16 +369,21 @@ class RolePermissionDetailCreate(View):
     def post(self, request):
         bound_formU = self.form_class(request.POST)
 
+        #RolePermissionFormSet = modelformset_factory(RolePermission, fields=('rolePermission_ID', 'code', 'sysFeature'), extra=0)
+        #data = request.POST or None
+        #formset = RolePermissionFormSet(data=data, queryset=RolePermission.objects.filter(rolePermission_ID=bound_formU.rolePermission_ID))
 
-        if bound_formU.is_valid():
-            new_post = bound_formU.save()
+        roleCodeM = RoleCode.objects.get(pk=bound_formU['roleCode_ID'].value())
+        for rpID in bound_formU['rolePermission_ID'].value():
+            rolePermisM = RolePermission.objects.get(pk=rpID)
+            rpdM = RolePermissionDetail(roleCode_ID=roleCodeM, rolePermission_ID=rolePermisM)
+            rpdM.save()
 
-            return redirect('myapp:RolePermissionDetail_List')
-        else:
-            return render(
-                request,
-                self.template_name,
-                {'formU': bound_formU})
+        return redirect('myapp:RolePermissionDetail_List')
+
+
+
+
 
 
 
