@@ -130,8 +130,11 @@
             <div class="row">
             <div class="sidenav col-xs-3">
             <a href="{% url 'myapp:Users_List' %}">User List</a>
+            <a href="{% url 'myapp:UserRole_List' %}">Assign Role</a>
             <a href="{% url 'myapp:RoleCode_List' %}">System Roles</a>
-            <a href="{% url 'myapp:PermissionType_List' %}">Permission</a>
+            <a href="{% url 'myapp:RolePermissionDetail_List' %}">Assigned Capabilities</a>
+            <a href="{% url 'myapp:PermissionType_List' %}">Permission Types</a>
+            <a href="{% url 'myapp:RolePermission_List' %}">System Feature</a>
             </div>
 					<div class="banner_content col-xs-9">
                              {% block content %}        {% endblock %}
