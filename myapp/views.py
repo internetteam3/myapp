@@ -1,9 +1,10 @@
 
 # Create your views here.
+import datetime
 from django.shortcuts import (
     get_object_or_404, redirect, render)
 from django.views.generic import View
-from .forms import UsersForm, PasswordForm, RoleCodeForm, PermissionTypeForm, RolePermissionForm, RolePermissionDetailForm, UserRoleForm
+from .forms import UsersForm, PasswordForm, RoleCodeForm, PermissionTypeForm, RolePermissionForm, RolePermissionDetailForm, UserRoleForm, LoginForm, ChangePasswordForm
 from .models import Users, Password, RoleCode, PermissionType, RolePermission, RolePermissionDetail, UserRole
 from django.forms import modelformset_factory, inlineformset_factory
 
@@ -20,8 +21,79 @@ def sportEquip(request):
 def properties(request):
     return render(request, 'myapp/properties.html')
 
-def login(request):
-    return render(request, 'myapp/login.html')
+class login(View):
+    form_class = LoginForm
+    chpaswd_form_class = ChangePasswordForm
+    template_name = 'myapp/login.html'
+
+    def get(self, request):
+        return render(
+            request,
+            self.template_name,
+            {'formL': self.form_class()})
+
+    def post(self, request):
+
+        bound_formL = self.form_class(request.POST)
+        userName = bound_formL['user_name'].value()
+        password = bound_formL['password'].value()
+
+        if bound_formL.is_valid():
+
+            # user = get_object_or_404(Password, userName=userName)
+            # user, created = Password.objects.get_or_create(userName = userName, encryptedPassword = password)
+            user = Password.objects.filter(userName = userName, encryptedPassword = password)
+
+            if user:
+                print(user)
+                return redirect('myapp:Users_List')
+
+            # userModel = Users(firstName="",lastName="",email="")
+            # new_post = userModel.save()
+            # passwordModal = Password(userName = userName,
+            #                          userAccountExpiryDate = (datetime.datetime.now() + datetime.timedelta(days=10 * 365)).strftime('%Y-%m-%d'),
+            #                          user_ID=new_post)
+            # print((datetime.datetime.now() + datetime.timedelta(days=10 * 365)).strftime('%Y-%m-%d'))
+            return render(
+                request,
+                'myapp/changePassword.html',
+                {'formP': self.chpaswd_form_class(),
+                 'userName':userName})
+
+        else:
+            return render(
+                request,
+                self.template_name,
+                {'formL': bound_formL})
+
+
+class changePassword(View):
+    form_class = ChangePasswordForm
+    template_name = 'myapp/changePassword.html'
+
+    def post(self, request):
+
+        bound_formP = self.form_class(request.POST)
+        password = bound_formP['password'].value()
+        change_password = bound_formP['reenter_password'].value()
+        userName = request.POST['userName']
+
+        if bound_formP.is_valid():
+
+            if password == change_password:
+                userModel = Users(firstName=userName, lastName=userName, email=userName+"@gmail.com")
+                userModel.save()
+                passwordModal = Password(userName = userName,
+                                         encryptedPassword = password,
+                                         userAccountExpiryDate = (datetime.datetime.now() + datetime.timedelta(
+                                             days=10 * 365)).strftime('%Y-%m-%d')
+                                         )
+                passwordModal.user_ID_id = userModel.user_ID
+                passwordModal.save()
+                print((datetime.datetime.now() + datetime.timedelta(days=10 * 365)).strftime('%Y-%m-%d'))
+                return redirect('myapp:Users_List')
+
+        return redirect('myapp:login')
 
 def reset(request):
     return render(request, 'myapp/reset.html')

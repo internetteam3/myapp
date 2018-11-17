@@ -9,27 +9,27 @@
             <div class="container">
 				<div class="advanced_search" style="margin-top: 2%!important; margin-right: 30%;box-shadow: 21.21px 21.21px 30px 21.21px rgba(158,158,158,0.3);">
 					<h3>LogIn</h3>
+{#                    <form method="POST">#}
+{#                        {% csrf_token %}#}
+{#                        {% bootstrap_form form %}#}
+{#                        <input type="submit" class="btn btn-primary" value="Login">#}
+{##}
+{#                    </form>#}
+                    <form
+                            action="{% url 'myapp:login' %}"
+                            method="post">
+                        {% csrf_token %}
+                        {{ formL.as_p }}
+                        <button type="submit" value="submit" class="btn submit_btn">LogIn</button>
+                        {#                        <button type="submit" value="submit" id="reset" class="btn submit_btn">Reset</button>#}
+                        <a href="{% url 'myapp:login' %}" class="btn submit_btn"> Reset </a>
 
-                    <input type="text" name="usename" placeholder="Enter UserName" onfocus="this.placeholder = ''" onblur="this.placeholder = 'First Name'" required class="single-input">
-					<br>
-                    <input type="password" name="password" placeholder="Enter Password" onfocus="this.placeholder = ''" onblur="this.placeholder = 'First Name'" required class="single-input">
+                    </form>
 
 
-
-
-					<button type="submit" value="submit" class="btn submit_btn">LogIn</button>
-                    <button type="submit" value="submit"  id ="reset"class="btn submit_btn">Reset</button>
-
-
-
-				</div>
+                </div>
             </div>
         </section>
-        <!--================End Team Area =================-->
-
-        <!--================Feature Area =================-->
-        <!--================End Feature Area =================-->
-
 
 
 {% endblock %}

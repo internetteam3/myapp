@@ -78,3 +78,11 @@ class UserRoleForm(forms.ModelForm):
         widgets = {
             'dateAssigned': DateInput(),
         }
+
+class LoginForm(forms.Form):
+    user_name = forms.CharField(label="",widget = forms.TextInput(attrs={'class': 'single-input','placeholder': 'User Name'}))
+    password = forms.CharField(label="",widget = forms.PasswordInput(attrs={'class': 'single-input','placeholder': 'Password'}))
+
+class ChangePasswordForm(forms.Form):
+    password = forms.CharField(label="",widget = forms.PasswordInput(attrs={'class': 'single-input','placeholder': 'Enter Password'}))
+    reenter_password = forms.CharField(label="",widget = forms.PasswordInput(attrs={'class': 'single-input','placeholder': 're-enter Password'}))

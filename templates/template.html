@@ -98,13 +98,15 @@
 										<li class="nav-item"><a class="nav-link" href="elements.html">Elements</a></li>
 									</ul>
 								</li> -->
-								<li class="nav-item submenu dropdown">
-									<a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Login</a>
-									<ul class="dropdown-menu">
-										<li class="nav-item"><a class="nav-link" href="{% url 'myapp:login' %}">Login</a></li>
-										<li class="nav-item"><a class="nav-link" href="{% url 'myapp:properties' %}">Sign up</a></li>
-									</ul>
-								</li>
+
+                               <li class="nav-item"><a class="nav-link" href="{% url 'myapp:login' %}">Login</a></li>
+{#								<li class="nav-item submenu dropdown">#}
+{#									<a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Login</a>#}
+{#									<ul class="dropdown-menu">#}
+{#										<li class="nav-item"><a class="nav-link" href="{% url 'myapp:login' %}">Login</a></li>#}
+{#										<li class="nav-item"><a class="nav-link" href="{% url 'myapp:properties' %}">Sign up</a></li>#}
+{#									</ul>#}
+{#								</li>#}
 								<li class="nav-item"><a class="nav-link" href="{% url 'myapp:properties' %}">Contact</a></li>
 							</ul>
 							<ul class="nav navbar-nav navbar-right">

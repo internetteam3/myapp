@@ -31,7 +31,11 @@ urlpatterns = [
 
                   path(r'properties', views.properties, name='properties'),
 
-                  path(r'login', views.login, name='login'),
+                  url(r'^login/$', views.login.as_view(),
+                      name='login'),
+
+                  url(r'^changePassword/$', views.changePassword.as_view(),
+                      name='changePassword'),
 
                   path(r'reset', views.reset, name='reset'),
 
