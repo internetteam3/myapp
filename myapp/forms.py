@@ -1,6 +1,6 @@
 from django import forms
 
-from .models import Users, Password, RoleCode, PermissionType, RolePermission, RolePermissionDetail, UserRole
+from .models import Users, Password, RoleCode, PermissionType, RolePermission, RolePermissionDetail, UserRole, Country
 
 class DateInput(forms.DateInput):
     input_type = 'date'
@@ -86,3 +86,12 @@ class LoginForm(forms.Form):
 class ChangePasswordForm(forms.Form):
     password = forms.CharField(label="",widget = forms.PasswordInput(attrs={'class': 'single-input','placeholder': 'Enter Password'}))
     reenter_password = forms.CharField(label="",widget = forms.PasswordInput(attrs={'class': 'single-input','placeholder': 're-enter Password'}))
+
+
+class CountryForm(forms.ModelForm):
+    class Meta:
+        model = Country
+        fields = ['countryName']
+        widgets = {
+            'countryName': forms.TextInput(attrs={'class': 'single-input'}),
+        }

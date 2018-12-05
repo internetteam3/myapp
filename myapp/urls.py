@@ -135,4 +135,29 @@ urlpatterns = [
                       views.UserRoleDelete.as_view(),
                       name='UserRole_delete'),
 
+
+
+
+
+
+
+
+
+
+                  url(r'^countryCreate/$',
+                      views.CountryCreate.as_view(),
+                      name='Country_create'),
+
+                  url(r'^countryList/$',
+                      views.CountryList.as_view(),
+                      name='Country_List'),
+
+                  url(r'^countryUpdate/(?P<uID>\d+)$',
+                      views.CountryUpdate.as_view(),
+                      name='Country_update'),
+
+                  url(r'^countryDelete/(?P<uID>\d+)$',
+                      views.CountryDelete.as_view(),
+                      name='Country_delete'),
+
               ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

@@ -4,8 +4,8 @@ import datetime
 from django.shortcuts import (
     get_object_or_404, redirect, render)
 from django.views.generic import View
-from .forms import UsersForm, PasswordForm, RoleCodeForm, PermissionTypeForm, RolePermissionForm, RolePermissionDetailForm, UserRoleForm, LoginForm, ChangePasswordForm
-from .models import Users, Password, RoleCode, PermissionType, RolePermission, RolePermissionDetail, UserRole
+from .forms import UsersForm, PasswordForm, RoleCodeForm, PermissionTypeForm, RolePermissionForm, RolePermissionDetailForm, UserRoleForm, LoginForm, ChangePasswordForm,CountryForm
+from .models import Users, Password, RoleCode, PermissionType, RolePermission, RolePermissionDetail, UserRole, Country
 from django.forms import modelformset_factory, inlineformset_factory
 
 
@@ -590,3 +590,81 @@ class UserRoleDelete(View):
 
 
 
+
+#######################################################################################################################
+
+class CountryCreate(View):
+    form_class = CountryForm
+    template_name = 'myapp/Country_form.html'
+
+    def get(self, request):
+        return render(
+            request,
+            self.template_name,
+            {'formU': self.form_class()})
+
+    def post(self, request):
+        bound_formU = self.form_class(request.POST)
+
+
+        if bound_formU.is_valid():
+            new_post = bound_formU.save()
+
+            return redirect('myapp:Country_List')
+        else:
+            return render(
+                request,
+                self.template_name,
+                {'formU': bound_formU})
+
+
+class CountryList(View):
+
+    def get(self, request):
+        return render(
+            request,
+            'myapp/Country_list.html',
+            {'country_list': Country.objects.all().order_by('-countryID')})
+
+
+class CountryUpdate(View):
+    form_class = CountryForm
+    template_name = 'myapp/CountryUpdate_form.html'
+
+    def get(self, request, uID):
+        userM = get_object_or_404(Country, countryID=uID)
+        context = {
+            'formU': self.form_class(
+                instance=userM),
+            'userM': userM
+        }
+        return render(
+            request, self.template_name, context)
+
+    def post(self,request, uID):
+        userM = get_object_or_404(Country, countryID=uID)
+        bound_formU = self.form_class(
+            request.POST, instance=userM)
+        if bound_formU.is_valid():
+            new_post = bound_formU.save()
+
+            return redirect('myapp:Country_List')
+        else:
+            context = {
+                'formU': bound_formU,
+                'userM': userM,
+            }
+            return render(
+                request,
+                self.template_name,
+                context)
+
+class CountryDelete(View):
+
+    def get(self, request, uID):
+        userM = get_object_or_404(Country, countryID=uID)
+        userM.delete()
+        return redirect('myapp:Country_List')
+
+
+#######################################################################################################################
