@@ -1,6 +1,6 @@
 from django import forms
 
-from .models import Users, Password, RoleCode, PermissionType, RolePermission, RolePermissionDetail, UserRole, Country
+from .models import Users, Password, RoleCode, PermissionType, RolePermission, RolePermissionDetail, UserRole, Country, Province, City, PropertyCategory, Property_Sector
 
 class DateInput(forms.DateInput):
     input_type = 'date'
@@ -94,4 +94,44 @@ class CountryForm(forms.ModelForm):
         fields = ['countryName']
         widgets = {
             'countryName': forms.TextInput(attrs={'class': 'single-input'}),
+        }
+
+
+class ProvinceForm(forms.ModelForm):
+    class Meta:
+        model = Province
+        fields = ['countryID','provinceName']
+        widgets = {
+
+            'provinceName': forms.TextInput(attrs={'class': 'single-input'}),
+        }
+
+
+class CityForm(forms.ModelForm):
+    class Meta:
+        model = City
+        fields = ['cityName','countryName','provinceID']
+        widgets = {
+
+            'cityName': forms.TextInput(attrs={'class': 'single-input'}),
+        }
+
+
+class PropertyCategoryForm(forms.ModelForm):
+    class Meta:
+        model = PropertyCategory
+        fields = ['propertyCategoryName']
+        widgets = {
+
+            'propertyCategoryName': forms.TextInput(attrs={'class': 'single-input'}),
+        }
+
+
+class PropertySectorForm(forms.ModelForm):
+    class Meta:
+        model = Property_Sector
+        fields = ['propertySectorName']
+        widgets = {
+
+            'propertySectorName': forms.TextInput(attrs={'class': 'single-input'}),
         }

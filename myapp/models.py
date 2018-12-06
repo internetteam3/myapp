@@ -15,7 +15,7 @@ class Country(models.Model):
     def __str__(self):
         return str(self.countryID)+"-"+self.countryName
 
-
+#done
 class Province(models.Model):
     provinceID = models.AutoField(primary_key=True)
     countryID = models.ForeignKey(Country, on_delete=models.DO_NOTHING, )
@@ -24,7 +24,7 @@ class Province(models.Model):
     def __str__(self):
         return str(self.provinceID)+"-"+self.provinceName
 
-
+#done
 class City(models.Model):
     cityID = models.AutoField(primary_key=True)
     cityName = models.TextField()
@@ -34,7 +34,7 @@ class City(models.Model):
     def __str__(self):
         return str(self.cityID)+"-"+self.cityName
 
-
+#done
 class PropertyCategory(models.Model):
     propertyCategory = models.AutoField(primary_key=True)
     propertyCategoryName = models.CharField(max_length=200)
@@ -95,7 +95,7 @@ class PropertyImages(models.Model):
 
     def __str__(self):
         return str(self.propertyImageID)+"-"+self.propertyImageDescription
-
+#done
 class  Users(models.Model):
     user_ID = models.AutoField(primary_key=True)
     firstName = models.CharField(max_length=200)

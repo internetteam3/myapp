@@ -4,8 +4,9 @@ import datetime
 from django.shortcuts import (
     get_object_or_404, redirect, render)
 from django.views.generic import View
-from .forms import UsersForm, PasswordForm, RoleCodeForm, PermissionTypeForm, RolePermissionForm, RolePermissionDetailForm, UserRoleForm, LoginForm, ChangePasswordForm,CountryForm
-from .models import Users, Password, RoleCode, PermissionType, RolePermission, RolePermissionDetail, UserRole, Country
+from .forms import UsersForm, PasswordForm, RoleCodeForm, PermissionTypeForm, RolePermissionForm, RolePermissionDetailForm, \
+    UserRoleForm, LoginForm, ChangePasswordForm,CountryForm, ProvinceForm, CityForm, PropertyCategoryForm, PropertySectorForm
+from .models import Users, Password, RoleCode, PermissionType, RolePermission, RolePermissionDetail, UserRole, Country, Province, City, PropertyCategory, Property_Sector
 from django.forms import modelformset_factory, inlineformset_factory
 
 
@@ -666,5 +667,310 @@ class CountryDelete(View):
         userM.delete()
         return redirect('myapp:Country_List')
 
+
+#######################################################################################################################
+
+
+
+class ProvinceCreate(View):
+    form_class = ProvinceForm
+    template_name = 'myapp/Province_form.html'
+
+    def get(self, request):
+        return render(
+            request,
+            self.template_name,
+            {'formU': self.form_class()})
+
+    def post(self, request):
+        bound_formU = self.form_class(request.POST)
+
+
+        if bound_formU.is_valid():
+            new_post = bound_formU.save()
+
+            return redirect('myapp:Province_list')
+        else:
+            return render(
+                request,
+                self.template_name,
+                {'formU': bound_formU})
+
+
+class ProvinceList(View):
+    def get(self, request):
+        return render(
+            request,
+            'myapp/Province_list.html',
+            {'province_list': Province.objects.all().order_by('-provinceID')})
+
+
+class ProvinceUpdate(View):
+    form_class = ProvinceForm
+    template_name = 'myapp/ProvinceUpdate_form.html'
+
+    def get(self, request, uID):
+        userM = get_object_or_404(Province, provinceID=uID)
+        context = {
+            'formU': self.form_class(
+                instance=userM),
+            'userM': userM
+        }
+        return render(
+            request, self.template_name, context)
+
+    def post(self,request, uID):
+        userM = get_object_or_404(Province, provinceID=uID)
+        bound_formU = self.form_class(
+            request.POST, instance=userM)
+        if bound_formU.is_valid():
+            new_post = bound_formU.save()
+
+            return redirect('myapp:Province_list')
+        else:
+            context = {
+                'formU': bound_formU,
+                'userM': userM,
+            }
+            return render(
+                request,
+                self.template_name,
+                context)
+
+class ProvinceDelete(View):
+
+    def get(self, request, uID):
+        userM = get_object_or_404(Province, provinceID=uID)
+        userM.delete()
+        return redirect('myapp:Province_list')
+
+
+#######################################################################################################################
+
+class CityCreate(View):
+    form_class = CityForm
+    template_name = 'myapp/City_form.html'
+
+    def get(self, request):
+        return render(
+            request,
+            self.template_name,
+            {'formU': self.form_class()})
+
+    def post(self, request):
+        bound_formU = self.form_class(request.POST)
+
+
+        if bound_formU.is_valid():
+            new_post = bound_formU.save()
+
+            return redirect('myapp:City_list')
+        else:
+            return render(
+                request,
+                self.template_name,
+                {'formU': bound_formU})
+
+
+class CityList(View):
+    def get(self, request):
+        return render(
+            request,
+            'myapp/City_list.html',
+            {'city_list': City.objects.all().order_by('-cityID')})
+
+
+class CityUpdate(View):
+    form_class = CityForm
+    template_name = 'myapp/CityUpdate_form.html'
+
+    def get(self, request, uID):
+        userM = get_object_or_404(City, cityID=uID)
+        context = {
+            'formU': self.form_class(
+                instance=userM),
+            'userM': userM
+        }
+        return render(
+            request, self.template_name, context)
+
+    def post(self,request, uID):
+        userM = get_object_or_404(City, cityID=uID)
+        bound_formU = self.form_class(
+            request.POST, instance=userM)
+        if bound_formU.is_valid():
+            new_post = bound_formU.save()
+
+            return redirect('myapp:City_list')
+        else:
+            context = {
+                'formU': bound_formU,
+                'userM': userM,
+            }
+            return render(
+                request,
+                self.template_name,
+                context)
+
+
+class CityDelete(View):
+
+    def get(self, request, uID):
+        userM = get_object_or_404(City, cityID=uID)
+        userM.delete()
+        return redirect('myapp:City_list')
+
+#######################################################################################################################
+
+
+class PropertyCategoryCreate(View):
+    form_class = PropertyCategoryForm
+    template_name = 'myapp/PropertyCategory_form.html'
+
+    def get(self, request):
+        return render(
+            request,
+            self.template_name,
+            {'formU': self.form_class()})
+
+    def post(self, request):
+        bound_formU = self.form_class(request.POST)
+
+
+        if bound_formU.is_valid():
+            new_post = bound_formU.save()
+
+            return redirect('myapp:PropertyCategory_list')
+        else:
+            return render(
+                request,
+                self.template_name,
+                {'formU': bound_formU})
+
+
+class PropertyCategoryList(View):
+    def get(self, request):
+        return render(
+            request,
+            'myapp/PropertyCategory_list.html',
+            {'propertyCategory_list': PropertyCategory.objects.all().order_by('-propertyCategory')})
+
+
+class PropertyCategoryUpdate(View):
+    form_class = PropertyCategoryForm
+    template_name = 'myapp/PropertyCategoryUpdate_form.html'
+
+    def get(self, request, uID):
+        userM = get_object_or_404(PropertyCategory, propertyCategory=uID)
+        context = {
+            'formU': self.form_class(
+                instance=userM),
+            'userM': userM
+        }
+        return render(
+            request, self.template_name, context)
+
+    def post(self,request, uID):
+        userM = get_object_or_404(PropertyCategory, propertyCategory=uID)
+        bound_formU = self.form_class(
+            request.POST, instance=userM)
+        if bound_formU.is_valid():
+            new_post = bound_formU.save()
+
+            return redirect('myapp:PropertyCategory_list')
+        else:
+            context = {
+                'formU': bound_formU,
+                'userM': userM,
+            }
+            return render(
+                request,
+                self.template_name,
+                context)
+
+
+class PropertyCategoryDelete(View):
+
+    def get(self, request, uID):
+        userM = get_object_or_404(PropertyCategory, propertyCategory=uID)
+        userM.delete()
+        return redirect('myapp:PropertyCategory_list')
+
+#######################################################################################################################
+
+
+
+class PropertySectorCreate(View):
+    form_class = PropertySectorForm
+    template_name = 'myapp/PropertySector_form.html'
+
+    def get(self, request):
+        return render(
+            request,
+            self.template_name,
+            {'formU': self.form_class()})
+
+    def post(self, request):
+        bound_formU = self.form_class(request.POST)
+
+
+        if bound_formU.is_valid():
+            new_post = bound_formU.save()
+
+            return redirect('myapp:PropertySector_list')
+        else:
+            return render(
+                request,
+                self.template_name,
+                {'formU': bound_formU})
+
+
+class PropertySectorList(View):
+    def get(self, request):
+        return render(
+            request,
+            'myapp/PropertySector_list.html',
+            {'propertySector_list': Property_Sector.objects.all().order_by('-propertySector')})
+
+
+class PropertySectorUpdate(View):
+    form_class = PropertySectorForm
+    template_name = 'myapp/PropertySectorUpdate_form.html'
+
+    def get(self, request, uID):
+        userM = get_object_or_404(Property_Sector, propertySector=uID)
+        context = {
+            'formU': self.form_class(
+                instance=userM),
+            'userM': userM
+        }
+        return render(
+            request, self.template_name, context)
+
+    def post(self,request, uID):
+        userM = get_object_or_404(Property_Sector, propertySector=uID)
+        bound_formU = self.form_class(
+            request.POST, instance=userM)
+        if bound_formU.is_valid():
+            new_post = bound_formU.save()
+
+            return redirect('myapp:PropertySector_list')
+        else:
+            context = {
+                'formU': bound_formU,
+                'userM': userM,
+            }
+            return render(
+                request,
+                self.template_name,
+                context)
+
+
+class PropertySectorDelete(View):
+
+    def get(self, request, uID):
+        userM = get_object_or_404(Property_Sector, propertySector=uID)
+        userM.delete()
+        return redirect('myapp:PropertySector_list')
 
 #######################################################################################################################

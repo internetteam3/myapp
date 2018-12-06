@@ -142,7 +142,7 @@ urlpatterns = [
 
 
 
-
+#country
 
                   url(r'^countryCreate/$',
                       views.CountryCreate.as_view(),
@@ -160,4 +160,97 @@ urlpatterns = [
                       views.CountryDelete.as_view(),
                       name='Country_delete'),
 
+
+
+    #province
+
+                  url(r'^provinceCreate/$',
+                      views.ProvinceCreate.as_view(),
+                      name='Province_create'),
+
+                  url(r'^provinceList/$',
+                      views.ProvinceList.as_view(),
+                      name='Province_list'),
+
+                  url(r'^provinceUpdate/(?P<uID>\d+)$',
+                      views.ProvinceUpdate.as_view(),
+                      name='Province_update'),
+
+                  url(r'^provinceDelete/(?P<uID>\d+)$',
+                      views.ProvinceDelete.as_view(),
+                      name='Province_delete'),
+
+
+
+
+
+# city
+
+                  url(r'^cityCreate/$',
+                      views.CityCreate.as_view(),
+                      name='City_create'),
+
+                  url(r'^cityList/$',
+                      views.CityList.as_view(),
+                      name='City_list'),
+
+                  url(r'^cityUpdate/(?P<uID>\d+)$',
+                      views.CityUpdate.as_view(),
+                      name='City_update'),
+
+                  url(r'^cityDelete/(?P<uID>\d+)$',
+                      views.CityDelete.as_view(),
+                      name='City_delete'),
+
+
+
+
+# propertyCategory
+
+                  url(r'^propertyCategoryCreate/$',
+                      views.PropertyCategoryCreate.as_view(),
+                      name='PropertyCategory_create'),
+
+                  url(r'^propertyCategoryList/$',
+                      views.PropertyCategoryList.as_view(),
+                      name='PropertyCategory_list'),
+
+                  url(r'^propertyCategoryUpdate/(?P<uID>\d+)$',
+                      views.PropertyCategoryUpdate.as_view(),
+                      name='PropertyCategory_update'),
+
+                  url(r'^propertyCategoryDelete/(?P<uID>\d+)$',
+                      views.PropertyCategoryDelete.as_view(),
+                      name='PropertyCategory_delete'),
+
+
+# propertySector
+
+                  url(r'^propertySectorCreate/$',
+                      views.PropertySectorCreate.as_view(),
+                      name='PropertySector_create'),
+
+                  url(r'^propertySectorList/$',
+                      views.PropertySectorList.as_view(),
+                      name='PropertySector_list'),
+
+                  url(r'^propertyCategoryUpdate/(?P<uID>\d+)$',
+                      views.PropertySectorUpdate.as_view(),
+                      name='PropertySector_update'),
+
+                  url(r'^propertySectorDelete/(?P<uID>\d+)$',
+                      views.PropertySectorDelete.as_view(),
+                      name='PropertySector_delete'),
+
+
+
+
+
+
+
+
+
+
               ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+
+
