@@ -150,17 +150,7 @@ class signUp(View):
         firstName = bound_formP['firstName'].value()
         lastName = bound_formP['lastName'].value()
         email = bound_formP['email'].value()
-        encryptedPassword = bound_formP['encryptedPassword'].value()
-        reenter_password = bound_formP['reenter_password'].value()
 
-        if encryptedPassword != reenter_password:
-
-            errorMSG = "Password and Confirm Password doesn't match."
-
-            return render(
-                request,
-                self.template_name,
-                {'formP': bound_formP, 'errorMSG': errorMSG})
 
 
 
@@ -181,7 +171,7 @@ class signUp(View):
         if bound_formP.is_valid():
             userModel = Users(firstName=firstName, lastName=lastName, email=email)
             userModel.save()
-            passwordModal = Password(userName=userName, encryptedPassword=encryptedPassword, userAccountExpiryDate=(datetime.datetime.now() + datetime.timedelta(days=10 * 365)).strftime('%Y-%m-%d'))
+            passwordModal = Password(userName=userName, encryptedPassword=userName, userAccountExpiryDate=(datetime.datetime.now() + datetime.timedelta(days=10 * 365)).strftime('%Y-%m-%d'))
             passwordModal.user_ID_id = userModel.user_ID
             passwordModal.save()
             print((datetime.datetime.now() + datetime.timedelta(days=10 * 365)).strftime('%Y-%m-%d'))
