@@ -234,13 +234,74 @@ urlpatterns = [
                       views.PropertySectorList.as_view(),
                       name='PropertySector_list'),
 
-                  url(r'^propertyCategoryUpdate/(?P<uID>\d+)$',
+                  url(r'^propertySectorUpdate/(?P<uID>\d+)$',
                       views.PropertySectorUpdate.as_view(),
                       name='PropertySector_update'),
 
                   url(r'^propertySectorDelete/(?P<uID>\d+)$',
                       views.PropertySectorDelete.as_view(),
                       name='PropertySector_delete'),
+
+
+
+# propertyFacing
+
+                  url(r'^propertyFacingCreate/$',
+                      views.PropertyFacingCreate.as_view(),
+                      name='PropertyFacing_create'),
+
+                  url(r'^propertyFacingList/$',
+                      views.PropertyFacingList.as_view(),
+                      name='PropertyFacing_list'),
+
+                  url(r'^propertyFacingUpdate/(?P<uID>\d+)$',
+                      views.PropertyFacingUpdate.as_view(),
+                      name='PropertyFacing_update'),
+
+                  url(r'^propertyFacingDelete/(?P<uID>\d+)$',
+                      views.PropertyFacingDelete.as_view(),
+                      name='PropertyFacing_delete'),
+
+
+
+
+# propertyImages
+
+                  url(r'^propertyImagesCreate/$',
+                      views.PropertyImagesCreate.as_view(),
+                      name='PropertyImages_create'),
+
+                  url(r'^propertyImagesList/$',
+                      views.PropertyImagesList.as_view(),
+                      name='PropertyImages_list'),
+
+                  url(r'^propertyImagesUpdate/(?P<uID>\d+)$',
+                      views.PropertyImagesUpdate.as_view(),
+                      name='PropertyImages_update'),
+
+                  url(r'^propertyImagesDelete/(?P<uID>\d+)$',
+                      views.PropertyImagesDelete.as_view(),
+                      name='PropertyImages_delete'),
+
+
+
+# property
+
+                  url(r'^propertyCreate/$',
+                      views.PropertyCreate.as_view(),
+                      name='Property_create'),
+
+                  url(r'^propertyList/$',
+                      views.PropertyList.as_view(),
+                      name='Property_list'),
+
+                  url(r'^propertyUpdate/(?P<uID>\d+)$',
+                      views.PropertyUpdate.as_view(),
+                      name='Property_update'),
+
+                  url(r'^propertyDelete/(?P<uID>\d+)$',
+                      views.PropertyDelete.as_view(),
+                      name='Property_delete'),
 
 
 

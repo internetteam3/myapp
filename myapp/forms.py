@@ -1,6 +1,8 @@
 from django import forms
 
-from .models import Users, Password, RoleCode, PermissionType, RolePermission, RolePermissionDetail, UserRole, Country, Province, City, PropertyCategory, Property_Sector
+from .models import Users, Password, RoleCode, PermissionType, RolePermission, RolePermissionDetail, \
+    UserRole, Country, Province, City, PropertyCategory, Property_Sector, Property_Facing, PropertyImages, Property
+
 
 class DateInput(forms.DateInput):
     input_type = 'date'
@@ -134,4 +136,51 @@ class PropertySectorForm(forms.ModelForm):
         widgets = {
 
             'propertySectorName': forms.TextInput(attrs={'class': 'single-input'}),
+        }
+
+
+class PropertyFacingForm(forms.ModelForm):
+    class Meta:
+        model = Property_Facing
+        fields = ['propertyFacingName']
+        widgets = {
+
+            'propertyFacingName': forms.TextInput(attrs={'class': 'single-input'}),
+        }
+
+
+class PropertyImagesForm(forms.ModelForm):
+    class Meta:
+        model = PropertyImages
+        fields = ['propertyID','propertyImage','propertyImageDescription']
+        widgets = {
+            'propertyImageDescription': forms.TextInput(attrs={'class': 'single-input'}),
+        }
+
+
+class PropertyForm(forms.ModelForm):
+    class Meta:
+        model = Property
+        fields = ['propertyTitle','propertyCategory','propertySector','propertyFacing',
+                  'propertyCountry','propertyProvince','propertyCity','propertyStreet',
+                  'propertyPostalCode','propertyStreetnumber','propertyConstructionDate',
+                  'propertyRegistrationDate','propertyNoofHalls','propertyNumberofRooms','propertyNoofBathrooms',
+                  'propertyNoofFloors','propertyTotalArea','propertyAskingPrice','propertySellingPrice']
+        widgets = {
+
+            'propertyTitle': forms.TextInput(attrs={'class': 'single-input'}),
+
+            'propertyStreet': forms.TextInput(attrs={'class': 'single-input'}),
+            'propertyPostalCode': forms.TextInput(attrs={'class': 'single-input'}),
+            'propertyStreetnumber': forms.TextInput(attrs={'class': 'single-input'}),
+            'propertyConstructionDate': forms.TextInput(attrs={'class': 'single-input'}),
+            'propertyRegistrationDate': forms.TextInput(attrs={'class': 'single-input'}),
+            'propertyNoofHalls': forms.TextInput(attrs={'class': 'single-input'}),
+            'propertyNumberofRooms': forms.TextInput(attrs={'class': 'single-input'}),
+            'propertyNoofBathrooms': forms.TextInput(attrs={'class': 'single-input'}),
+            'propertyNoofFloors': forms.TextInput(attrs={'class': 'single-input'}),
+            'propertyTotalArea': forms.TextInput(attrs={'class': 'single-input'}),
+            'propertyAskingPrice': forms.TextInput(attrs={'class': 'single-input'}),
+            'propertySellingPrice': forms.TextInput(attrs={'class': 'single-input'}),
+
         }

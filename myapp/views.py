@@ -5,8 +5,10 @@ from django.shortcuts import (
     get_object_or_404, redirect, render)
 from django.views.generic import View
 from .forms import UsersForm, PasswordForm, RoleCodeForm, PermissionTypeForm, RolePermissionForm, RolePermissionDetailForm, \
-    UserRoleForm, LoginForm, ChangePasswordForm,CountryForm, ProvinceForm, CityForm, PropertyCategoryForm, PropertySectorForm
-from .models import Users, Password, RoleCode, PermissionType, RolePermission, RolePermissionDetail, UserRole, Country, Province, City, PropertyCategory, Property_Sector
+    UserRoleForm, LoginForm, ChangePasswordForm,CountryForm, ProvinceForm, CityForm, PropertyCategoryForm, PropertySectorForm,\
+    PropertyFacingForm, PropertyImagesForm, PropertyForm
+from .models import Users, Password, RoleCode, PermissionType, RolePermission, RolePermissionDetail, UserRole, Country, \
+    Province, City, PropertyCategory, Property_Sector, Property_Facing, Property, PropertyImages
 from django.forms import modelformset_factory, inlineformset_factory
 
 
@@ -972,5 +974,232 @@ class PropertySectorDelete(View):
         userM = get_object_or_404(Property_Sector, propertySector=uID)
         userM.delete()
         return redirect('myapp:PropertySector_list')
+
+#######################################################################################################################
+
+
+class PropertyFacingCreate(View):
+    form_class = PropertyFacingForm
+    template_name = 'myapp/PropertyFacing_form.html'
+
+    def get(self, request):
+        return render(
+            request,
+            self.template_name,
+            {'formU': self.form_class()})
+
+    def post(self, request):
+        bound_formU = self.form_class(request.POST)
+
+
+        if bound_formU.is_valid():
+            new_post = bound_formU.save()
+
+            return redirect('myapp:PropertyFacing_list')
+        else:
+            return render(
+                request,
+                self.template_name,
+                {'formU': bound_formU})
+
+
+class PropertyFacingList(View):
+    def get(self, request):
+        return render(
+            request,
+            'myapp/PropertyFacing_list.html',
+            {'propertyFacing_list': Property_Facing.objects.all().order_by('-propertyFacing')})
+
+
+class PropertyFacingUpdate(View):
+    form_class = PropertyFacingForm
+    template_name = 'myapp/PropertyFacingUpdate_form.html'
+
+    def get(self, request, uID):
+        userM = get_object_or_404(Property_Facing, propertyFacing=uID)
+        context = {
+            'formU': self.form_class(
+                instance=userM),
+            'userM': userM
+        }
+        return render(
+            request, self.template_name, context)
+
+    def post(self,request, uID):
+        userM = get_object_or_404(Property_Facing, propertyFacing=uID)
+        bound_formU = self.form_class(
+            request.POST, instance=userM)
+        if bound_formU.is_valid():
+            new_post = bound_formU.save()
+
+            return redirect('myapp:PropertyFacing_list')
+        else:
+            context = {
+                'formU': bound_formU,
+                'userM': userM,
+            }
+            return render(
+                request,
+                self.template_name,
+                context)
+
+
+class PropertyFacingDelete(View):
+
+    def get(self, request, uID):
+        userM = get_object_or_404(Property_Facing, propertyFacing=uID)
+        userM.delete()
+        return redirect('myapp:PropertyFacing_list')
+
+#######################################################################################################################
+
+
+class PropertyImagesCreate(View):
+    form_class = PropertyImagesForm
+    template_name = 'myapp/PropertyImages_form.html'
+
+    def get(self, request):
+        return render(
+            request,
+            self.template_name,
+            {'formU': self.form_class()})
+
+    def post(self, request):
+        bound_formU = self.form_class(request.POST)
+
+        if bound_formU.is_valid():
+            new_post = bound_formU.save()
+
+            return redirect('myapp:PropertyImages_list')
+        else:
+            return render(
+                request,
+                self.template_name,
+                {'formU': bound_formU})
+
+
+class PropertyImagesList(View):
+    def get(self, request):
+        return render(
+            request,
+            'myapp/PropertyImages_list.html',
+            {'propertyImages_list': PropertyImages.objects.all().order_by('-propertyImageID')})
+
+
+class PropertyImagesUpdate(View):
+    form_class = PropertyImagesForm
+    template_name = 'myapp/PropertyImagesUpdate_form.html'
+
+    def get(self, request, uID):
+        userM = get_object_or_404(PropertyImages, propertyImageID=uID)
+        context = {
+            'formU': self.form_class(
+                instance=userM),
+            'userM': userM
+        }
+        return render(
+            request, self.template_name, context)
+
+    def post(self,request, uID):
+        userM = get_object_or_404(PropertyImages, propertyImageID=uID)
+        bound_formU = self.form_class(
+            request.POST, instance=userM)
+        if bound_formU.is_valid():
+            new_post = bound_formU.save()
+
+            return redirect('myapp:PropertyImages_list')
+        else:
+            context = {
+                'formU': bound_formU,
+                'userM': userM,
+            }
+            return render(
+                request,
+                self.template_name,
+                context)
+
+
+class PropertyImagesDelete(View):
+
+    def get(self, request, uID):
+        userM = get_object_or_404(PropertyImages, propertyImageID=uID)
+        userM.delete()
+        return redirect('myapp:PropertyImages_list')
+
+#######################################################################################################################
+
+
+class PropertyCreate(View):
+    form_class = PropertyForm
+    template_name = 'myapp/Property_form.html'
+
+    def get(self, request):
+        return render(
+            request,
+            self.template_name,
+            {'formU': self.form_class()})
+
+    def post(self, request):
+        bound_formU = self.form_class(request.POST)
+
+
+        if bound_formU.is_valid():
+            new_post = bound_formU.save()
+
+            return redirect('myapp:Property_list')
+        else:
+            return render(
+                request,
+                self.template_name,
+                {'formU': bound_formU})
+
+
+class PropertyList(View):
+    def get(self, request):
+        return render(
+            request,
+            'myapp/Property_list.html',
+            {'property_list': Property.objects.all().order_by('-propertyID')})
+
+
+class PropertyUpdate(View):
+    form_class = PropertyForm
+    template_name = 'myapp/PropertyUpdate_form.html'
+
+    def get(self, request, uID):
+        userM = get_object_or_404(Property, propertyID=uID)
+        context = {
+            'formU': self.form_class(
+                instance=userM),
+            'userM': userM
+        }
+        return render(
+            request, self.template_name, context)
+
+    def post(self,request, uID):
+        userM = get_object_or_404(Property, propertyID=uID)
+        bound_formU = self.form_class(
+            request.POST, instance=userM)
+        if bound_formU.is_valid():
+            new_post = bound_formU.save()
+
+            return redirect('myapp:Property_list')
+        else:
+            context = {
+                'formU': bound_formU,
+                'userM': userM,
+            }
+            return render(
+                request,
+                self.template_name,
+                context)
+
+
+class PropertyDelete(View):
+
+    def get(self, request, uID):
+        userM = get_object_or_404(Property, propertyID=uID)
+        userM.delete()
+        return redirect('myapp:Property_list')
 
 #######################################################################################################################

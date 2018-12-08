@@ -7,7 +7,7 @@ from django.utils import timezone
 
 # Create your models here.
 
-
+#done-Bj
 class Country(models.Model):
     countryID = models.AutoField(primary_key=True)
     countryName = models.TextField(unique=True)
@@ -15,7 +15,7 @@ class Country(models.Model):
     def __str__(self):
         return str(self.countryID)+"-"+self.countryName
 
-#done
+#done-Bj
 class Province(models.Model):
     provinceID = models.AutoField(primary_key=True)
     countryID = models.ForeignKey(Country, on_delete=models.DO_NOTHING, )
@@ -24,7 +24,7 @@ class Province(models.Model):
     def __str__(self):
         return str(self.provinceID)+"-"+self.provinceName
 
-#done
+#done-Bj
 class City(models.Model):
     cityID = models.AutoField(primary_key=True)
     cityName = models.TextField()
@@ -34,7 +34,7 @@ class City(models.Model):
     def __str__(self):
         return str(self.cityID)+"-"+self.cityName
 
-#done
+#done-Bj
 class PropertyCategory(models.Model):
     propertyCategory = models.AutoField(primary_key=True)
     propertyCategoryName = models.CharField(max_length=200)
@@ -42,7 +42,7 @@ class PropertyCategory(models.Model):
     def __str__(self):
         return str(self.propertyCategory)+"-"+self.propertyCategoryName
 
-
+#done-Bj
 class Property_Sector(models.Model):
     propertySector = models.AutoField(primary_key=True)
     propertySectorName = models.CharField(max_length=200)
@@ -50,8 +50,7 @@ class Property_Sector(models.Model):
     def __str__(self):
         return str(self.propertySector)+"-"+self.propertySectorName
 
-
-
+#done-Bj
 class Property_Facing(models.Model):
     propertyFacing = models.AutoField(primary_key=True)
     propertyFacingName = models.CharField(max_length=200)
@@ -59,7 +58,7 @@ class Property_Facing(models.Model):
     def __str__(self):
         return str(self.propertyFacing)+"-"+self.propertyFacingName
 
-
+#done-Bj
 class Property(models.Model):
     propertyID = models.AutoField(primary_key=True)
     propertyTitle = models.CharField(max_length=255)
@@ -86,7 +85,7 @@ class Property(models.Model):
     def __str__(self):
         return str(self.propertyID)+"-"+self.propertyTitle+" -> Asking Price: "+str(self.propertyAskingPrice)+"$"
 
-
+#done-Bj
 class PropertyImages(models.Model):
     propertyImageID = models.AutoField(primary_key=True)
     propertyID = models.ForeignKey(Property, on_delete=models.DO_NOTHING)
@@ -95,7 +94,7 @@ class PropertyImages(models.Model):
 
     def __str__(self):
         return str(self.propertyImageID)+"-"+self.propertyImageDescription
-#done
+#up to here was done by neel
 class  Users(models.Model):
     user_ID = models.AutoField(primary_key=True)
     firstName = models.CharField(max_length=200)
