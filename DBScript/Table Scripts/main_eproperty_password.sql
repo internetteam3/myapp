@@ -1,0 +1,4 @@
+INSERT INTO eproperty_password (password_ID, userName, encryptedPassword, salt, userAccountExpiryDate, passwordMustChanged, passwordReset, isActive, user_ID_id) VALUES (1, 'neel47', 'admin', '', '1993-11-11', 0, 1, 0, 1);
+INSERT INTO eproperty_password (password_ID, userName, encryptedPassword, salt, userAccountExpiryDate, passwordMustChanged, passwordReset, isActive, user_ID_id) VALUES (2, 'dhavan1', 'admin', '', '1993-11-11', 0, 1, 0, 2);
+INSERT INTO eproperty_password (password_ID, userName, encryptedPassword, salt, userAccountExpiryDate, passwordMustChanged, passwordReset, isActive, user_ID_id) VALUES (3, 'sid', 'patel', '', '2028-11-13', 0, 1, 0, 3);
+INSERT INTO eproperty_password (password_ID, userName, encryptedPassword, salt, userAccountExpiryDate, passwordMustChanged, passwordReset, isActive, user_ID_id) VALUES (4, 'neel', 'admin', '', '2028-12-05', 0, 1, 0, 4);

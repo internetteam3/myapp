@@ -1,0 +1,2 @@
+INSERT INTO myapp_rolepermissiondetail (roleCode_ID_id, rolePermission_ID_id, rolePermissionDetail_ID) VALUES (1, 1, 1);
+INSERT INTO myapp_rolepermissiondetail (roleCode_ID_id, rolePermission_ID_id, rolePermissionDetail_ID) VALUES (1, 2, 2);

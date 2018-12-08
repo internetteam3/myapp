@@ -1,0 +1,1 @@
+INSERT INTO myapp_userrole (userRole_ID, dateAssigned, roleCode_ID_id, user_ID_id) VALUES (1, '2018-11-15', 1, 1);

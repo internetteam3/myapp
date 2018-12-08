@@ -1,0 +1,3 @@
+INSERT INTO myapp_password (userName, encryptedPassword, salt, userAccountExpiryDate, passwordMustChanged, passwordReset, user_ID_id, password_ID) VALUES ('neel47', 'admin', '', '1993-11-11', 0, 1, 1, 1);
+INSERT INTO myapp_password (userName, encryptedPassword, salt, userAccountExpiryDate, passwordMustChanged, passwordReset, user_ID_id, password_ID) VALUES ('dhavan1', 'admin', '', '1993-11-11', 0, 1, 2, 2);
+INSERT INTO myapp_password (userName, encryptedPassword, salt, userAccountExpiryDate, passwordMustChanged, passwordReset, user_ID_id, password_ID) VALUES ('sid', 'patel', '', '2028-11-13', 0, 1, 3, 3);

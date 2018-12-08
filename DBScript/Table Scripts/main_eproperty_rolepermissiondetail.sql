@@ -1,0 +1,2 @@
+INSERT INTO eproperty_rolepermissiondetail (rolePermissionDetail_ID, roleCode_ID_id, rolePermission_ID_id) VALUES (1, 1, 1);
+INSERT INTO eproperty_rolepermissiondetail (rolePermissionDetail_ID, roleCode_ID_id, rolePermission_ID_id) VALUES (2, 1, 2);

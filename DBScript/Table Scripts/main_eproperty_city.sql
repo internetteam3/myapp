@@ -1,0 +1,11 @@
+INSERT INTO eproperty_city (cityID, cityName, countryName_id, provinceID_id) VALUES (1, 'Windsor', 1, 1);
+INSERT INTO eproperty_city (cityID, cityName, countryName_id, provinceID_id) VALUES (2, 'Montreal', 1, 2);
+INSERT INTO eproperty_city (cityID, cityName, countryName_id, provinceID_id) VALUES (3, 'Edmonton', 1, 3);
+INSERT INTO eproperty_city (cityID, cityName, countryName_id, provinceID_id) VALUES (4, 'Winnipeg', 1, 4);
+INSERT INTO eproperty_city (cityID, cityName, countryName_id, provinceID_id) VALUES (5, 'Vancouver', 1, 5);
+INSERT INTO eproperty_city (cityID, cityName, countryName_id, provinceID_id) VALUES (6, 'Toronto', 1, 1);
+INSERT INTO eproperty_city (cityID, cityName, countryName_id, provinceID_id) VALUES (7, 'Ottawa', 1, 1);
+INSERT INTO eproperty_city (cityID, cityName, countryName_id, provinceID_id) VALUES (8, 'NewYork', 2, 6);
+INSERT INTO eproperty_city (cityID, cityName, countryName_id, provinceID_id) VALUES (9, 'Detroit', 2, 7);
+INSERT INTO eproperty_city (cityID, cityName, countryName_id, provinceID_id) VALUES (10, 'PaloAlto', 2, 8);
+INSERT INTO eproperty_city (cityID, cityName, countryName_id, provinceID_id) VALUES (11, 'SanFransisco', 2, 8);
