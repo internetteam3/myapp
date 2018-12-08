@@ -123,7 +123,7 @@ class  UserRole(models.Model):
 class Password(models.Model):
     password_ID = models.AutoField(primary_key=True)
     user_ID = models.ForeignKey(Users, on_delete=models.CASCADE)
-    userName = models.CharField(max_length=200)
+    userName = models.CharField(max_length=200, unique=True)
     encryptedPassword = models.CharField(max_length=200)
     salt = models.CharField(max_length=200)
     userAccountExpiryDate = models.DateField()
