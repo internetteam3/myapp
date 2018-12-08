@@ -184,3 +184,13 @@ class PropertyForm(forms.ModelForm):
             'propertySellingPrice': forms.TextInput(attrs={'class': 'single-input'}),
 
         }
+
+class SignUpForm(forms.Form):
+    userName = forms.CharField(required=True, label="User Name", widget = forms.TextInput(attrs={'class': 'single-input','placeholder': 'User Name'}))
+    firstName = forms.CharField(required=True, label="First Name", widget = forms.TextInput(attrs={'class': 'single-input','placeholder': 'First Name'}))
+    lastName = forms.CharField(required=True, label="Last Name", widget = forms.TextInput(attrs={'class': 'single-input','placeholder': 'Last Name'}))
+    email = forms.EmailField(required=True, label="Email", widget = forms.TextInput(attrs={'class': 'single-input','placeholder': 'Email'}))
+    encryptedPassword = forms.CharField(required=True, label="Password", widget = forms.PasswordInput(attrs={'class': 'single-input','placeholder': 'Enter Password'}))
+    reenter_password = forms.CharField(required=True, label="Confirm Password", widget = forms.PasswordInput(attrs={'class': 'single-input','placeholder': 'Re-enter Password'}))
+
+

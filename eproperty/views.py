@@ -6,7 +6,7 @@ from django.shortcuts import (
 from django.views.generic import View
 from .forms import UsersForm, PasswordForm, RoleCodeForm, PermissionTypeForm, RolePermissionForm, RolePermissionDetailForm, \
     UserRoleForm, LoginForm, ChangePasswordForm,CountryForm, ProvinceForm, CityForm, PropertyCategoryForm, PropertySectorForm,\
-    PropertyFacingForm, PropertyImagesForm, PropertyForm
+    PropertyFacingForm, PropertyImagesForm, PropertyForm, SignUpForm
 from .models import Users, Password, RoleCode, PermissionType, RolePermission, RolePermissionDetail, UserRole, Country, \
     Province, City, PropertyCategory, Property_Sector, Property_Facing, Property, PropertyImages
 from django.forms import modelformset_factory, inlineformset_factory
@@ -45,11 +45,23 @@ class login(View):
 
             # user = get_object_or_404(Password, userName=userName)
             # user, created = Password.objects.get_or_create(userName = userName, encryptedPassword = password)
-            user = Password.objects.filter(userName = userName, encryptedPassword = password)
+            #user = Password.objects.filter(userName = userName, encryptedPassword = password)
+            user = get_object_or_404(Password, userName=userName, encryptedPassword=password)
 
             if user:
-                print(user)
+                userRole = UserRole.objects.get(user_ID=user.user_ID)
+                print(userRole.roleCode_ID.name)
+
+
+
                 return redirect('eproperty:Users_List')
+            else:
+                errorMSG = 'Invalid Login Credentials. Please Try Again'
+
+                return render(
+                    request,
+                    self.template_name,
+                    {'formL': self.form_class(), 'errorMSG': errorMSG})
 
             # userModel = Users(firstName="",lastName="",email="")
             # new_post = userModel.save()
@@ -57,6 +69,7 @@ class login(View):
             #                          userAccountExpiryDate = (datetime.datetime.now() + datetime.timedelta(days=10 * 365)).strftime('%Y-%m-%d'),
             #                          user_ID=new_post)
             # print((datetime.datetime.now() + datetime.timedelta(days=10 * 365)).strftime('%Y-%m-%d'))
+
             return render(
                 request,
                 'eproperty/changePassword.html',
@@ -97,6 +110,64 @@ class changePassword(View):
                 return redirect('eproperty:Users_List')
 
         return redirect('eproperty:login')
+
+
+class signUp(View):
+    form_class = SignUpForm
+    template_name = 'eproperty/SignUp.html'
+
+    def get(self, request):
+        return render(
+            request,
+            self.template_name,
+            {'formP': self.form_class()})
+
+    def post(self, request):
+
+        bound_formP = self.form_class(request.POST)
+
+        userName = bound_formP['userName'].value()
+        firstName = bound_formP['firstName'].value()
+        lastName = bound_formP['lastName'].value()
+        email = bound_formP['email'].value()
+        encryptedPassword = bound_formP['encryptedPassword'].value()
+        reenter_password = bound_formP['reenter_password'].value()
+
+        if encryptedPassword != reenter_password:
+
+            errorMSG = "Password and Confirm Password doesn't match."
+
+            return render(
+                request,
+                self.template_name,
+                {'formP': bound_formP, 'errorMSG': errorMSG})
+
+
+
+        user = Password.objects.filter(userName = userName)
+
+        if user:
+            errorMSG = "User Name Already used."
+
+            return render(
+                request,
+                self.template_name,
+                {'formP': bound_formP, 'errorMSG': errorMSG})
+
+
+
+
+
+        if bound_formP.is_valid():
+            userModel = Users(firstName=firstName, lastName=lastName, email=email)
+            userModel.save()
+            passwordModal = Password(userName=userName, encryptedPassword=encryptedPassword, userAccountExpiryDate=(datetime.datetime.now() + datetime.timedelta(days=10 * 365)).strftime('%Y-%m-%d'))
+            passwordModal.user_ID_id = userModel.user_ID
+            passwordModal.save()
+            print((datetime.datetime.now() + datetime.timedelta(days=10 * 365)).strftime('%Y-%m-%d'))
+            return redirect('eproperty:login')
+
+        return redirect('eproperty:SignUp')
 
 def reset(request):
     return render(request, 'eproperty/reset.html')
