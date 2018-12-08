@@ -46,12 +46,29 @@ class login(View):
             # user = get_object_or_404(Password, userName=userName)
             # user, created = Password.objects.get_or_create(userName = userName, encryptedPassword = password)
             #user = Password.objects.filter(userName = userName, encryptedPassword = password)
-            user = get_object_or_404(Password, userName=userName, encryptedPassword=password)
+            #user = Password.objects.filter(userName=userName, encryptedPassword=password)
+
+            try:
+                user = Password.objects.get(userName=userName, encryptedPassword=password)
+            except Password.DoesNotExist:
+                user = None
 
             if user:
-                userRole = UserRole.objects.get(user_ID=user.user_ID)
-                print(userRole.roleCode_ID.name)
 
+                try:
+                    userRole = UserRole.objects.get(user_ID=user.user_ID)
+                except UserRole.DoesNotExist:
+                    userRole = None
+
+                if userRole:
+                    print(userRole.roleCode_ID.name)
+                else:
+                    errorMSG = 'No Role Assigned by the Admin'
+
+                    return render(
+                        request,
+                        self.template_name,
+                        {'formL': self.form_class(), 'errorMSG': errorMSG})
 
 
                 return redirect('eproperty:Users_List')
