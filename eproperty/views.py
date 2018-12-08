@@ -133,6 +133,9 @@ class signUp(View):
     form_class = SignUpForm
     template_name = 'eproperty/SignUp.html'
 
+    signup_form_class = LoginForm
+    signup_template_name = 'eproperty/login.html'
+
     def get(self, request):
         return render(
             request,
@@ -182,6 +185,13 @@ class signUp(View):
             passwordModal.user_ID_id = userModel.user_ID
             passwordModal.save()
             print((datetime.datetime.now() + datetime.timedelta(days=10 * 365)).strftime('%Y-%m-%d'))
+
+            errorMSG = 'You have SignUp. You will shortly receive an email from the Admin'
+
+            return render(
+                request,
+                self.signup_template_name,
+                {'formL': self.signup_form_class(), 'errorMSG': errorMSG})
             return redirect('eproperty:login')
 
         return redirect('eproperty:SignUp')
