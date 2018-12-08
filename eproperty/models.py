@@ -127,7 +127,7 @@ class Password(models.Model):
     encryptedPassword = models.CharField(max_length=200)
     salt = models.CharField(max_length=200)
     userAccountExpiryDate = models.DateField()
-    passwordMustChanged = models.BooleanField(default=False)
+    passwordMustChanged = models.BooleanField(default=True)
     passwordReset = models.BooleanField(default=True)
     isActive = models.BooleanField(default=False)
 

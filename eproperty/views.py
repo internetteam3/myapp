@@ -53,7 +53,7 @@ class login(View):
             except Password.DoesNotExist:
                 user = None
 
-            if user:
+            if user and user.isActive:
 
                 try:
                     userRole = UserRole.objects.get(user_ID=user.user_ID)
@@ -69,6 +69,15 @@ class login(View):
                         request,
                         self.template_name,
                         {'formL': self.form_class(), 'errorMSG': errorMSG})
+
+
+                if user.passwordMustChanged:
+                    return render(
+                        request,
+                        'eproperty/changePassword.html',
+                        {'formP': self.chpaswd_form_class(),
+                         'userName': userName})
+
 
 
                 return redirect('eproperty:Users_List')
@@ -87,11 +96,6 @@ class login(View):
             #                          user_ID=new_post)
             # print((datetime.datetime.now() + datetime.timedelta(days=10 * 365)).strftime('%Y-%m-%d'))
 
-            return render(
-                request,
-                'eproperty/changePassword.html',
-                {'formP': self.chpaswd_form_class(),
-                 'userName':userName})
 
         else:
             return render(
@@ -157,7 +161,7 @@ class signUp(View):
         user = Password.objects.filter(userName = userName)
 
         if user:
-            errorMSG = "User Name Already used."
+            errorMSG = "User Name Already exist."
 
             return render(
                 request,
@@ -206,11 +210,26 @@ class UsersCreate(View):
         bound_formU = self.form_class(request.POST)
         bound_formP = self.form_class_password(request.POST)
 
+        user = Password.objects.filter(userName=bound_formP['userName'].value())
+
+        if user:
+            errorMSG = "User Name Already exist."
+
+            return render(
+                request,
+                self.template_name,
+                {'formU': bound_formU, 'formP': bound_formP, 'errorMSG': errorMSG})
+
+
+
+
+
+
         if bound_formU.is_valid():
             new_post = bound_formU.save()
 
             if bound_formP.is_valid():
-                passwordModal = Password(userName=bound_formP['userName'].value(), userAccountExpiryDate=bound_formP['userAccountExpiryDate'].value(), user_ID=new_post)
+                passwordModal = Password(userName=bound_formP['userName'].value(), userAccountExpiryDate=bound_formP['userAccountExpiryDate'].value(), user_ID=new_post, encryptedPassword=bound_formP['userName'].value())
                 passwordModal.save()
             else:
                 print(bound_formP.errors)
@@ -231,6 +250,9 @@ class UsersList(View):
             request,
             'eproperty/Users_list.html',
             {'users_list': Users.objects.all().order_by('-user_ID')})
+
+
+
 
 
 class UsersUpdate(View):
