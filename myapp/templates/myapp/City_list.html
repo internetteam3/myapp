@@ -73,7 +73,7 @@
 								 {% for c in city_list %}
 									<tr>
 
-										<td>{{ role.name }}</td>
+										<td>{{ c.cityName }}</td>
 										<td> <a href="{% url 'myapp:City_update' c.cityID%}">Edit</a> &nbsp;
                                         <a href="javascript:deleteFromURL('{% url 'myapp:City_delete' c.cityID %}', 'City')">Delete</a>
                                         </td>
