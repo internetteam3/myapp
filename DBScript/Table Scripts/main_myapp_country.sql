@@ -1,2 +1,2 @@
-INSERT INTO myapp_country (countryID, countryName) VALUES (1, 'Canada');
-INSERT INTO myapp_country (countryID, countryName) VALUES (2, 'USA');
+INSERT INTO myapp_country (countryName, countryID) VALUES ('Canada', 1);
+INSERT INTO myapp_country (countryName, countryID) VALUES ('USA', 2);

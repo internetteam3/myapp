@@ -1,6 +1,6 @@
-INSERT INTO myapp_property_sector (propertySector, propertySectorName) VALUES (1, 'Private');
-INSERT INTO myapp_property_sector (propertySector, propertySectorName) VALUES (2, 'Residential');
-INSERT INTO myapp_property_sector (propertySector, propertySectorName) VALUES (3, 'Commercial');
-INSERT INTO myapp_property_sector (propertySector, propertySectorName) VALUES (4, 'Government');
-INSERT INTO myapp_property_sector (propertySector, propertySectorName) VALUES (5, 'Rural');
-INSERT INTO myapp_property_sector (propertySector, propertySectorName) VALUES (6, 'Other');
+INSERT INTO myapp_property_sector (propertySectorName, propertySector) VALUES ('Private', 1);
+INSERT INTO myapp_property_sector (propertySectorName, propertySector) VALUES ('Residential', 2);
+INSERT INTO myapp_property_sector (propertySectorName, propertySector) VALUES ('Commercial', 3);
+INSERT INTO myapp_property_sector (propertySectorName, propertySector) VALUES ('Government', 4);
+INSERT INTO myapp_property_sector (propertySectorName, propertySector) VALUES ('Rural', 5);
+INSERT INTO myapp_property_sector (propertySectorName, propertySector) VALUES ('Other', 6);

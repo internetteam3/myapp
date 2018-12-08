@@ -56,3 +56,11 @@ sequence of table:-
 6)propertysector
 7)property
 8)property_image
+Users
+RoleCode
+UserRole
+Password
+PermissionType
+RolePermission
+RolePermissionDetail
+Advertisement

@@ -1,0 +1,34 @@
+{% extends "sidebar_base.html" %}
+
+{% load static %}
+{% block customCSS %}
+     <link rel="stylesheet" href="{% static '/css/sb-admin.css' %}">
+{% endblock %}
+
+{% block content %}
+ <div  class="formPaddingBox">
+     <div class="card mb-3">
+         <div class="card-header">
+					<i class="fa fa-table"></i> Modify Capabilities
+         </div>
+                <br>
+
+          <div>
+            <div>
+              <form
+                  action="{% url 'eproperty:RolePermissionDetail_update' userM.rolePermissionDetail_ID %}"
+                  method="post">
+                {% csrf_token %}
+                  {{ formU.as_p }}
+                  <a href="{% url 'eproperty:RolePermissionDetail_List' %}" class="btn btn-primary"> Cancel </a>
+                <button type="submit"class="btn btn-primary">
+                  Save </button>
+              </form>
+            </div>
+          </div>
+
+
+     </div>
+ </div>
+
+{% endblock %}

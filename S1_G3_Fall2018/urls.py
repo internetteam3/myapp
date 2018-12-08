@@ -24,7 +24,7 @@ from S1_G3_Fall2018.views import redirect_root
 urlpatterns = [
                   url(r'^$', redirect_root),
                   url(r'^admin/', admin.site.urls),
-                  url(r'myapp/', include('myapp.urls')),
+                  url(r'eproperty/', include('eproperty.urls')),
 
 
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
