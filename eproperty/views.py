@@ -81,6 +81,10 @@ class login(View):
                          'userName': userName})
 
 
+                # sesseion object created
+                #request.session['pass_obj'] = user
+                request.session['userType'] = userRole.roleCode_ID.name
+
 
                 return redirect('eproperty:Users_List')
             else:
@@ -242,6 +246,8 @@ class resetUserPassword(View):
 class logoutUser(View):
     def get(self, request):
         print("logout")
+        #del request.session['pass_obj']
+        del request.session['userType']
 
         return redirect('eproperty:login')
 

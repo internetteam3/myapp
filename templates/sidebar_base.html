@@ -127,20 +127,28 @@
 				<div class="container">
             <div class="row">
             <div class="sidenav col-xs-3">
-            <a href="{% url 'eproperty:Users_List' %}">User List</a>
+
+                {% if request.session.userType == 'admin' %}
+
+                 <a href="{% url 'eproperty:Users_List' %}">User List</a>
             <a href="{% url 'eproperty:UserRole_List' %}">Assign Role</a>
             <a href="{% url 'eproperty:RoleCode_List' %}">System Roles</a>
             <a href="{% url 'eproperty:RolePermissionDetail_List' %}">Assign Capabilities</a>
             <a href="{% url 'eproperty:PermissionType_List' %}">Permission Types</a>
             <a href="{% url 'eproperty:RolePermission_List' %}">System Feature</a>
-                <a href="{% url 'eproperty:Country_List' %}">Country</a>
-                <a href="{% url 'eproperty:Province_list' %}">Province</a>
-                <a href="{% url 'eproperty:City_list' %}">City</a>
-                <a href="{% url 'eproperty:PropertyCategory_list' %}">Property Category</a>
-                <a href="{% url 'eproperty:PropertySector_list' %}">Property Sector</a>
-                <a href="{% url 'eproperty:PropertyFacing_list' %}">Property Facing</a>
-                <a href="{% url 'eproperty:PropertyImages_list' %}">Property Images</a>
-                <a href="{% url 'eproperty:Property_list' %}">Property</a>
+            <a href="{% url 'eproperty:Country_List' %}">Country</a>
+             <a href="{% url 'eproperty:Province_list' %}">Province</a>
+             <a href="{% url 'eproperty:City_list' %}">City</a>
+             <a href="{% url 'eproperty:PropertyCategory_list' %}">Property Category</a>
+             <a href="{% url 'eproperty:PropertySector_list' %}">Property Sector</a>
+             <a href="{% url 'eproperty:PropertyFacing_list' %}">Property Facing</a>
+
+                 {% else %}
+
+             <a href="{% url 'eproperty:Property_list' %}">Property</a>
+             <a href="{% url 'eproperty:PropertyImages_list' %}">Property Images</a>
+
+                {% endif %}
 
 
             </div>
