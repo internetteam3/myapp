@@ -160,20 +160,20 @@ class PropertyImagesForm(forms.ModelForm):
 class PropertyForm(forms.ModelForm):
     class Meta:
         model = Property
-        fields = ['propertyTitle','propertyCategory','propertySector','propertyFacing',
+        fields = ['user_ID','propertyTitle','propertyCategory','propertySector','propertyFacing',
                   'propertyCountry','propertyProvince','propertyCity','propertyStreet',
                   'propertyPostalCode','propertyStreetnumber','propertyConstructionDate',
                   'propertyRegistrationDate','propertyNoofHalls','propertyNumberofRooms','propertyNoofBathrooms',
                   'propertyNoofFloors','propertyTotalArea','propertyAskingPrice','propertySellingPrice']
         widgets = {
-
+            'user_ID': forms.TextInput(attrs={'readonly': True, 'type': 'hidden'}),
             'propertyTitle': forms.TextInput(attrs={'class': 'single-input'}),
 
             'propertyStreet': forms.TextInput(attrs={'class': 'single-input'}),
             'propertyPostalCode': forms.TextInput(attrs={'class': 'single-input'}),
             'propertyStreetnumber': forms.TextInput(attrs={'class': 'single-input'}),
-            'propertyConstructionDate': forms.TextInput(attrs={'class': 'single-input'}),
-            'propertyRegistrationDate': forms.TextInput(attrs={'class': 'single-input'}),
+            'propertyConstructionDate': DateInput(),
+            'propertyRegistrationDate': DateInput(),
             'propertyNoofHalls': forms.TextInput(attrs={'class': 'single-input'}),
             'propertyNumberofRooms': forms.TextInput(attrs={'class': 'single-input'}),
             'propertyNoofBathrooms': forms.TextInput(attrs={'class': 'single-input'}),
@@ -194,8 +194,11 @@ class SignUpForm(forms.Form):
 class AdvertisementForm(forms.ModelForm):
     class Meta:
         model = Advertisement
-        fields = ['user_ID','propertyID','advStartDate','advEndDate','advDescription']
+        fields = ['user_ID','propertyID','advStartDate', 'advEndDate','advDescription']
         widgets = {
+            'user_ID': forms.TextInput(attrs={'readonly': True, 'type': 'hidden'}),
             'advDescription': forms.TextInput(attrs={'class': 'single-input'}),
+            'advStartDate': DateInput(),
+            'advEndDate': DateInput()
         }
 
