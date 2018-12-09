@@ -118,17 +118,16 @@ class changePassword(View):
         if bound_formP.is_valid():
 
             if password == change_password:
-                userModel = Users(firstName=userName, lastName=userName, email=userName+"@gmail.com")
-                userModel.save()
-                passwordModal = Password(userName = userName,
-                                         encryptedPassword = password,
-                                         userAccountExpiryDate = (datetime.datetime.now() + datetime.timedelta(
-                                             days=10 * 365)).strftime('%Y-%m-%d')
-                                         )
-                passwordModal.user_ID_id = userModel.user_ID
-                passwordModal.save()
-                print((datetime.datetime.now() + datetime.timedelta(days=10 * 365)).strftime('%Y-%m-%d'))
+                passwordM = Password.objects.get(userName=userName)
+                passwordM.encryptedPassword = password
+                passwordM.passwordMustChanged = False
+                passwordM.save()
                 return redirect('eproperty:Users_List')
+
+            else:
+                errorMSG = 'Password Mismatch. Try Again'
+                return render(request, 'eproperty/changePassword.html',
+                              {'formP': self.form_class(), 'userName': userName, 'errorMSG': errorMSG})
 
         return redirect('eproperty:login')
 
