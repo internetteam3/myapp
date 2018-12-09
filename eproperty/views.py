@@ -74,6 +74,7 @@ class login(View):
 
 
                 request.session['userType'] = userRole.roleCode_ID.name
+                request.session['userID'] = user.user_ID.user_ID
 
                 if user.passwordMustChanged:
                     return render(
@@ -262,7 +263,7 @@ class resetUserPassword(View):
 class logoutUser(View):
     def get(self, request):
         print("logout")
-        #del request.session['pass_obj']
+        del request.session['userID']
         del request.session['userType']
 
         return redirect('eproperty:login')
@@ -295,9 +296,6 @@ class UsersCreate(View):
                 request,
                 self.template_name,
                 {'formU': bound_formU, 'formP': bound_formP, 'errorMSG': errorMSG})
-
-
-
 
 
 
@@ -1266,10 +1264,22 @@ class PropertyImagesCreate(View):
 
 class PropertyImagesList(View):
     def get(self, request):
+
+        if request.session.get('userType', 'mini') == 'admin':
+            userID= 1
+        else:
+            userID = request.session.get('userID', 1)
+
+        propIDs = Property.objects.filter(user_ID=userID).order_by('-propertyID').values('propertyID')
+
+        #print(propIDs)
+
+
+
         return render(
             request,
             'eproperty/PropertyImages_list.html',
-            {'propertyImages_list': PropertyImages.objects.all().order_by('-propertyImageID')})
+            {'propertyImages_list': PropertyImages.objects.filter(propertyID__in=propIDs).order_by('-propertyImageID')})
 
 
 class PropertyImagesUpdate(View):
@@ -1319,11 +1329,15 @@ class PropertyCreate(View):
     form_class = PropertyForm
     template_name = 'eproperty/Property_form.html'
 
+
     def get(self, request):
+
+        #self.form_class.user_ID = request.session.get('userID', 1)
+
         return render(
             request,
             self.template_name,
-            {'formU': self.form_class()})
+            {'formU': self.form_class(initial={'user_ID': request.session.get('userID', 1)})})
 
     def post(self, request):
         bound_formU = self.form_class(request.POST)
@@ -1342,10 +1356,17 @@ class PropertyCreate(View):
 
 class PropertyList(View):
     def get(self, request):
+
+        if request.session.get('userType', 'mini') == 'admin':
+            userID= 1
+        else:
+            userID = request.session.get('userID', 1)
+
+
         return render(
             request,
             'eproperty/Property_list.html',
-            {'property_list': Property.objects.all().order_by('-propertyID')})
+            {'property_list': Property.objects.filter(user_ID=userID).order_by('-propertyID')})
 
 
 class PropertyUpdate(View):
@@ -1401,7 +1422,7 @@ class AdvertisementCreate(View):
         return render(
             request,
             self.template_name,
-            {'formU': self.form_class()})
+            {'formU': self.form_class(initial={'user_ID': request.session.get('userID', 1)})})
 
     def post(self, request):
         bound_formU = self.form_class(request.POST)
