@@ -186,8 +186,7 @@ class signUp(View):
             message += "User Name: "+userName+"\nFirst Name: "+firstName+"\nLast Name: "+lastName+"\nEmail: "+email
             message += "\n\n Kindly Active & Assign Role to this user through your portal."
 
-
-            sendEmailAdmin(subject, message)
+            sendEmailToAdmin(subject, message)
 
             errorMSG = 'You have SignUp. You will shortly receive an email from the Admin'
 
@@ -203,10 +202,43 @@ def reset(request):
     return render(request, 'eproperty/reset.html')
 
 
-def sendEmailAdmin(subject, message):
+def sendEmailToAdmin(subject, message):
     email_from = settings.EMAIL_DUMMY
     recipient_list = ['shah13yWindsor@gmail.com']
     send_mail( subject, message, email_from, recipient_list)
+
+def sendEmailToUser(subject, message, recipient):
+    email_from = settings.EMAIL_DUMMY
+    recipient_list = [recipient]
+    send_mail( subject, message, email_from, recipient_list)
+
+class activateUser(View):
+    def get(self, request, uID):
+
+        passwordM = Password.objects.get(password_ID=uID)
+
+        subject = 'Welcome to your new Real Estate Account: ' + passwordM.userName
+        message = "Thank you for creating a Real Estate Account. Here is some advice to get started with your account.\n\n"
+        message += "You User name: "+passwordM.userName+"\nYour Temporary Password is: "+passwordM.encryptedPassword
+        message += "\n\n You can now login to your account by filling above details"
+        sendEmailToUser(subject, message, passwordM.user_ID.email)
+
+
+
+
+        passwordM.isActive = True
+        passwordM.save()
+
+        return redirect('eproperty:Users_List')
+
+class resetUserPassword(View):
+    def get(self, request, uID):
+        passwordM = Password.objects.get(password_ID=uID)
+        passwordM.passwordMustChanged = True
+        passwordM.save()
+
+        return redirect('eproperty:Users_List')
+
 
 ######################################################################################################################
 
@@ -264,7 +296,7 @@ class UsersList(View):
         return render(
             request,
             'eproperty/Users_list.html',
-            {'users_list': Users.objects.all().order_by('-user_ID')})
+            {'password_list': Password.objects.all().order_by('-password_ID')})
 
 
 

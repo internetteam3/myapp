@@ -60,6 +60,7 @@
 									<th>First Name</th>
 									<th>Last Name</th>
 									<th>Email Address</th>
+                                    <th>Is User Active</th>
 									<th>Link</th>
 								</tr>
 							</thead>
@@ -68,20 +69,28 @@
 									<th>First Name</th>
 									<th>Last Name</th>
 									<th>Email Address</th>
+                                    <th>Is User Active</th>
 									<th>Link</th>
 								</tr>
 							</tfoot>
 							<tbody>
 
 
-								 {% for user in users_list %}
+								 {% for user in password_list %}
 									<tr>
 
-										<td>{{ user.firstName }}</td>
-										<td>{{ user.lastName }}</td>
-										<td>{{ user.email }}</td>
-										<td> <a href="{% url 'eproperty:Users_update' user.user_ID %}">Edit</a> &nbsp;
-                                        <a href="javascript:deleteFromURL('{% url 'eproperty:Users_delete' user.user_ID %}', 'User')">Delete</a>
+										<td>{{ user.user_ID.firstName }}</td>
+										<td>{{ user.user_ID.lastName }}</td>
+										<td>{{ user.user_ID.email }}</td>
+                                        <td>{{ user.isActive }}</td>
+										<td> <a href="{% url 'eproperty:Users_update' user.user_ID.user_ID %}">Edit</a> &nbsp;
+                                        <a href="javascript:deleteFromURL('{% url 'eproperty:Users_delete' user.user_ID.user_ID %}', 'User')">Delete</a> &nbsp;&nbsp;
+                                            {% if user.isActive %}
+                                                  <a href="{% url 'eproperty:ResetUserPassword' user.password_ID %}">Reset Password</a>
+                                            {% else %}
+                                                  <a href="{% url 'eproperty:ActivateUser' user.password_ID %}">Activate</a>
+                                            {% endif %}
+
                                         </td>
 
 									</tr>

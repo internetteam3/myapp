@@ -40,6 +40,12 @@ urlpatterns = [
                   url(r'^signUp/$', views.signUp.as_view(),
                       name='SignUp'),
 
+                  url(r'^activateUser/(?P<uID>\d+)$', views.activateUser.as_view(),
+                      name='ActivateUser'),
+
+                  url(r'^resetUserPassword/(?P<uID>\d+)$', views.resetUserPassword.as_view(),
+                      name='ResetUserPassword'),
+
 
                   path(r'reset', views.reset, name='reset'),
 
