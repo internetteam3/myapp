@@ -239,6 +239,13 @@ class resetUserPassword(View):
 
         return redirect('eproperty:Users_List')
 
+class logoutUser(View):
+    def get(self, request):
+        print("logout")
+
+        return redirect('eproperty:login')
+
+
 
 ######################################################################################################################
 

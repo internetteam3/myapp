@@ -34,6 +34,10 @@ urlpatterns = [
                   url(r'^login/$', views.login.as_view(),
                       name='login'),
 
+                  url(r'^logout/$', views.logoutUser.as_view(),
+                      name='Logout'),
+
+
                   url(r'^changePassword/$', views.changePassword.as_view(),
                       name='changePassword'),
 
