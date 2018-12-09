@@ -13,7 +13,7 @@ class Country(models.Model):
     countryName = models.TextField(unique=True)
 
     def __str__(self):
-        return str(self.countryID)+"-"+self.countryName
+        return self.countryName
 
 #done-Bj
 class Province(models.Model):
@@ -22,7 +22,7 @@ class Province(models.Model):
     provinceName = models.TextField()
 
     def __str__(self):
-        return str(self.provinceID)+"-"+self.provinceName
+        return self.provinceName
 
 #done-Bj
 class City(models.Model):
@@ -32,7 +32,7 @@ class City(models.Model):
     provinceID = models.ForeignKey(Province, on_delete=models.DO_NOTHING, )
 
     def __str__(self):
-        return str(self.cityID)+"-"+self.cityName
+        return self.cityName
 
 #done-Bj
 class PropertyCategory(models.Model):
@@ -40,7 +40,7 @@ class PropertyCategory(models.Model):
     propertyCategoryName = models.CharField(max_length=200)
 
     def __str__(self):
-        return str(self.propertyCategory)+"-"+self.propertyCategoryName
+        return self.propertyCategoryName
 
 #done-Bj
 class Property_Sector(models.Model):
@@ -48,7 +48,7 @@ class Property_Sector(models.Model):
     propertySectorName = models.CharField(max_length=200)
 
     def __str__(self):
-        return str(self.propertySector)+"-"+self.propertySectorName
+        return self.propertySectorName
 
 #done-Bj
 class Property_Facing(models.Model):
@@ -56,7 +56,18 @@ class Property_Facing(models.Model):
     propertyFacingName = models.CharField(max_length=200)
 
     def __str__(self):
-        return str(self.propertyFacing)+"-"+self.propertyFacingName
+        return self.propertyFacingName
+
+
+class Users(models.Model):
+    user_ID = models.AutoField(primary_key=True)
+    firstName = models.CharField(max_length=200)
+    lastName = models.CharField(max_length=200)
+    email = models.EmailField(max_length=200)
+
+    def __str__(self):
+        return str(self.user_ID)+"-"+self.firstName+"-"+self.email
+
 
 #done-Bj
 class Property(models.Model):
@@ -81,6 +92,7 @@ class Property(models.Model):
     propertyTotalArea = models.FloatField(null=False)
     propertyAskingPrice = models.FloatField(null=False)
     propertySellingPrice = models.FloatField(null=False)
+    user_ID = models.ForeignKey(Users, on_delete=models.CASCADE)
 
     def __str__(self):
         return str(self.propertyID)+"-"+self.propertyTitle+" -> Asking Price: "+str(self.propertyAskingPrice)+"$"
@@ -94,15 +106,7 @@ class PropertyImages(models.Model):
 
     def __str__(self):
         return str(self.propertyImageID)+"-"+self.propertyImageDescription
-#up to here was done by neel
-class  Users(models.Model):
-    user_ID = models.AutoField(primary_key=True)
-    firstName = models.CharField(max_length=200)
-    lastName = models.CharField(max_length=200)
-    email = models.EmailField(max_length=200)
-
-    def __str__(self):
-        return str(self.user_ID)+"-"+self.firstName+"-"+self.email
+#done by neel
 
 class RoleCode(models.Model):
     roleCode_ID = models.AutoField(primary_key=True)
@@ -168,3 +172,6 @@ class Advertisement(models.Model):
     advStartDate = models.DateField()
     advEndDate = models.DateField()
     advDescription = models.CharField(max_length=200)
+
+    def __str__(self):
+        return self.propertyID.propertyTitle

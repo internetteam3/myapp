@@ -188,7 +188,7 @@ class signUp(View):
             subject = 'New User Sign Up Request: '+userName
             message = "New User has requested to Sign-Up: Real Estate Site\nUser details are as follows:-\n\n"
             message += "User Name: "+userName+"\nFirst Name: "+firstName+"\nLast Name: "+lastName+"\nEmail: "+email
-            message += "\n\n Kindly Active & Assign Role to this user through your portal."
+            message += "\n\n Kindly Activate & Assign Role to this user through your portal."
 
             sendEmailToAdmin(subject, message)
 

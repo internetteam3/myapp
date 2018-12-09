@@ -194,8 +194,10 @@ class SignUpForm(forms.Form):
 class AdvertisementForm(forms.ModelForm):
     class Meta:
         model = Advertisement
-        fields = ['user_ID','propertyID','advStartDate','advEndDate','advDescription']
+        fields = ['user_ID', 'propertyID','advStartDate', 'advEndDate','advDescription']
         widgets = {
             'advDescription': forms.TextInput(attrs={'class': 'single-input'}),
+            'advStartDate': DateInput(),
+            'advEndDate': DateInput()
         }
 

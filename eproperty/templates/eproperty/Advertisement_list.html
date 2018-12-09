@@ -57,13 +57,29 @@
 							cellspacing="0">
 							<thead>
 								<tr>
-									<th>Advertisement Name</th>
+									<th>Property Name</th>
+                                    <th>Property Category</th>
+                                    <th>Property Sector</th>
+                                    <th>Country</th>
+                                     <th>Province</th>
+                                    <th>City</th>
+                                    <th>Total Area</th>
+                                    <th>Advertisement Start Date</th>
+                                    <th>Advertisement End Date</th>
 									<th>Link</th>
 								</tr>
 							</thead>
 							<tfoot>
 								<tr>
-									<th>Advertisement Name</th>
+									<th>Property Name</th>
+                                    <th>Property Category</th>
+                                    <th>Property Sector</th>
+                                    <th>Country</th>
+                                     <th>Province</th>
+                                    <th>City</th>
+                                    <th>Total Area</th>
+                                    <th>Advertisement Start Date</th>
+                                    <th>Advertisement End Date</th>
 									<th>Link</th>
 								</tr>
 							</tfoot>
@@ -73,7 +89,15 @@
 								 {% for c in advertisement_list %}
 									<tr>
 
-										<td>{{ c.advDescription }}</td>
+										<td>{{ c.propertyID.propertyTitle }}</td>
+                                        <td>{{ c.propertyID.propertyCategory }}</td>
+                                        <td>{{ c.propertyID.propertySector }}</td>
+                                        <td>{{ c.propertyID.propertyCountry }}</td>
+                                        <td>{{ c.propertyID.propertyProvince }}</td>
+                                        <td>{{ c.propertyID.propertyCity }}</td>
+                                        <td>{{ c.propertyID.propertyTotalArea }}</td>
+                                        <td>{{ c.advStartDate }}</td>
+                                        <td>{{ c.advEndDate }}</td>
 										<td> <a href="{% url 'eproperty:Advertisement_update' c.adv_ID%}">Edit</a> &nbsp;
                                         <a href="javascript:deleteFromURL('{% url 'eproperty:Advertisement_delete' c.adv_ID %}', 'Advertisement')">Delete</a>
                                         </td>
