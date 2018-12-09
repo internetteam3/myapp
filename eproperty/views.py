@@ -73,6 +73,8 @@ class login(View):
                         {'formL': self.form_class(), 'errorMSG': errorMSG})
 
 
+                request.session['userType'] = userRole.roleCode_ID.name
+
                 if user.passwordMustChanged:
                     return render(
                         request,
@@ -83,10 +85,17 @@ class login(View):
 
                 # sesseion object created
                 #request.session['pass_obj'] = user
-                request.session['userType'] = userRole.roleCode_ID.name
 
 
-                return redirect('eproperty:Users_List')
+
+                if 'admin' == userRole.roleCode_ID.name:
+                    return redirect('eproperty:Users_List')
+                else:
+                    return redirect('eproperty:Property_list')
+
+
+
+
             else:
                 errorMSG = 'Invalid Login Credentials. Please Try Again'
 
@@ -128,7 +137,14 @@ class changePassword(View):
                 passwordM.encryptedPassword = password
                 passwordM.passwordMustChanged = False
                 passwordM.save()
-                return redirect('eproperty:Users_List')
+
+                #print(request.session.get('userType', 'mini'))
+
+                if request.session.get('userType', 'mini') == 'admin':
+                    return redirect('eproperty:Users_List')
+                else:
+                    return redirect('eproperty:Property_list')
+
 
             else:
                 errorMSG = 'Password Mismatch. Try Again'
