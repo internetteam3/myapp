@@ -11,6 +11,8 @@ from .models import Users, Password, RoleCode, PermissionType, RolePermission, R
     Province, City, PropertyCategory, Property_Sector, Property_Facing, Property, PropertyImages
 from django.forms import modelformset_factory, inlineformset_factory
 
+from django.core.mail import send_mail
+from django.conf import settings
 
 def home(request):
     return render(request, 'eproperty/home.html')
@@ -177,7 +179,15 @@ class signUp(View):
             passwordModal = Password(userName=userName, encryptedPassword=userName, userAccountExpiryDate=(datetime.datetime.now() + datetime.timedelta(days=10 * 365)).strftime('%Y-%m-%d'))
             passwordModal.user_ID_id = userModel.user_ID
             passwordModal.save()
-            print((datetime.datetime.now() + datetime.timedelta(days=10 * 365)).strftime('%Y-%m-%d'))
+            #print((datetime.datetime.now() + datetime.timedelta(days=10 * 365)).strftime('%Y-%m-%d'))
+
+            subject = 'New User Sign Up Request: '+userName
+            message = "New User has requested to Sign-Up: Real Estate Site\nUser details are as follows:-\n\n"
+            message += "User Name: "+userName+"\nFirst Name: "+firstName+"\nLast Name: "+lastName+"\nEmail: "+email
+            message += "\n\n Kindly Active & Assign Role to this user through your portal."
+
+
+            sendEmailAdmin(subject, message)
 
             errorMSG = 'You have SignUp. You will shortly receive an email from the Admin'
 
@@ -191,6 +201,12 @@ class signUp(View):
 
 def reset(request):
     return render(request, 'eproperty/reset.html')
+
+
+def sendEmailAdmin(subject, message):
+    email_from = settings.EMAIL_DUMMY
+    recipient_list = ['shah13yWindsor@gmail.com']
+    send_mail( subject, message, email_from, recipient_list)
 
 ######################################################################################################################
 
