@@ -1,7 +1,7 @@
 from django import forms
 
 from .models import Users, Password, RoleCode, PermissionType, RolePermission, RolePermissionDetail, \
-    UserRole, Country, Province, City, PropertyCategory, Property_Sector, Property_Facing, PropertyImages, Property
+    UserRole, Country, Province, City, PropertyCategory, Property_Sector, Property_Facing, PropertyImages, Property, Advertisement
 
 
 class DateInput(forms.DateInput):
@@ -190,4 +190,12 @@ class SignUpForm(forms.Form):
     lastName = forms.CharField(required=True, label="Last Name", widget = forms.TextInput(attrs={'class': 'single-input','placeholder': 'Last Name'}))
     email = forms.EmailField(required=True, label="Email", widget = forms.TextInput(attrs={'class': 'single-input','placeholder': 'Email'}))
 
+
+class AdvertisementForm(forms.ModelForm):
+    class Meta:
+        model = Advertisement
+        fields = ['user_ID','propertyID','advStartDate','advEndDate','advDescription']
+        widgets = {
+            'advDescription': forms.TextInput(attrs={'class': 'single-input'}),
+        }
 

@@ -322,6 +322,27 @@ urlpatterns = [
 
 
 
+# adv
+
+                  url(r'^advertisementCreate/$',
+                      views.AdvertisementCreate.as_view(),
+                      name='Advertisement_create'),
+
+                  url(r'^advertisementList/$',
+                      views.AdvertisementList.as_view(),
+                      name='Advertisement_list'),
+
+                  url(r'^advertisementUpdate/(?P<uID>\d+)$',
+                      views.AdvertisementUpdate.as_view(),
+                      name='Advertisement_update'),
+
+                  url(r'^advertisementDelete/(?P<uID>\d+)$',
+                      views.AdvertisementDelete.as_view(),
+                      name='Advertisement_delete'),
+
+
+
+
 
 
 

@@ -6,9 +6,9 @@ from django.shortcuts import (
 from django.views.generic import View
 from .forms import UsersForm, PasswordForm, RoleCodeForm, PermissionTypeForm, RolePermissionForm, RolePermissionDetailForm, \
     UserRoleForm, LoginForm, ChangePasswordForm,CountryForm, ProvinceForm, CityForm, PropertyCategoryForm, PropertySectorForm,\
-    PropertyFacingForm, PropertyImagesForm, PropertyForm, SignUpForm
+    PropertyFacingForm, PropertyImagesForm, PropertyForm, SignUpForm, AdvertisementForm
 from .models import Users, Password, RoleCode, PermissionType, RolePermission, RolePermissionDetail, UserRole, Country, \
-    Province, City, PropertyCategory, Property_Sector, Property_Facing, Property, PropertyImages
+    Province, City, PropertyCategory, Property_Sector, Property_Facing, Property, PropertyImages, Advertisement
 from django.forms import modelformset_factory, inlineformset_factory
 
 from django.core.mail import send_mail
@@ -1373,3 +1373,81 @@ class PropertyDelete(View):
         return redirect('eproperty:Property_list')
 
 #######################################################################################################################
+
+
+
+
+class AdvertisementCreate(View):
+    form_class = AdvertisementForm
+    template_name = 'eproperty/Advertisement_form.html'
+
+    def get(self, request):
+        return render(
+            request,
+            self.template_name,
+            {'formU': self.form_class()})
+
+    def post(self, request):
+        bound_formU = self.form_class(request.POST)
+
+
+        if bound_formU.is_valid():
+            new_post = bound_formU.save()
+
+            return redirect('eproperty:Advertisement_list')
+        else:
+            return render(
+                request,
+                self.template_name,
+                {'formU': bound_formU})
+
+
+class AdvertisementList(View):
+    def get(self, request):
+        return render(
+            request,
+            'eproperty/Advertisement_list.html',
+            {'advertisement_list': Advertisement.objects.all().order_by('-adv_ID')})
+
+
+class AdvertisementUpdate(View):
+    form_class = AdvertisementForm
+    template_name = 'eproperty/AdvertisementUpdate_form.html'
+
+    def get(self, request, uID):
+        userM = get_object_or_404(Advertisement, adv_ID=uID)
+        context = {
+            'formU': self.form_class(
+                instance=userM),
+            'userM': userM
+        }
+        return render(
+            request, self.template_name, context)
+
+    def post(self,request, uID):
+        userM = get_object_or_404(Advertisement, adv_ID=uID)
+        bound_formU = self.form_class(
+            request.POST, instance=userM)
+        if bound_formU.is_valid():
+            new_post = bound_formU.save()
+
+            return redirect('eproperty:Advertisement_list')
+        else:
+            context = {
+                'formU': bound_formU,
+                'userM': userM,
+            }
+            return render(
+                request,
+                self.template_name,
+                context)
+
+
+class AdvertisementDelete(View):
+
+    def get(self, request, uID):
+        userM = get_object_or_404(Advertisement, adv_ID=uID)
+        userM.delete()
+        return redirect('eproperty:Advertisement_list')
+
+########################################################################################################
