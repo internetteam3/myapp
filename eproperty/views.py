@@ -1466,7 +1466,7 @@ class AdvertisementUpdate(View):
     def get(self, request, uID):
         userM = get_object_or_404(Advertisement, adv_ID=uID)
         form = self.form_class(instance=userM)
-        form.fields['propertyID'].queryset = Property.objects.filter(user_ID=request.session.get('userID', 1))
+        form.fields['propertyID'].queryset = Property.objects.filter(propertyID=userM.propertyID.propertyID)
 
         context = {
             'formU': form,
