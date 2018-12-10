@@ -92,7 +92,7 @@ class login(View):
                 if 'admin' == userRole.roleCode_ID.name:
                     return redirect('eproperty:Users_List')
                 else:
-                    return redirect('eproperty:Property_list')
+                    return redirect('eproperty:Advertisement_list')
 
 
 
@@ -144,7 +144,7 @@ class changePassword(View):
                 if request.session.get('userType', 'mini') == 'admin':
                     return redirect('eproperty:Users_List')
                 else:
-                    return redirect('eproperty:Property_list')
+                    return redirect('eproperty:Advertisement_list')
 
 
             else:
@@ -1426,8 +1426,10 @@ class AdvertisementCreate(View):
 
     def get(self, request):
 
+        propIds = Advertisement.objects.filter(user_ID=request.session.get('userID', 1)).values('propertyID')
+
         form = self.form_class(initial={'user_ID': request.session.get('userID', 1)})
-        form.fields['propertyID'].queryset = Property.objects.filter(user_ID=request.session.get('userID', 1))
+        form.fields['propertyID'].queryset = Property.objects.filter(user_ID=request.session.get('userID', 1)).exclude(propertyID__in=propIds)
 
         return render(
             request,
@@ -1454,7 +1456,7 @@ class AdvertisementList(View):
         return render(
             request,
             'eproperty/Advertisement_list.html',
-            {'advertisement_list': Advertisement.objects.all().order_by('-adv_ID')})
+            {'advertisement_list': Advertisement.objects.all().order_by('-advStartDate')})
 
 
 class AdvertisementUpdate(View):

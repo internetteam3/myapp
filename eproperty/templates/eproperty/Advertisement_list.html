@@ -100,6 +100,7 @@
                                         <td>{{ c.advEndDate }}</td>
 										<td> <a href="{% url 'eproperty:Advertisement_update' c.adv_ID%}">Edit</a> &nbsp;
                                         <a href="javascript:deleteFromURL('{% url 'eproperty:Advertisement_delete' c.adv_ID %}', 'Advertisement')">Delete</a>
+                                            <a href="{% url 'eproperty:Property_update' c.propertyID.propertyID%}">View Property</a> &nbsp;
                                         </td>
 
 									</tr>
