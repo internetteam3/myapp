@@ -57,12 +57,22 @@
 							cellspacing="0">
 							<thead>
 								<tr>
+                                    <th>Property Name</th>
+                                    <th>Property Category</th>
+                                    <th>Country</th>
+                                     <th>Province</th>
+                                    <th>City</th>
 									<th>Property Image</th>
 									<th>Link</th>
 								</tr>
 							</thead>
 							<tfoot>
 								<tr>
+									<th>Property Name</th>
+                                    <th>Property Category</th>
+                                    <th>Country</th>
+                                     <th>Province</th>
+                                    <th>City</th>
 									<th>Property Image</th>
 									<th>Link</th>
 								</tr>
@@ -72,7 +82,11 @@
 
 								 {% for p in propertyImages_list %}
 									<tr>
-
+                                        <td>{{ p.propertyID.propertyTitle }}</td>
+                                         <td>{{ p.propertyID.propertyCategory }}</td>
+                                         <td>{{ p.propertyID.propertyCountry }}</td>
+                                         <td>{{ p.propertyID.propertyProvince }}</td>
+                                         <td>{{ p.propertyID.propertyCity }}</td>
 										<td>{{ p.propertyImage }}</td>
 										<td> <a href="{% url 'eproperty:PropertyImages_update' p.propertyImageID%}">Edit</a> &nbsp;
                                         <a href="javascript:deleteFromURL('{% url 'eproperty:PropertyImages_delete' p.propertyImageID %}', 'Property Images')">Delete</a>
