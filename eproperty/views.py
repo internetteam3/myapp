@@ -1242,11 +1242,14 @@ class PropertyImagesCreate(View):
     form_class = PropertyImagesForm
     template_name = 'eproperty/PropertyImages_form.html'
 
+
     def get(self, request):
+        form = self.form_class()
+        form.fields['propertyID'].queryset = Property.objects.filter(user_ID=request.session.get('userID', 1))
         return render(
             request,
             self.template_name,
-            {'formU': self.form_class()})
+            {'formU': form})
 
     def post(self, request):
         bound_formU = self.form_class(request.POST)
@@ -1288,9 +1291,12 @@ class PropertyImagesUpdate(View):
 
     def get(self, request, uID):
         userM = get_object_or_404(PropertyImages, propertyImageID=uID)
+
+        form = self.form_class(instance=userM)
+        form.fields['propertyID'].queryset = Property.objects.filter(user_ID=request.session.get('userID', 1))
+
         context = {
-            'formU': self.form_class(
-                instance=userM),
+            'formU': form,
             'userM': userM
         }
         return render(
@@ -1419,10 +1425,14 @@ class AdvertisementCreate(View):
     template_name = 'eproperty/Advertisement_form.html'
 
     def get(self, request):
+
+        form = self.form_class(initial={'user_ID': request.session.get('userID', 1)})
+        form.fields['propertyID'].queryset = Property.objects.filter(user_ID=request.session.get('userID', 1))
+
         return render(
             request,
             self.template_name,
-            {'formU': self.form_class(initial={'user_ID': request.session.get('userID', 1)})})
+            {'formU': form})
 
     def post(self, request):
         bound_formU = self.form_class(request.POST)
@@ -1453,9 +1463,11 @@ class AdvertisementUpdate(View):
 
     def get(self, request, uID):
         userM = get_object_or_404(Advertisement, adv_ID=uID)
+        form = self.form_class(instance=userM)
+        form.fields['propertyID'].queryset = Property.objects.filter(user_ID=request.session.get('userID', 1))
+
         context = {
-            'formU': self.form_class(
-                instance=userM),
+            'formU': form,
             'userM': userM
         }
         return render(
