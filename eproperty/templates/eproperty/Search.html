@@ -1,0 +1,118 @@
+{% extends "template.html" %}
+{% block title %}Welcome{% endblock %}
+{% load static %}
+
+{% block customCSS %}
+     <link rel="stylesheet" href="{% static '/css/sb-admin.css' %}">
+    <link rel="stylesheet" href="{% static 'vendors/datatables/dataTables.bootstrap4.css' %}">
+    <style type="text/css" media="screen">
+
+    .advanced_search {max-width: 30% !important; text-align: justify}
+
+    label {max-width: 100px;}
+
+
+
+    </style>
+{% endblock %}
+
+{% block content %}
+
+        <!--================Team Area =================-->
+
+
+            <div class="container">
+				<div class="advanced_search" style="margin-top: 1%!important; margin-right: 30%;box-shadow: 21.21px 21.21px 30px 21.21px rgba(158,158,158,0.3);">
+					<h3>Search Properties For </h3>
+                    <form
+                            action="{% url 'eproperty:Search' %}"
+                            method="post">
+                        {% csrf_token %}
+                        {{ formP.as_p }}
+                         {% if errorMSG %}
+                            <p style="color: red"> {{ errorMSG }}</p>
+                        {% endif %}
+                        <button type="submit" value="submit" class="btn submit_btn">Search</button>
+                        <a href="{% url 'eproperty:Search' %}" class="btn submit_btn"> Reset </a>
+
+                    </form>
+
+
+                </div>
+            </div>
+
+
+         <div class="table-responsive" style="padding-right: 10%">
+						<table class="table table-bordered" id="dataTable" width="100%"
+							cellspacing="0">
+							<thead>
+								<tr>
+									<th>Property Name</th>
+                                    <th>Property Category</th>
+                                    <th>Property Sector</th>
+                                    <th>Country</th>
+                                     <th>Province</th>
+                                    <th>City</th>
+                                    <th>Total Area</th>
+                                    <th>No of Rooms</th>
+                                    <th>Asking Price</th>
+                                    <th>Selling Price</th>
+									<th>Link</th>
+								</tr>
+							</thead>
+							<tfoot>
+								<tr>
+									<th>Property Name</th>
+                                    <th>Property Category</th>
+                                    <th>Property Sector</th>
+                                    <th>Country</th>
+                                     <th>Province</th>
+                                    <th>City</th>
+                                    <th>Total Area</th>
+                                    <th>No of Rooms</th>
+                                    <th>Asking Price</th>
+                                    <th>Selling Price</th>
+									<th>Link</th>
+								</tr>
+							</tfoot>
+							<tbody>
+
+
+								 {% for c in propertySearchList %}
+									<tr>
+
+										<td>{{ c.propertyTitle }}</td>
+                                        <td>{{ c.propertyCategory }}</td>
+                                        <td>{{ c.propertySector }}</td>
+                                        <td>{{ c.propertyCountry }}</td>
+                                        <td>{{ c.propertyProvince }}</td>
+                                        <td>{{ c.propertyCity }}</td>
+                                        <td>{{ c.propertyTotalArea }}</td>
+                                        <td>{{ c.propertyNumberofRooms }}</td>
+                                        <td>{{ c.propertyAskingPrice }}
+                                        <td>{{ c.propertySellingPrice }}</td>
+										<td> <a href="{% url 'eproperty:Property_update' c.propertyID%}">Edit</a> &nbsp;
+                                        <a href="javascript:deleteFromURL('{% url 'eproperty:Property_delete' c.propertyID %}', 'Property')">Delete</a>
+                                        </td>
+
+									</tr>
+								 {% endfor %}
+
+
+
+							</tbody>
+						</table>
+					</div>
+
+
+
+{% endblock %}
+
+
+{% block jsBlock %}
+    <script src="{% static '/vendors/datatables/jquery.dataTables.js' %}"></script>
+    <script src="{% static '/vendors/datatables/dataTables.bootstrap4.js' %}"></script>
+    <script src="{% static '/js/sb-admin-datatables.js' %}"></script>
+ {% endblock %}
+
+

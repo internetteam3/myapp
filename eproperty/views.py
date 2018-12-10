@@ -6,7 +6,7 @@ from django.shortcuts import (
 from django.views.generic import View
 from .forms import UsersForm, PasswordForm, RoleCodeForm, PermissionTypeForm, RolePermissionForm, RolePermissionDetailForm, \
     UserRoleForm, LoginForm, ChangePasswordForm,CountryForm, ProvinceForm, CityForm, PropertyCategoryForm, PropertySectorForm,\
-    PropertyFacingForm, PropertyImagesForm, PropertyForm, SignUpForm, AdvertisementForm
+    PropertyFacingForm, PropertyImagesForm, PropertyForm, SignUpForm, AdvertisementForm, SearchForm
 from .models import Users, Password, RoleCode, PermissionType, RolePermission, RolePermissionDetail, UserRole, Country, \
     Province, City, PropertyCategory, Property_Sector, Property_Facing, Property, PropertyImages, Advertisement
 from django.forms import modelformset_factory, inlineformset_factory
@@ -1502,3 +1502,109 @@ class AdvertisementDelete(View):
         return redirect('eproperty:Advertisement_list')
 
 ########################################################################################################
+
+
+class Search(View):
+    form_class = SearchForm
+    template_name = 'eproperty/Search.html'
+
+    signup_form_class = LoginForm
+    signup_template_name = 'eproperty/login.html'
+
+    def get(self, request):
+        return render(
+            request,
+            self.template_name,
+            {'formP': self.form_class()})
+
+    def post(self, request):
+
+        bound_formP = self.form_class(request.POST)
+
+        category = bound_formP['category'].value()
+        sector = bound_formP['sector'].value()
+        country = bound_formP['country'].value()
+        province = bound_formP['province'].value()
+        city = bound_formP['city'].value()
+        #askingPrice = bound_formP['askingPrice'].value()
+
+        print(category)
+        print(sector)
+        print(country)
+        print(province)
+        print(city)
+        #print(askingPrice)
+
+        prop = Property.objects.all()
+
+        if category:
+            prop = prop.filter(propertyCategory=category)
+        if sector:
+            prop = prop.filter(propertySector=sector)
+        if country:
+            prop = prop.filter(propertyCountry=country)
+        if province:
+            prop = prop.filter(propertyProvince=province)
+        if city:
+            prop = prop.filter(propertyCity=city)
+
+
+        print(prop)
+
+        return render(
+            request,
+            self.template_name,
+            {'formP': bound_formP,
+             'propertySearchList': prop
+             })
+
+
+
+
+
+
+
+
+
+
+
+
+
+        # user = Password.objects.filter(userName = userName)
+        #
+        # if user:
+        #     errorMSG = "User Name Already exist."
+        #
+        #     return render(
+        #         request,
+        #         self.template_name,
+        #         {'formP': bound_formP, 'errorMSG': errorMSG})
+        #
+        #
+        #
+        #
+        #
+        # if bound_formP.is_valid():
+        #     userModel = Users(firstName=firstName, lastName=lastName, email=email)
+        #     userModel.save()
+        #     passwordModal = Password(userName=userName, encryptedPassword=userName, userAccountExpiryDate=(datetime.datetime.now() + datetime.timedelta(days=10 * 365)).strftime('%Y-%m-%d'))
+        #     passwordModal.user_ID_id = userModel.user_ID
+        #     passwordModal.save()
+        #     #print((datetime.datetime.now() + datetime.timedelta(days=10 * 365)).strftime('%Y-%m-%d'))
+        #
+        #     subject = 'New User Sign Up Request: '+userName
+        #     message = "New User has requested to Sign-Up: Real Estate Site\nUser details are as follows:-\n\n"
+        #     message += "User Name: "+userName+"\nFirst Name: "+firstName+"\nLast Name: "+lastName+"\nEmail: "+email
+        #     message += "\n\n Kindly Activate & Assign Role to this user through your portal."
+        #
+        #     sendEmailToAdmin(subject, message)
+        #
+        #     errorMSG = 'You have SignUp. You will shortly receive an email from the Admin'
+        #
+        #     return render(
+        #         request,
+        #         self.signup_template_name,
+        #         {'formL': self.signup_form_class(), 'errorMSG': errorMSG})
+        #     return redirect('eproperty:login')
+
+        return redirect('eproperty:SignUp')

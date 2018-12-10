@@ -50,6 +50,9 @@ urlpatterns = [
                   url(r'^resetUserPassword/(?P<uID>\d+)$', views.resetUserPassword.as_view(),
                       name='ResetUserPassword'),
 
+                  url(r'^search/$', views.Search.as_view(),
+                      name='Search'),
+
 
                   path(r'reset', views.reset, name='reset'),
 

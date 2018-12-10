@@ -202,3 +202,19 @@ class AdvertisementForm(forms.ModelForm):
             'advEndDate': DateInput()
         }
 
+class SearchForm(forms.Form):
+    category = forms.ModelChoiceField(queryset=PropertyCategory.objects.all(), label='Category', required=False)
+    sector = forms.ModelChoiceField(queryset=Property_Sector.objects.all(), label='Sector', required=False)
+    country = forms.ModelChoiceField(queryset=Country.objects.all(), label='Country', required=False)
+    province = forms.ModelChoiceField(queryset=Province.objects.all(), label='Province', required=False)
+    city = forms.ModelChoiceField(queryset=City.objects.all(), label='City', required=False)
+    #askingPrice = forms.IntegerField(label="Asking Price ", required=False, widget = forms.TextInput(attrs={'class': 'single-input','placeholder': 'Asking Price'}))
+
+    def __init__(self, *args, **kwargs):
+        super(SearchForm, self).__init__(*args, **kwargs)
+        self.fields['category'].widget.attrs.update({'class': 'nice-select right'})
+        self.fields['sector'].widget.attrs.update({'class': 'nice-select right'})
+        self.fields['country'].widget.attrs.update({'class': 'nice-select right'})
+        self.fields['province'].widget.attrs.update({'class': 'nice-select right'})
+        self.fields['city'].widget.attrs.update({'class': 'nice-select right'})
+
