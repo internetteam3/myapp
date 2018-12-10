@@ -703,10 +703,18 @@ class UserRoleCreate(View):
     template_name = 'eproperty/UserRole_form.html'
 
     def get(self, request):
+
+        userIds = UserRole.objects.all().values('user_ID')
+
+        form = self.form_class()
+        form.fields['user_ID'].queryset = Users.objects.all().exclude(
+            user_ID__in=userIds)
+
+
         return render(
             request,
             self.template_name,
-            {'formU': self.form_class()})
+            {'formU': form})
 
     def post(self, request):
         bound_formU = self.form_class(request.POST)
@@ -739,9 +747,12 @@ class UserRoleUpdate(View):
 
     def get(self, request, uID):
         userM = get_object_or_404(UserRole, userRole_ID=uID)
+
+        form = self.form_class(instance=userM)
+        form.fields['user_ID'].queryset = Users.objects.filter(user_ID=userM.user_ID.user_ID)
+
         context = {
-            'formU': self.form_class(
-                instance=userM),
+            'formU': form,
             'userM': userM
         }
         return render(
