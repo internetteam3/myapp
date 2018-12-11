@@ -128,7 +128,7 @@
 				<div class="container">
             <div class="row">
             <div class="sidenav col-xs-3">
-
+               <a href="{% url 'eproperty:PersonalDetail_update' %}">Personal Detail</a>
                 {% if request.session.userType == 'admin' %}
 
                  <a href="{% url 'eproperty:Users_List' %}">User List</a>
@@ -145,7 +145,7 @@
              <a href="{% url 'eproperty:PropertyFacing_list' %}">Property Facing</a>
 
                  {% else %}
-              <a href="{% url 'eproperty:PersonalDetail_update' %}">Personal Detail</a>
+
              <a href="{% url 'eproperty:Advertisement_list' %}">Advertisement</a>
              <a href="{% url 'eproperty:Property_list' %}">Property</a>
              <a href="{% url 'eproperty:PropertyImages_list' %}">Property Images</a>
