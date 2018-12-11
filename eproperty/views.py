@@ -1539,11 +1539,6 @@ class Search(View):
         city = bound_formP['city'].value()
         #askingPrice = bound_formP['askingPrice'].value()
 
-        print(category)
-        print(sector)
-        print(country)
-        print(province)
-        print(city)
         #print(askingPrice)
 
         prop = Property.objects.all()
