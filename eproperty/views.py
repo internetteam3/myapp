@@ -1488,10 +1488,11 @@ class AdvertisementCreate(View):
 
 class AdvertisementList(View):
     def get(self, request):
+
         return render(
             request,
             'eproperty/Advertisement_list.html',
-            {'advertisement_list': Advertisement.objects.all().order_by('-advStartDate')})
+            {'advertisement_list': Advertisement.objects.filter(user_ID=request.session.get('userID', 1)).order_by('-advStartDate')})
 
 
 class AdvertisementUpdate(View):
