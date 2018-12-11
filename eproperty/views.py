@@ -6,7 +6,7 @@ from django.shortcuts import (
 from django.views.generic import View
 from .forms import UsersForm, PasswordForm, RoleCodeForm, PermissionTypeForm, RolePermissionForm, RolePermissionDetailForm, \
     UserRoleForm, LoginForm, ChangePasswordForm,CountryForm, ProvinceForm, CityForm, PropertyCategoryForm, PropertySectorForm,\
-    PropertyFacingForm, PropertyImagesForm, PropertyForm, SignUpForm, AdvertisementForm, SearchForm
+    PropertyFacingForm, PropertyImagesForm, PropertyForm, SignUpForm, AdvertisementForm, SearchForm, PasswordFormForPersonalUpdate
 from .models import Users, Password, RoleCode, PermissionType, RolePermission, RolePermissionDetail, UserRole, Country, \
     Province, City, PropertyCategory, Property_Sector, Property_Facing, Property, PropertyImages, Advertisement
 from django.forms import modelformset_factory, inlineformset_factory
@@ -1593,7 +1593,7 @@ class Search(View):
 
 class PersonalDetailUpdate(View):
     form_class = UsersForm
-    form_class_password = PasswordForm
+    form_class_password = PasswordFormForPersonalUpdate
     template_name = 'eproperty/UsersUpdate_form.html'
 
     def get(self, request):

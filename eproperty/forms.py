@@ -217,3 +217,16 @@ class SearchForm(forms.Form):
         self.fields['province'].widget.attrs.update({'class': 'nice-select right'})
         self.fields['city'].widget.attrs.update({'class': 'nice-select right'})
 
+class PasswordFormForPersonalUpdate(forms.ModelForm):
+    class Meta:
+        model = Password
+        fields = ['userName', 'userAccountExpiryDate']
+        labels = {
+            'userName':'User Name',
+            'userAccountExpiryDate':'Account Expiry Date'
+        }
+        widgets = {
+            'userName': forms.TextInput(attrs={'class': 'single-input','readonly': True}),
+            'userAccountExpiryDate': DateInput()
+
+        }
