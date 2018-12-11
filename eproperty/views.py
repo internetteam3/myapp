@@ -253,12 +253,34 @@ class activateUser(View):
         return redirect('eproperty:Users_List')
 
 class resetUserPassword(View):
+    form_class = UsersForm
+    form_class_password = PasswordForm
+    template_name = 'eproperty/UsersUpdate_form.html'
+
     def get(self, request, uID):
         passwordM = Password.objects.get(password_ID=uID)
         passwordM.passwordMustChanged = True
         passwordM.save()
 
-        return redirect('eproperty:Users_List')
+        if request.session.get('userType', 'mini') == 'admin':
+            return redirect('eproperty:Users_List')
+        else:
+            userM = get_object_or_404(Users, user_ID=request.session.get('userID', 1))
+            passM = get_object_or_404(Password, user_ID=userM)
+
+            context = {
+                'formU': self.form_class(
+                    instance=userM),
+                'formP': self.form_class_password(instance=passM),
+                'userM': userM,
+                'passM': passM,
+                'errorMSG': "You will be asked to change your password in your next Login."
+            }
+
+            return render(
+                request,
+                self.template_name,
+                context)
 
 class logoutUser(View):
     def get(self, request):
@@ -341,7 +363,8 @@ class UsersUpdate(View):
             'formU': self.form_class(
                 instance=userM),
             'formP': self.form_class_password(instance=passM),
-            'userM': userM
+            'userM': userM,
+            'passM': passM
         }
         return render(
             request, self.template_name, context)
@@ -363,6 +386,7 @@ class UsersUpdate(View):
                 'formU': bound_formU,
                 'formP': bound_formP,
                 'userM': userM,
+                'passM': passM
             }
             return render(
                 request,
@@ -1564,53 +1588,64 @@ class Search(View):
              'propertySearchList': prop
              })
 
+########################################################################################################
 
 
+class PersonalDetailUpdate(View):
+    form_class = UsersForm
+    form_class_password = PasswordForm
+    template_name = 'eproperty/UsersUpdate_form.html'
 
+    def get(self, request):
+        userM = get_object_or_404(Users, user_ID=request.session.get('userID', 1))
+        passM = get_object_or_404(Password, user_ID=userM)
+        context = {
+            'formU': self.form_class(
+                instance=userM),
+            'formP': self.form_class_password(instance=passM),
+            'userM': userM,
+            'passM': passM
+        }
+        return render(
+            request, self.template_name, context)
 
+    def post(self,request):
+        userM = get_object_or_404(Users, user_ID=request.session.get('userID', 1))
+        passM = get_object_or_404(Password, user_ID=userM)
+        bound_formU = self.form_class(
+            request.POST, instance=userM)
+        bound_formP = self.form_class_password(
+            request.POST, instance=passM)
+        if bound_formU.is_valid():
+            new_post = bound_formU.save()
+            if bound_formP.is_valid():
+                bound_formP.save()
 
+            userM = get_object_or_404(Users, user_ID=request.session.get('userID', 1))
+            passM = get_object_or_404(Password, user_ID=userM)
 
+            context = {
+                'formU': self.form_class(
+                    instance=userM),
+                'formP': self.form_class_password(instance=passM),
+                'userM': userM,
+                'passM': passM,
+                'errorMSG': "You have successfully updated your Personal Details"
+            }
 
+            return render(
+                request,
+                self.template_name,
+                context)
 
-
-
-
-
-        # user = Password.objects.filter(userName = userName)
-        #
-        # if user:
-        #     errorMSG = "User Name Already exist."
-        #
-        #     return render(
-        #         request,
-        #         self.template_name,
-        #         {'formP': bound_formP, 'errorMSG': errorMSG})
-        #
-        #
-        #
-        #
-        #
-        # if bound_formP.is_valid():
-        #     userModel = Users(firstName=firstName, lastName=lastName, email=email)
-        #     userModel.save()
-        #     passwordModal = Password(userName=userName, encryptedPassword=userName, userAccountExpiryDate=(datetime.datetime.now() + datetime.timedelta(days=10 * 365)).strftime('%Y-%m-%d'))
-        #     passwordModal.user_ID_id = userModel.user_ID
-        #     passwordModal.save()
-        #     #print((datetime.datetime.now() + datetime.timedelta(days=10 * 365)).strftime('%Y-%m-%d'))
-        #
-        #     subject = 'New User Sign Up Request: '+userName
-        #     message = "New User has requested to Sign-Up: Real Estate Site\nUser details are as follows:-\n\n"
-        #     message += "User Name: "+userName+"\nFirst Name: "+firstName+"\nLast Name: "+lastName+"\nEmail: "+email
-        #     message += "\n\n Kindly Activate & Assign Role to this user through your portal."
-        #
-        #     sendEmailToAdmin(subject, message)
-        #
-        #     errorMSG = 'You have SignUp. You will shortly receive an email from the Admin'
-        #
-        #     return render(
-        #         request,
-        #         self.signup_template_name,
-        #         {'formL': self.signup_form_class(), 'errorMSG': errorMSG})
-        #     return redirect('eproperty:login')
-
-        return redirect('eproperty:SignUp')
+        else:
+            context = {
+                'formU': bound_formU,
+                'formP': bound_formP,
+                'userM': userM,
+                'passM': passM
+            }
+            return render(
+                request,
+                self.template_name,
+                context)

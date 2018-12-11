@@ -53,6 +53,11 @@ urlpatterns = [
                   url(r'^search/$', views.Search.as_view(),
                       name='Search'),
 
+                  url(r'^personalDetailUpdate/$',
+                      views.PersonalDetailUpdate.as_view(),
+                      name='PersonalDetail_update'),
+
+
 
                   path(r'reset', views.reset, name='reset'),
 

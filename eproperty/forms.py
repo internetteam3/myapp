@@ -23,11 +23,10 @@ class UsersForm(forms.ModelForm):
 class PasswordForm(forms.ModelForm):
     class Meta:
         model = Password
-        fields = ['userName', 'userAccountExpiryDate', 'isActive']
+        fields = ['userName', 'userAccountExpiryDate']
         labels = {
             'userName':'User Name',
-            'userAccountExpiryDate':'Account Expiry Date',
-            'isActive':'Active User'
+            'userAccountExpiryDate':'Account Expiry Date'
         }
         widgets = {
             'userName': forms.TextInput(attrs={'class': 'single-input'}),
