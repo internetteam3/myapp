@@ -19,7 +19,7 @@
             <div>
               <form
                   action="{% url 'eproperty:PropertyImages_create' %}"
-                  method="post">
+                  method="post"  enctype="multipart/form-data">
                 {% csrf_token %}
                 {{ formU.as_p }}
                   <br>

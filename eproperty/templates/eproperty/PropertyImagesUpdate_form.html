@@ -18,7 +18,7 @@
             <div>
               <form
                   action="{% url 'eproperty:PropertyImages_update' userM.propertyImageID %}"
-                  method="post">
+                  method="post" enctype="multipart/form-data">
                 {% csrf_token %}
                   {{ formU.as_p }}
                   <a href="{% url 'eproperty:PropertyImages_list' %}" class="btn btn-primary"> Cancel </a>

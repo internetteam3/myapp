@@ -1315,7 +1315,7 @@ class PropertyImagesCreate(View):
             {'formU': form})
 
     def post(self, request):
-        bound_formU = self.form_class(request.POST)
+        bound_formU = self.form_class(request.POST, request.FILES)
 
         if bound_formU.is_valid():
             new_post = bound_formU.save()
@@ -1368,7 +1368,7 @@ class PropertyImagesUpdate(View):
     def post(self,request, uID):
         userM = get_object_or_404(PropertyImages, propertyImageID=uID)
         bound_formU = self.form_class(
-            request.POST, instance=userM)
+            request.POST, request.FILES, instance=userM)
         if bound_formU.is_valid():
             new_post = bound_formU.save()
 
