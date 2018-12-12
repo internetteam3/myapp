@@ -26,6 +26,34 @@ def sportEquip(request):
 def properties(request):
     return render(request, 'eproperty/properties.html')
 
+def advertisement(request):
+    propIDs = Advertisement.objects.order_by('-advStartDate').values('propertyID')
+
+    #prop = Property.objects.filter(propertyID__in=propIDs)
+    prop = Property.objects.filter(propertyID=3).prefetch_related('propImg').all()
+
+    print("hi")
+    print(prop)
+    for p in prop:
+
+        child = p.propImg.all()
+        print(child)
+
+
+    print("hi2")
+
+
+
+
+
+
+    context = {
+        'formU': propIDs
+    }
+
+
+    return render(request, 'eproperty/Advertisement.html')
+
 class login(View):
     form_class = LoginForm
     chpaswd_form_class = ChangePasswordForm

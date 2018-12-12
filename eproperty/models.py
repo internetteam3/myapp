@@ -100,7 +100,7 @@ class Property(models.Model):
 #done-Bj
 class PropertyImages(models.Model):
     propertyImageID = models.AutoField(primary_key=True)
-    propertyID = models.ForeignKey(Property, on_delete=models.DO_NOTHING)
+    propertyID = models.ForeignKey(Property, on_delete=models.DO_NOTHING, related_name='propImg')
     propertyImage = models.ImageField(blank=True, null=True)
     propertyImageDescription = models.TextField()
 

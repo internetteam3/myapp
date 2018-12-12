@@ -57,6 +57,9 @@ urlpatterns = [
                       views.PersonalDetailUpdate.as_view(),
                       name='PersonalDetail_update'),
 
+                  url(r'^advertisement/$', views.advertisement,
+                      name='Advertisement'),
+
 
 
                   path(r'reset', views.reset, name='reset'),
