@@ -30,9 +30,9 @@ def advertisement(request):
     propIDs = Advertisement.objects.order_by('-advStartDate').values('propertyID')
 
     #prop = Property.objects.filter(propertyID__in=propIDs)
-    prop = Property.objects.filter(propertyID=3).prefetch_related('propImg').all()
+    prop = Property.objects.filter(propertyID__in=propIDs).prefetch_related('propImg').all()
 
-    print("hi")
+    #print("hi")
     print(prop)
     for p in prop:
 
@@ -40,15 +40,12 @@ def advertisement(request):
         print(child)
 
 
-    print("hi2")
-
-
-
+    #print("hi2")
 
 
 
     context = {
-        'formU': propIDs
+        'PropertyList': prop
     }
 
 
