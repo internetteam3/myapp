@@ -14,30 +14,35 @@
 
 
 
+                   {% for p in property_list %}
+
+
         			<div class="col-lg-4">
         				<div class="properties_item">
         					<div class="pp_img">
         						<img class="img-fluid" src="{% static '/img/properties/pp-1.jpg' %}" alt="">
         					</div>
         					<div class="pp_content">
-        						<a href="#"><h4>04 Bed Duplex</h4></a>
+        						<a href="#"><h4>{{ p.propertyTitle }}</h4></a>
         						<div class="tags">
-        							<a href="#">04 Beds</a>
-        							<a href="#">03 Baths</a>
-        							<a href="#">750 sqm</a>
-        							<a href="#"><i class="fa fa-check" aria-hidden="true"></i>Pool</a>
-        							<a href="#"><i class="fa fa-times" aria-hidden="true"></i>Bar</a>
-        							<a href="#"><i class="fa fa-times" aria-hidden="true"></i>Pool</a>
+        							<a href="#">{{ p.propertyNoofHalls }} Halls</a>
+        							<a href="#">{{ p.propertyNumberofRooms }} Rooms</a>
+        							<a href="#">{{ p.propertyNoofBathrooms }} BathRoom</a>
+                                   <a href="#">{{ p.propertyNoofFloors }} Floors</a>
+                                   <a href="#">{{ p.propertyTotalArea }} sq.ft</a>
+{#        							<a href="#"><i class="fa fa-check" aria-hidden="true"></i>Pool</a>#}
+{#        							<a href="#"><i class="fa fa-times" aria-hidden="true"></i>Bar</a>#}
+{#        							<a href="#"><i class="fa fa-times" aria-hidden="true"></i>Pool</a>#}
         						</div>
         						<div class="pp_footer">
-        							<h5>Total: $3.5M</h5>
+        							<h5>Total: {{ p.propertyAskingPrice }}$</h5>
         							<a class="main_btn" href="#project1" data-toggle="modal">More Info</a>
         						</div>
         					</div>
         				</div>
         			</div>
 
-
+                   {% endfor %}
 
 
 

@@ -45,11 +45,11 @@ def advertisement(request):
 
 
     context = {
-        'PropertyList': prop
+        'property_list': prop
     }
 
 
-    return render(request, 'eproperty/Advertisement.html')
+    return render(request, 'eproperty/Advertisement.html', context)
 
 class login(View):
     form_class = LoginForm
