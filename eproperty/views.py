@@ -29,6 +29,9 @@ def properties(request):
 def contact(request):
     return render(request, 'eproperty/contact.html')
 
+def advanceSearch(request):
+    return render(request, 'eproperty/SearchAdvance.html')
+
 def advertisement(request):
     propIDs = Advertisement.objects.filter(advStartDate__lte=datetime.date.today()).filter(advEndDate__gte=datetime.date.today()).order_by('-adv_ID').values('propertyID')
 
