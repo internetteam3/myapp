@@ -60,6 +60,11 @@ urlpatterns = [
                   url(r'^advertisement/$', views.advertisement,
                       name='Advertisement'),
 
+                  url(r'^dashboard/$', views.dashboard,
+                      name='DashBoard'),
+                  url(r'^contact/$', views.contact,
+                      name='Contact'),
+
 
 
                   path(r'reset', views.reset, name='reset'),

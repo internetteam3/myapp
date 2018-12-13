@@ -26,21 +26,24 @@ def sportEquip(request):
 def properties(request):
     return render(request, 'eproperty/properties.html')
 
+def contact(request):
+    return render(request, 'eproperty/contact.html')
+
 def advertisement(request):
     propIDs = Advertisement.objects.order_by('-advStartDate').values('propertyID')
 
     #prop = Property.objects.filter(propertyID__in=propIDs)
     prop = Property.objects.filter(propertyID__in=propIDs).prefetch_related('propImg').all()
 
-    #print("hi")
-    print(prop)
-    for p in prop:
 
-        child = p.propImg.all()
-        print(child)
+    # print(prop)
+    # for p in prop:
+    #
+    #     child = p.propImg.all()
+    #     print(child)
+    #
 
 
-    #print("hi2")
 
 
 
@@ -50,6 +53,12 @@ def advertisement(request):
 
 
     return render(request, 'eproperty/Advertisement.html', context)
+
+def dashboard(request):
+    if request.session.get('userType', 'mini') == 'admin':
+        return redirect('eproperty:Users_List')
+    else:
+        return redirect('eproperty:Advertisement_list')
 
 class login(View):
     form_class = LoginForm
