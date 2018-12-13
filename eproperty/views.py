@@ -1684,3 +1684,16 @@ class PersonalDetailUpdate(View):
                 request,
                 self.template_name,
                 context)
+
+########################################################################################################
+
+class SearchAd(View):
+    template_name = 'eproperty/SearchAdvertisement.html'
+
+    def get(self, request,uID):
+        print("here")
+        prop = Property.objects.filter(propertyID=uID).prefetch_related('propImg').all()
+        return render(
+            request,
+            self.template_name,
+            {'property_list': prop})

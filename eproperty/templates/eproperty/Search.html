@@ -91,8 +91,8 @@
                                         <td>{{ c.propertyNumberofRooms }}</td>
                                         <td>{{ c.propertyAskingPrice }}
                                         <td>{{ c.propertySellingPrice }}</td>
-										<td> <a href="{% url 'eproperty:Property_update' c.propertyID%}">Edit</a> &nbsp;
-                                        <a href="javascript:deleteFromURL('{% url 'eproperty:Property_delete' c.propertyID %}', 'Property')">Delete</a>
+										<td> <a href="{% url 'eproperty:SearchAdvertisement' c.propertyID%}">View</a> &nbsp;
+
                                         </td>
 
 									</tr>

@@ -60,6 +60,9 @@ urlpatterns = [
                   url(r'^advertisement/$', views.advertisement,
                       name='Advertisement'),
 
+                  url(r'^searchAdvertisement/(?P<uID>\d+)$', views.SearchAd.as_view(),
+                      name='SearchAdvertisement'),
+
                   url(r'^dashboard/$', views.dashboard,
                       name='DashBoard'),
                   url(r'^contact/$', views.contact,
