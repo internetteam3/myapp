@@ -20,7 +20,14 @@
                     <div class="col-lg-4">
                         <div class="properties_item">
                             <div class="pp_img">
-                                <img class="img-fluid" src="{{ MEDIA_URL }}CN_Tower.jpg" alt="">
+                                {#                                <img class="img-fluid" src="{{ MEDIA_URL }}CN_Tower.jpg" alt="">#}
+                                {% for img in p.propImg.all|slice:":1" %}
+
+                                    <img class="" src="{{ MEDIA_URL }}{{ img.propertyImage }}" alt="" width="360"
+                                         height="240">
+
+
+                                {% endfor %}
                             </div>
                             <div class="pp_content">
                                 <a href="#"><h4>{{ p.propertyTitle }}</h4></a>
@@ -30,9 +37,9 @@
                                     <a href="#">{{ p.propertyNoofBathrooms }} BathRoom</a>
                                     <a href="#">{{ p.propertyNoofFloors }} Floors</a>
                                     <a href="#">{{ p.propertyTotalArea }} sq.ft</a>
-                                    {#        							<a href="#"><i class="fa fa-check" aria-hidden="true"></i>Pool</a>#}
-                                    {#        							<a href="#"><i class="fa fa-times" aria-hidden="true"></i>Bar</a>#}
-                                    {#        							<a href="#"><i class="fa fa-times" aria-hidden="true"></i>Pool</a>#}
+                                    {#                                            							<a href="#"><i class="fa fa-check" aria-hidden="true"></i>Pool</a>#}
+                                    {#                                            							<a href="#"><i class="fa fa-times" aria-hidden="true"></i>Bar</a>#}
+                                    {#                                            							<a href="#"><i class="fa fa-times" aria-hidden="true"></i>Pool</a>#}
                                 </div>
                                 <div class="pp_footer">
                                     <h5>Total: {{ p.propertyAskingPrice }}$</h5>
@@ -59,6 +66,10 @@
                                     <div class="row" style="background-color: beige">
                                         <div class="mx-auto">
                                             <div class="modal-body">
+                                                <button class="btn custom-btn-one" data-dismiss="modal" type="button" style="padding-left: 95%;background-color: beige;">
+                                                    <i class="fa fa-times"></i>
+                                                    Close
+                                                </button>
 
 
                                                 <!-- Project Details Go Here -->
@@ -66,17 +77,18 @@
                                                 <br>
                                                 <label>Image Gallery</label><br>
 
-                                                  {% for img in p.propImg.all%}
+                                                {% for img in p.propImg.all %}
 
 
-                                                       <a href="{{ MEDIA_URL }}{{ img.propertyImage }}" rel="prettyPhoto[pp_gal{{ p.propertyID }}]"
-                                                   title="Click to expand" target="_blank"><img
-                                                        src="{{ MEDIA_URL }}{{ img.propertyImage }}"
-                                                        width="140" height="90"
-                                                        alt="" /></a>
+                                                    <a href="{{ MEDIA_URL }}{{ img.propertyImage }}"
+                                                       rel="prettyPhoto[pp_gal{{ p.propertyID }}]"
+                                                       title="{{ img.propertyImageDescription }}" target="_blank"><img
+                                                            src="{{ MEDIA_URL }}{{ img.propertyImage }}"
+                                                            width="140" height="90"
+                                                            alt=""/></a>
 
-                                                  {% endfor %}
-                                            <br>
+                                                {% endfor %}
+                                                <br>
                                                 <p>
                                                 <table class="table table-striped">
 
@@ -110,7 +122,7 @@
                                                         <td>{{ p.propertyStreet }} </td>
                                                     </tr>
                                                     <tr class="table-success">
-                                                        <td>Street Number: </td>
+                                                        <td>Street Number:</td>
                                                         <td>{{ p.propertyStreetnumber }} </td>
                                                     </tr>
                                                     <tr class="table-danger">
@@ -118,11 +130,11 @@
                                                         <td>{{ p.propertyPostalCode }} </td>
                                                     </tr>
                                                     <tr class="table-warning">
-                                                        <td>Halls: </td>
+                                                        <td>Halls:</td>
                                                         <td>{{ p.propertyNoofHalls }} </td>
                                                     </tr>
                                                     <tr class="table-info">
-                                                        <td>Rooms: </td>
+                                                        <td>Rooms:</td>
                                                         <td>{{ p.propertyNumberofRooms }} </td>
                                                     </tr>
                                                     <tr class="table-light">
@@ -136,7 +148,7 @@
                                                     </tr>
                                                     <tr class="table-success">
                                                         <td>Total Area:</td>
-                                                        <td>{{ p.propertyTotalArea }} sq.ft </td>
+                                                        <td>{{ p.propertyTotalArea }} sq.ft</td>
                                                     </tr>
                                                     <tr class="table-danger">
                                                         <td>Asking price:</td>
@@ -155,38 +167,12 @@
                                                         <td>{{ p.propertyRegistrationDate }} </td>
                                                     </tr>
 
-{#                                                    <tr class="table-secondary">#}
-{#                                                        <td>Street</td>#}
-{#                                                        <td>{{ p.propertyStreet }} </td>#}
-{#                                                    </tr>#}
-{#                                                    <tr class="table-success">#}
-{#                                                        <td>Street Number: </td>#}
-{#                                                        <td>{{ p.propertyStreetnumber }} </td>#}
-{#                                                    </tr>#}
-{#                                                    <tr class="table-danger">#}
-{#                                                        <td>Postal Code:</td>#}
-{#                                                        <td>{{ p.propertyPostalCode }} </td>#}
-{#                                                    </tr>#}
-{#                                                    <tr class="table-warning">#}
-{#                                                        <td>Halls: </td>#}
-{#                                                        <td>{{ p.propertyNoofHalls }} </td>#}
-{#                                                    </tr>#}
-{#                                                    <tr class="table-info">#}
-{#                                                        <td>Rooms: </td>#}
-{#                                                        <td>{{ p.propertyNumberofRooms }} </td>#}
-{#                                                    </tr>#}
-{#                                                    <tr class="table-light">#}
-{#                                                        <td>BathRooms:</td>#}
-{#                                                        <td>{{ p.propertyNoofBathrooms }} </td>#}
-{#                                                    </tr>#}
-
 
                                                 </table>
                                                 </p>
 
 
                                                 <br><br>
-
 
 
                                                 <br>
