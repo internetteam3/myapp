@@ -30,7 +30,7 @@ def contact(request):
     return render(request, 'eproperty/contact.html')
 
 def advertisement(request):
-    propIDs = Advertisement.objects.order_by('-advStartDate').values('propertyID')
+    propIDs = Advertisement.objects.filter(advStartDate__lte=datetime.date.today()).filter(advEndDate__gte=datetime.date.today()).order_by('-adv_ID').values('propertyID')
 
     #prop = Property.objects.filter(propertyID__in=propIDs)
     prop = Property.objects.filter(propertyID__in=propIDs).prefetch_related('propImg').all()
