@@ -59,8 +59,24 @@
                                     <div class="row" style="background-color: beige">
                                         <div class="mx-auto">
                                             <div class="modal-body">
+
+
                                                 <!-- Project Details Go Here -->
                                                 <h1>{{ p.propertyTitle }}</h1>
+                                                <br>
+                                                <label>Image Gallery</label><br>
+
+                                                  {% for img in p.propImg.all%}
+
+
+                                                       <a href="{{ MEDIA_URL }}{{ img.propertyImage }}" rel="prettyPhoto[pp_gal{{ p.propertyID }}]"
+                                                   title="Click to expand" target="_blank"><img
+                                                        src="{{ MEDIA_URL }}{{ img.propertyImage }}"
+                                                        width="140" height="90"
+                                                        alt="" /></a>
+
+                                                  {% endfor %}
+                                            <br>
                                                 <p>
                                                 <table class="table table-striped">
 
@@ -169,18 +185,7 @@
                                                 </p>
 
 
-                                                <br><br><label>Image Gallery</label><br>
-
-                                                  {% for img in p.propImg.all%}
-
-
-                                                       <a href="{{ MEDIA_URL }}{{ img.propertyImage }}" rel="prettyPhoto[pp_gal{{ p.propertyID }}]"
-                                                   title="Click to expand" target="_blank"><img
-                                                        src="{{ MEDIA_URL }}{{ img.propertyImage }}"
-                                                        width="140" height="90"
-                                                        alt="" /></a>
-
-                                                  {% endfor %}
+                                                <br><br>
 
 
 
