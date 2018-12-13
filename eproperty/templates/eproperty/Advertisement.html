@@ -1,6 +1,7 @@
 {% extends "template.html" %}
 {% block title %}Welcome{% endblock %}
 {% load static %}
+
 {% block content %}
 
     <!--================Properties Area =================-->
@@ -168,26 +169,20 @@
                                                 </p>
 
 
-                                                <br><br>
+                                                <br><br><label>Image Gallery</label><br>
+
+                                                  {% for img in p.propImg.all%}
 
 
-                                                <a href="assets/img/Project/inventory/DB.jpg" rel="prettyPhoto[pp_gal1]"
-                                                   title="Click to expand"><img
-                                                        src="assets/img/Project/inventory/DB.jpg"
+                                                       <a href="{{ MEDIA_URL }}{{ img.propertyImage }}" rel="prettyPhoto[pp_gal{{ p.propertyID }}]"
+                                                   title="Click to expand" target="_blank"><img
+                                                        src="{{ MEDIA_URL }}{{ img.propertyImage }}"
                                                         width="140" height="90"
-                                                        alt="Database overview"/></a>
-                                                <a href="assets/img/Project/inventory/1.jpg" rel="prettyPhoto[pp_gal1]"
-                                                   title="Click to expand"><img
-                                                        src="assets/img/Project/inventory/small/1.jpg" width="140"
-                                                        height="90" alt="Login"/></a>
-                                                <a href="assets/img/Project/inventory/2.jpg" rel="prettyPhoto[pp_gal1]"
-                                                   title="Click to expand"><img
-                                                        src="assets/img/Project/inventory/small/2.jpg" width="140"
-                                                        height="90" alt="Admin Panel"/></a>
-                                                <a href="assets/img/Project/inventory/3.jpg" rel="prettyPhoto[pp_gal1]"
-                                                   title="Click to expand"><img
-                                                        src="assets/img/Project/inventory/small/3.jpg" width="140"
-                                                        height="90" alt="User Form"/></a>
+                                                        alt="" /></a>
+
+                                                  {% endfor %}
+
+
 
                                                 <br>
 
