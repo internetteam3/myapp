@@ -87,7 +87,7 @@ class advanceSearch(View):
         # askingPrice = bound_formP['askingPrice'].value()
 
 
-        prop = Property.objects.all()
+        prop = Property.objects.all().order_by('-propertyID')
 
         if category:
             prop = prop.filter(propertyCategory=category)
@@ -1732,7 +1732,7 @@ class Search(View):
 
         #print(askingPrice)
 
-        prop = Property.objects.all()
+        prop = Property.objects.all().order_by('-propertyID')
 
         if category:
             prop = prop.filter(propertyCategory=category)
@@ -1824,7 +1824,7 @@ class SearchAd(View):
 
     def get(self, request,uID):
         print("here")
-        prop = Property.objects.filter(propertyID=uID).prefetch_related('propImg').all()
+        prop = Property.objects.filter(propertyID=uID).order_by('-propertyID').prefetch_related('propImg').all()
         return render(
             request,
             self.template_name,
