@@ -15,7 +15,15 @@ from django.core.mail import send_mail
 from django.conf import settings
 
 def home(request):
-    return render(request, 'eproperty/home.html')
+
+    # prop = Property.objects.filter(propertyID__in=propIDs)
+    prop = Property.objects.all().order_by('-propertyID').prefetch_related('propImg').all()
+
+
+    context = {
+        'property_list': prop
+    }
+    return render(request, 'eproperty/home.html', context)
 
 def about(request):
     return render(request, 'eproperty/about.html')

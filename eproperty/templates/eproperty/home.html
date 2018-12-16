@@ -26,74 +26,193 @@
         			<h2>Latest Added Properties</h2>
 
         		</div>
-        		<div class="row properties_inner">
-        			<div class="col-lg-4">
-        				<div class="properties_item">
-        					<div class="pp_img">
-        						<img class="img-fluid" src="{% static '/img/properties/pp-1.jpg' %}" alt="">
-        					</div>
-        					<div class="pp_content">
-        						<a href="#"><h4>04 Bed Duplex</h4></a>
-        						<div class="tags">
-        							<a href="#">04 Beds</a>
-        							<a href="#">03 Baths</a>
-        							<a href="#">750 sqm</a>
-        							<a href="#"><i class="fa fa-check" aria-hidden="true"></i>Pool</a>
-        							<a href="#"><i class="fa fa-times" aria-hidden="true"></i>Bar</a>
-        							<a href="#"><i class="fa fa-times" aria-hidden="true"></i>Pool</a>
-        						</div>
-        						<div class="pp_footer">
-        							<h5>Total: $3.5M</h5>
-        							<a class="main_btn" href="#project1" data-toggle="modal">More Info</a>
-        						</div>
-        					</div>
-        				</div>
-        			</div>
-        			<div class="col-lg-4">
-        				<div class="properties_item">
-        					<div class="pp_img">
-        						<img class="img-fluid" src="{% static '/img/properties/pp-2.jpg' %}" alt="">
-        					</div>
-        					<div class="pp_content">
-        						<a href="#"><h4>04 Bed Duplex</h4></a>
-        						<div class="tags">
-        							<a href="#">04 Beds</a>
-        							<a href="#">03 Baths</a>
-        							<a href="#">750 sqm</a>
-        							<a href="#"><i class="fa fa-check" aria-hidden="true"></i>Pool</a>
-        							<a href="#"><i class="fa fa-times" aria-hidden="true"></i>Bar</a>
-        							<a href="#"><i class="fa fa-times" aria-hidden="true"></i>Pool</a>
-        						</div>
-        						<div class="pp_footer">
-        							<h5>Total: $3.5M</h5>
-        							<a class="main_btn" href="#project1"  data-toggle="modal">More Info</a>
-        						</div>
-        					</div>
-        				</div>
-        			</div>
-        			<div class="col-lg-4">
-        				<div class="properties_item">
-        					<div class="pp_img">
-        						<img class="img-fluid" src="{% static '/img/properties/pp-3.jpg' %}" alt="">
-        					</div>
-        					<div class="pp_content">
-        						<a href="#"><h4>04 Bed Duplex</h4></a>
-        						<div class="tags">
-        							<a href="#">04 Beds</a>
-        							<a href="#">03 Baths</a>
-        							<a href="#">750 sqm</a>
-        							<a href="#"><i class="fa fa-check" aria-hidden="true"></i>Pool</a>
-        							<a href="#"><i class="fa fa-times" aria-hidden="true"></i>Bar</a>
-        							<a href="#"><i class="fa fa-times" aria-hidden="true"></i>Pool</a>
-        						</div>
-        						<div class="pp_footer">
-        							<h5>Total: $3.5M</h5>
-        							<a class="main_btn" href="#project1" data-toggle="modal">More Info</a>
-        						</div>
-        					</div>
-        				</div>
-        			</div>
-        		</div>
+        		 <div class="row properties_inner">
+
+
+                {% for p in property_list|slice:":3" %}
+
+
+                    <div class="col-lg-4">
+                        <div class="properties_item">
+                            <div class="pp_img">
+                                {#                                <img class="img-fluid" src="{{ MEDIA_URL }}CN_Tower.jpg" alt="">#}
+                                {% for img in p.propImg.all|slice:":1" %}
+
+                                    <img class="" src="{{ MEDIA_URL }}{{ img.propertyImage }}" alt="" width="360"
+                                         height="240">
+
+
+                                {% endfor %}
+                            </div>
+                            <div class="pp_content">
+                                <a href="#"><h4>{{ p.propertyTitle }}</h4></a>
+                                <div class="tags">
+                                    <a href="#">{{ p.propertyNoofHalls }} Halls</a>
+                                    <a href="#">{{ p.propertyNumberofRooms }} Rooms</a>
+                                    <a href="#">{{ p.propertyNoofBathrooms }} BathRoom</a>
+                                    <a href="#">{{ p.propertyNoofFloors }} Floors</a>
+                                    <a href="#">{{ p.propertyTotalArea }} sq.ft</a>
+                                    {#                                            							<a href="#"><i class="fa fa-check" aria-hidden="true"></i>Pool</a>#}
+                                    {#                                            							<a href="#"><i class="fa fa-times" aria-hidden="true"></i>Bar</a>#}
+                                    {#                                            							<a href="#"><i class="fa fa-times" aria-hidden="true"></i>Pool</a>#}
+                                </div>
+                                <div class="pp_footer">
+                                    <h5>Total: {{ p.propertyAskingPrice }}$</h5>
+                                    <a class="main_btn" href="#project{{ p.propertyID }}" data-toggle="modal">More
+                                        Info</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <!-- Modal Start -->
+
+                    <div class="portfolio-modal modal fade" id="project{{ p.propertyID }}" tabindex="-1" role="dialog"
+                         aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="close-modal" data-dismiss="modal">
+                                    <div class="lr">
+                                        <div class="rl"></div>
+                                    </div>
+                                </div>
+                                <div class="container">
+                                    <div class="row" style="background-color: beige">
+                                        <div class="mx-auto">
+                                            <div class="modal-body">
+                                                <button class="btn custom-btn-one" data-dismiss="modal" type="button" style="padding-left: 95%;background-color: beige;">
+                                                    <i class="fa fa-times"></i>
+                                                    Close
+                                                </button>
+
+
+                                                <!-- Project Details Go Here -->
+                                                <h1>{{ p.propertyTitle }}</h1>
+                                                <br>
+                                                <label>Image Gallery</label><br>
+
+                                                {% for img in p.propImg.all %}
+
+
+                                                    <a href="{{ MEDIA_URL }}{{ img.propertyImage }}"
+                                                       rel="prettyPhoto[pp_gal{{ p.propertyID }}]"
+                                                       title="{{ img.propertyImageDescription }}" target="_blank"><img
+                                                            src="{{ MEDIA_URL }}{{ img.propertyImage }}"
+                                                            width="140" height="90"
+                                                            alt=""/></a>
+
+                                                {% endfor %}
+                                                <br>
+                                                <p>
+                                                <table class="table table-striped">
+
+
+                                                    <tr class="table-secondary">
+                                                        <td>Property Category:</td>
+                                                        <td>{{ p.propertyCategory }} </td>
+                                                    </tr>
+                                                    <tr class="table-success">
+                                                        <td>Property Sector:</td>
+                                                        <td>{{ p.propertySector }} </td>
+                                                    </tr>
+                                                    <tr class="table-danger">
+                                                        <td>Property Facing:</td>
+                                                        <td>{{ p.propertyFacing }} </td>
+                                                    </tr>
+                                                    <tr class="table-warning">
+                                                        <td>Country:</td>
+                                                        <td>{{ p.propertyCountry }} </td>
+                                                    </tr>
+                                                    <tr class="table-info">
+                                                        <td>Province:</td>
+                                                        <td>{{ p.propertyProvince }} </td>
+                                                    </tr>
+                                                    <tr class="table-light">
+                                                        <td>City:</td>
+                                                        <td>{{ p.propertyCity }} </td>
+                                                    </tr>
+                                                    <tr class="table-secondary">
+                                                        <td>Street:</td>
+                                                        <td>{{ p.propertyStreet }} </td>
+                                                    </tr>
+                                                    <tr class="table-success">
+                                                        <td>Street Number:</td>
+                                                        <td>{{ p.propertyStreetnumber }} </td>
+                                                    </tr>
+                                                    <tr class="table-danger">
+                                                        <td>Postal Code:</td>
+                                                        <td>{{ p.propertyPostalCode }} </td>
+                                                    </tr>
+                                                    <tr class="table-warning">
+                                                        <td>Halls:</td>
+                                                        <td>{{ p.propertyNoofHalls }} </td>
+                                                    </tr>
+                                                    <tr class="table-info">
+                                                        <td>Rooms:</td>
+                                                        <td>{{ p.propertyNumberofRooms }} </td>
+                                                    </tr>
+                                                    <tr class="table-light">
+                                                        <td>BathRooms:</td>
+                                                        <td>{{ p.propertyNoofBathrooms }} </td>
+                                                    </tr>
+
+                                                    <tr class="table-secondary">
+                                                        <td>No. of Floors:</td>
+                                                        <td>{{ p.propertyNoofFloors }} </td>
+                                                    </tr>
+                                                    <tr class="table-success">
+                                                        <td>Total Area:</td>
+                                                        <td>{{ p.propertyTotalArea }} sq.ft</td>
+                                                    </tr>
+                                                    <tr class="table-danger">
+                                                        <td>Asking price:</td>
+                                                        <td>${{ p.propertyAskingPrice }} </td>
+                                                    </tr>
+                                                    <tr class="table-warning">
+                                                        <td>Selling price:</td>
+                                                        <td>${{ p.propertySellingPrice }} </td>
+                                                    </tr>
+                                                    <tr class="table-info">
+                                                        <td>Property Construction Date:</td>
+                                                        <td>{{ p.propertyConstructionDate }} </td>
+                                                    </tr>
+                                                    <tr class="table-light">
+                                                        <td>Property Registeration Date:</td>
+                                                        <td>{{ p.propertyRegistrationDate }} </td>
+                                                    </tr>
+
+
+                                                </table>
+                                                </p>
+
+
+                                                <br><br>
+
+
+                                                <br>
+
+                                                <button class="btn custom-btn-one" data-dismiss="modal" type="button">
+                                                    <i class="fa fa-times"></i>
+                                                    Close
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Modal End -->
+
+
+
+
+                {% endfor %}
+
+
+            </div>
         	</div>
         </section>
         <!--================End Properties Area =================-->
