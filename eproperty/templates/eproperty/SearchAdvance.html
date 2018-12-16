@@ -88,9 +88,7 @@
                 type="text" placeholder="No. of Rooms" name="room"> <input type="text" placeholder="No. of BathRoom"
                                                                            name="bathRoom"> <input
                 type="text" placeholder="No. of Floors" name="floor">
-            {% if errorMSG %}
-                <p style="color: red"> {{ errorMSG }}</p>
-            {% endif %}
+
 
             <div class="search_range" style="width: 100%;padding-left: 20%;padding-top: 2%">
                 <div class="range_item">
@@ -119,6 +117,9 @@
                 <span class="d_text2">sq.ft</span>
                 <input type="text" name="amount2" id="amount2" readonly style="border:0;" class="amount2">
             </div>
+              {% if MSG %}
+                <p style="color: red; margin-left: 5%">{{ MSG }}</p>
+            {% endif %}
 
 
             <div style="padding-top: 2%; padding-left: 30%">

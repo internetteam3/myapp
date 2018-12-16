@@ -86,43 +86,58 @@ class advanceSearch(View):
         amount2 = request.POST.get("amount2", "")
         # askingPrice = bound_formP['askingPrice'].value()
 
+        MSG = 'You have searched for'
+
 
         prop = Property.objects.all().order_by('-propertyID')
 
         if category:
             prop = prop.filter(propertyCategory=category)
+            MSG += ", Category:-" + str(catList.get(pk=category))
         if sector:
             prop = prop.filter(propertySector=sector)
+            MSG += ", Sector:-" + str(sectList.get(pk=sector))
         if facing:
-            prop = prop.filter(propertyFacing=sector)
+            prop = prop.filter(propertyFacing=facing)
+            MSG += ", Facing:-" + str(faceList.get(pk=facing))
         if country:
             prop = prop.filter(propertyCountry=country)
+            MSG += ", Country:-" + str(counList.get(pk=country))
         if province:
             prop = prop.filter(propertyProvince=province)
+            MSG += ", Province:-" + str(provList.get(pk=province))
         if city:
             prop = prop.filter(propertyCity=city)
+            MSG += ", City:-" + str(cityList.get(pk=city))
 
 
         if postal:
             prop = prop.filter(propertyPostalCode=postal)
+            MSG += ", Postal Code:-" + postal
         if hall:
             prop = prop.filter(propertyNoofHalls=hall)
+            MSG += ", No. Of Halls:-" + hall
         if room:
             prop = prop.filter(propertyNumberofRooms=room)
+            MSG += ", No. Of Rooms:-" + room
         if bathRoom:
             prop = prop.filter(propertyNoofBathrooms=bathRoom)
+            MSG += ", No. Of Bath Rooms:-" + bathRoom
         if floor:
             prop = prop.filter(propertyNoofFloors=floor)
+            MSG += ", No. Of Floor:-" + floor
         if amount:
             # print(amount)
             a, b = amount.split("  ")
             a = a[1:]
             b = b[1:]
             prop = prop.filter(propertyAskingPrice__gte=int(a), propertyAskingPrice__lte=int(b))
+            MSG += ", Asking Price between: $" + a + " - $"+b
         if amount2:
             # print(amount2)
             a, b = amount2.split("  ")
             prop = prop.filter(propertyTotalArea__gte=int(a), propertyTotalArea__lte=int(b))
+            MSG += ", Total Area between: " + a + "sq.ft - " + b + "sq.ft"
 
 
 
@@ -138,7 +153,8 @@ class advanceSearch(View):
             'counList': counList,
             'provList': provList,
             'cityList': cityList,
-            'propertySearchList': prop
+            'propertySearchList': prop,
+            'MSG': MSG
         }
 
         return render(request, 'eproperty/SearchAdvance.html',context)
