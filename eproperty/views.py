@@ -156,7 +156,7 @@ def advertisement(request):
     propIDs = Advertisement.objects.filter(advStartDate__lte=datetime.date.today()).filter(advEndDate__gte=datetime.date.today()).order_by('-adv_ID').values('propertyID')
 
     #prop = Property.objects.filter(propertyID__in=propIDs)
-    prop = Property.objects.filter(propertyID__in=propIDs).prefetch_related('propImg').all()
+    prop = Property.objects.filter(propertyID__in=propIDs).order_by('-propertyID').prefetch_related('propImg').all()
 
 
     # print(prop)
