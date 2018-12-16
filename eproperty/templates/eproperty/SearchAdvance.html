@@ -3,106 +3,195 @@
 {% load static %}
 
 {% block customCSS %}
-     <link rel="stylesheet" href="{% static '/css/sb-admin.css' %}">
+    <link rel="stylesheet" href="{% static '/css/sb-admin.css' %}">
     <link rel="stylesheet" href="{% static 'vendors/datatables/dataTables.bootstrap4.css' %}">
     <style type="text/css" media="screen">
 
-    .advanced_search {max-width: 30% !important; text-align: justify}
+        .advanced_search {
+            max-width: 30% !important;
+            text-align: justify
+        }
 
-    label {max-width: 100px;}
+        label {
+            max-width: 100px;
+        }
 
+        .nice-select {
+            min-width: 15% !important;
+        }
+
+        .ui-slider-range {
+
+            background: #f5204b;
+            border-radius: 0px;
+
+        }
 
 
     </style>
 {% endblock %}
 
+
 {% block content %}
 
-        <!--================Team Area =================-->
+    <!--================Team Area =================-->
 
 
-            <div class="container">
-				<div class="advanced_search" style="margin-top: 1%!important; margin-right: 30%;box-shadow: 21.21px 21.21px 30px 21.21px rgba(158,158,158,0.3);">
-					<h3>Search Properties For </h3>
-                    <form
-                            action="{% url 'eproperty:Search' %}"
-                            method="post">
-                        {% csrf_token %}
-                        {{ formP.as_p }}
-                         {% if errorMSG %}
-                            <p style="color: red"> {{ errorMSG }}</p>
-                        {% endif %}
-                        <button type="submit" value="submit" class="btn submit_btn">Search</button>
-                        <a href="{% url 'eproperty:Search' %}" class="btn submit_btn"> Reset </a>
+    <div class="container">
 
-                    </form>
+        <h3>Advance Search for Properties </h3>
+        <form
+                action="{% url 'eproperty:SearchAdvance' %}"
+                method="post" onsubmit="onSubmitForm()">
+            {% csrf_token %}
+            <select class="s_select" name="category">
+                <option disabled selected value> -- Category --</option>
+                {% for c in catList %}
+                    <option value="{{ c.propertyCategory }}">{{ c.propertyCategoryName }}</option>
+                {% endfor %}
 
+            </select>
+            <select class="s_select" name="sector">
+                <option disabled selected value> -- Sector --</option>
+                {% for s in sectList %}
+                    <option value="{{ s.propertySector }}">{{ s.propertySectorName }}</option>
+                {% endfor %}
+            </select>
+            <select class="s_select" name="facing">
+                <option disabled selected value> -- Facing --</option>
+                {% for f in faceList %}
+                    <option value="{{ f.propertyFacing }}">{{ f.propertyFacingName }}</option>
+                {% endfor %}
+            </select>
+            <select class="s_select" name="country">
+                <option disabled selected value> -- Country --</option>
+                {% for c in counList %}
+                    <option value="{{ c.countryID }}">{{ c.countryName }}</option>
+                {% endfor %}
+            </select>
+            <select class="s_select" name="province">
+                <option disabled selected value> -- Province --</option>
+                {% for p in provList %}
+                    <option value="{{ p.provinceID }}">{{ p.provinceName }}</option>
+                {% endfor %}
+            </select>
+            <select class="s_select" name="city">
+                <option disabled selected value> -- City --</option>
+                {% for c in cityList %}
+                    <option value="{{ c.cityID }}">{{ c.cityName }}</option>
+                {% endfor %}
+            </select>
 
+            &nbsp;
+            <input type="text" placeholder="Postal Code" name="postal"> <input type="text" placeholder="No. of Halls"
+                                                                               name="hall"> <input
+                type="text" placeholder="No. of Rooms" name="room"> <input type="text" placeholder="No. of BathRoom"
+                                                                           name="bathRoom"> <input
+                type="text" placeholder="No. of Floors" name="floor">
+            {% if errorMSG %}
+                <p style="color: red"> {{ errorMSG }}</p>
+            {% endif %}
+
+            <div class="search_range" style="width: 100%;padding-left: 20%;padding-top: 2%">
+                <div class="range_item">
+                    <div class="switch-wrap d-flex">
+                        <h5>Asking Price Range</h5> &nbsp;
+                        <div class="primary-switch">
+                            <input type="checkbox" id="default-switch" checked >
+                            <label for="default-switch"></label>
+                        </div>
+                    </div>
+                    <div id="slider-range"></div>
+                    <span class="d_text">$CAD</span>
+                    <input type="text" name="amount" id="amount" readonly style="border:0;" class="amount">
                 </div>
             </div>
 
-
-         <div class="table-responsive" style="padding-right: 10%">
-						<table class="table table-bordered" id="dataTable" width="100%"
-							cellspacing="0">
-							<thead>
-								<tr>
-									<th>Property Name</th>
-                                    <th>Property Category</th>
-                                    <th>Property Sector</th>
-                                    <th>Country</th>
-                                     <th>Province</th>
-                                    <th>City</th>
-                                    <th>Total Area</th>
-                                    <th>No of Rooms</th>
-                                    <th>Asking Price</th>
-                                    <th>Selling Price</th>
-									<th>Link</th>
-								</tr>
-							</thead>
-							<tfoot>
-								<tr>
-									<th>Property Name</th>
-                                    <th>Property Category</th>
-                                    <th>Property Sector</th>
-                                    <th>Country</th>
-                                     <th>Province</th>
-                                    <th>City</th>
-                                    <th>Total Area</th>
-                                    <th>No of Rooms</th>
-                                    <th>Asking Price</th>
-                                    <th>Selling Price</th>
-									<th>Link</th>
-								</tr>
-							</tfoot>
-							<tbody>
+            <div class="range_item" style="width: 100%;padding-left: 20%">
+                <div class="switch-wrap d-flex">
+                    <h5>Property Area</h5> &nbsp;
+                    <div class="confirm-switch">
+                        <input type="checkbox" id="confirm-switch" checked>
+                        <label for="confirm-switch"></label>
+                    </div>
+                </div>
+                <div id="slider-range2"></div>
+                <span class="d_text2">sq.ft</span>
+                <input type="text" name="amount2" id="amount2" readonly style="border:0;" class="amount2">
+            </div>
 
 
-								 {% for c in propertySearchList %}
-									<tr>
+            <div style="padding-top: 2%; padding-left: 30%">
+                <button type="submit" value="submit" class="btn submit_btn">Search</button>
+                <a href="{% url 'eproperty:Search' %}" class="btn submit_btn"> Reset </a>
+            </div>
 
-										<td>{{ c.propertyTitle }}</td>
-                                        <td>{{ c.propertyCategory }}</td>
-                                        <td>{{ c.propertySector }}</td>
-                                        <td>{{ c.propertyCountry }}</td>
-                                        <td>{{ c.propertyProvince }}</td>
-                                        <td>{{ c.propertyCity }}</td>
-                                        <td>{{ c.propertyTotalArea }}</td>
-                                        <td>{{ c.propertyNumberofRooms }}</td>
-                                        <td>{{ c.propertyAskingPrice }}
-                                        <td>{{ c.propertySellingPrice }}</td>
-										<td> <a href="{% url 'eproperty:SearchAdvertisement' c.propertyID%}">View</a> &nbsp;
-
-                                        </td>
-
-									</tr>
-								 {% endfor %}
+        </form>
 
 
+    </div>
+    <br>
 
-							</tbody>
-						</table>
-					</div>
+    <div class="table-responsive" style="padding-right: 10%">
+        <table class="table table-bordered" id="dataTable" width="100%"
+               cellspacing="0">
+            <thead>
+            <tr>
+                <th>Property Name</th>
+                <th>Property Category</th>
+                <th>Property Sector</th>
+                <th>Country</th>
+                <th>Province</th>
+                <th>City</th>
+                <th>Total Area</th>
+                <th>No of Rooms</th>
+                <th>Asking Price</th>
+                <th>Selling Price</th>
+                <th>Link</th>
+            </tr>
+            </thead>
+            <tfoot>
+            <tr>
+                <th>Property Name</th>
+                <th>Property Category</th>
+                <th>Property Sector</th>
+                <th>Country</th>
+                <th>Province</th>
+                <th>City</th>
+                <th>Total Area</th>
+                <th>No of Rooms</th>
+                <th>Asking Price</th>
+                <th>Selling Price</th>
+                <th>Link</th>
+            </tr>
+            </tfoot>
+            <tbody>
+
+
+            {% for c in propertySearchList %}
+                <tr>
+
+                    <td>{{ c.propertyTitle }}</td>
+                    <td>{{ c.propertyCategory }}</td>
+                    <td>{{ c.propertySector }}</td>
+                    <td>{{ c.propertyCountry }}</td>
+                    <td>{{ c.propertyProvince }}</td>
+                    <td>{{ c.propertyCity }}</td>
+                    <td>{{ c.propertyTotalArea }}</td>
+                    <td>{{ c.propertyNumberofRooms }}</td>
+                    <td>{{ c.propertyAskingPrice }}
+                    <td>{{ c.propertySellingPrice }}</td>
+                    <td><a href="{% url 'eproperty:SearchAdvertisement' c.propertyID %}">View</a> &nbsp;
+
+                    </td>
+
+                </tr>
+            {% endfor %}
+
+
+            </tbody>
+        </table>
+    </div>
 
 
 
@@ -113,6 +202,6 @@
     <script src="{% static '/vendors/datatables/jquery.dataTables.js' %}"></script>
     <script src="{% static '/vendors/datatables/dataTables.bootstrap4.js' %}"></script>
     <script src="{% static '/js/sb-admin-datatables.js' %}"></script>
- {% endblock %}
+{% endblock %}
 
 

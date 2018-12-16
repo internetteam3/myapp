@@ -203,31 +203,31 @@
 	/*----------------------------------------------------*/
     /*  Jquery Ui slider js
     /*----------------------------------------------------*/
-	$( "#slider-range, #slider-range2" ).slider({
+	$( "#slider-range" ).slider({
       range: true,
       min: 0,
-      max: 500,
-      values: [ 80, 500 ],
+      max: 7000,
+      values: [ 200, 3000 ],
       slide: function( event, ui ) {
-        $( "#amount, #amount2" ).val( "$" + ui.values[ 0 ] + " $" + ui.values[ 1 ] );
+        $( "#amount" ).val( "$" + ui.values[ 0 ] + "  $" + ui.values[ 1 ] );
       }
     });
-    $( "#amount, #amount2" ).val( "$" + $( "#slider-range, #slider-range2" ).slider( "values", 0 )+
-      "   $" + $( "#slider-range, #slider-range2" ).slider( "values", 1 ) );
+    $( "#amount" ).val( "$" + $( "#slider-range" ).slider( "values", 0 )+
+      "  $" + $( "#slider-range" ).slider( "values", 1 ) );
 	
 	
 	
 	$( "#slider-range2" ).slider({
       range: true,
       min: 0,
-      max: 500,
-      values: [ 80, 500 ],
+      max: 7000,
+      values: [ 200, 2000 ],
       slide: function( event, ui ) {
-        $( "#amount2" ).val( "$" + ui.values[ 0 ] + " $" + ui.values[ 1 ] );
+        $( "#amount2" ).val( ui.values[ 0 ] + "  " + ui.values[ 1 ] );
       }
     });
-    $( "#amount2" ).val( "$" + $( "#slider-range2" ).slider( "values", 0 )+
-      "   $" + $( "#slider-range2" ).slider( "values", 1 ) );
+    $( "#amount2" ).val( $( "#slider-range2" ).slider( "values", 0 )+
+      "  " + $( "#slider-range2" ).slider( "values", 1 ) );
 	
 //	/*----------------------------------------------------*/
 //    /*  Image Gallery js

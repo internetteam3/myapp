@@ -29,8 +29,120 @@ def properties(request):
 def contact(request):
     return render(request, 'eproperty/contact.html')
 
-def advanceSearch(request):
-    return render(request, 'eproperty/SearchAdvance.html')
+class advanceSearch(View):
+
+    def get(self, request):
+        catList = PropertyCategory.objects.all()
+        sectList = Property_Sector.objects.all()
+        faceList = Property_Facing.objects.all()
+        counList = Country.objects.all()
+        provList = Province.objects.all()
+        cityList = City.objects.all()
+        context = {
+            'catList': catList,
+            'sectList': sectList,
+            'faceList': faceList,
+            'counList': counList,
+            'provList': provList,
+            'cityList': cityList
+        }
+
+
+
+        return render(request, 'eproperty/SearchAdvance.html', context)
+
+
+
+
+    def post(self, request):
+        catList = PropertyCategory.objects.all()
+        sectList = Property_Sector.objects.all()
+        faceList = Property_Facing.objects.all()
+        counList = Country.objects.all()
+        provList = Province.objects.all()
+        cityList = City.objects.all()
+
+        category = request.POST.get("category", "")
+        sector = request.POST.get("sector", "")
+        facing = request.POST.get("facing", "")
+        country = request.POST.get("country", "")
+        province = request.POST.get("province", "")
+        city = request.POST.get("city", "")
+
+        postal = request.POST.get("postal", "")
+        hall = request.POST.get("hall", "")
+        room = request.POST.get("room", "")
+        bathRoom = request.POST.get("bathRoom", "")
+        floor = request.POST.get("floor", "")
+        amount = request.POST.get("amount", "")
+        amount2 = request.POST.get("amount2", "")
+        # askingPrice = bound_formP['askingPrice'].value()
+
+
+        prop = Property.objects.all()
+
+        if category:
+            prop = prop.filter(propertyCategory=category)
+        if sector:
+            prop = prop.filter(propertySector=sector)
+        if facing:
+            prop = prop.filter(propertyFacing=sector)
+        if country:
+            prop = prop.filter(propertyCountry=country)
+        if province:
+            prop = prop.filter(propertyProvince=province)
+        if city:
+            prop = prop.filter(propertyCity=city)
+
+
+        if postal:
+            prop = prop.filter(propertyPostalCode=postal)
+        if hall:
+            prop = prop.filter(propertyNoofHalls=hall)
+        if room:
+            prop = prop.filter(propertyNumberofRooms=room)
+        if bathRoom:
+            prop = prop.filter(propertyNoofBathrooms=bathRoom)
+        if floor:
+            prop = prop.filter(propertyNoofFloors=floor)
+        if amount:
+            # print(amount)
+            a, b = amount.split("  ")
+            a = a[1:]
+            b = b[1:]
+            prop = prop.filter(propertyAskingPrice__gte=int(a), propertyAskingPrice__lte=int(b))
+        if amount2:
+            # print(amount2)
+            a, b = amount2.split("  ")
+            prop = prop.filter(propertyTotalArea__gte=int(a), propertyTotalArea__lte=int(b))
+
+
+
+
+
+
+
+
+        context = {
+            'catList': catList,
+            'sectList': sectList,
+            'faceList': faceList,
+            'counList': counList,
+            'provList': provList,
+            'cityList': cityList,
+            'propertySearchList': prop
+        }
+
+        return render(request, 'eproperty/SearchAdvance.html',context)
+
+
+
+
+
+
+
+
+
 
 def advertisement(request):
     propIDs = Advertisement.objects.filter(advStartDate__lte=datetime.date.today()).filter(advEndDate__gte=datetime.date.today()).order_by('-adv_ID').values('propertyID')

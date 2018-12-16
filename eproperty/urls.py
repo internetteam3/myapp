@@ -53,7 +53,7 @@ urlpatterns = [
                   url(r'^search/$', views.Search.as_view(),
                       name='Search'),
 
-                  url(r'^searchAdvance/$', views.advanceSearch,
+                  url(r'^searchAdvance/$', views.advanceSearch.as_view(),
                       name='SearchAdvance'),
 
                   url(r'^personalDetailUpdate/$',

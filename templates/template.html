@@ -63,6 +63,23 @@
 
         }
 
+     function onSubmitForm() {
+
+
+         if (!$('#default-switch').is(":checked"))
+            {
+            $('#amount').val("");
+            }
+            if (!$('#confirm-switch').is(":checked"))
+            {
+            $('#amount2').val("");
+            }
+
+
+    }
+
+
+
 
 
         {% block insideJavaScript %}
