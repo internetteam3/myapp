@@ -101,7 +101,10 @@
                                         <td>{{ c.propertyNumberofRooms }}</td>
                                         <td>{{ c.propertyAskingPrice }}
                                         <td>{{ c.propertySellingPrice }}</td>
-										<td> <a href="{% url 'eproperty:Property_update' c.propertyID%}">Edit</a> &nbsp;
+										<td>
+                                            {% if request.session.userType != 'admin' %}
+                                            <a href="{% url 'eproperty:Property_update' c.propertyID%}">Edit</a>
+                                            {% endif %}
                                         <a href="javascript:deleteFromURL('{% url 'eproperty:Property_delete' c.propertyID %}', 'Property')">Delete</a>
                                         </td>
 

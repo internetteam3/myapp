@@ -1437,14 +1437,16 @@ class PropertyList(View):
 
         if request.session.get('userType', 'mini') == 'admin':
             userID= 1
+            pList = Property.objects.all().order_by('-propertyID')
         else:
             userID = request.session.get('userID', 1)
+            pList = Property.objects.filter(user_ID=userID).order_by('-propertyID')
 
 
         return render(
             request,
             'eproperty/Property_list.html',
-            {'property_list': Property.objects.filter(user_ID=userID).order_by('-propertyID')})
+            {'property_list': pList})
 
 
 class PropertyUpdate(View):
@@ -1526,10 +1528,17 @@ class AdvertisementCreate(View):
 class AdvertisementList(View):
     def get(self, request):
 
+        if request.session.get('userType', 'mini') == 'admin':
+            userID= 1
+            aList = Advertisement.objects.all().order_by('-advStartDate')
+        else:
+            userID = request.session.get('userID', 1)
+            aList = Advertisement.objects.filter(user_ID=request.session.get('userID', 1)).order_by('-advStartDate')
+
         return render(
             request,
             'eproperty/Advertisement_list.html',
-            {'advertisement_list': Advertisement.objects.filter(user_ID=request.session.get('userID', 1)).order_by('-advStartDate')})
+            {'advertisement_list': aList})
 
 
 class AdvertisementUpdate(View):
