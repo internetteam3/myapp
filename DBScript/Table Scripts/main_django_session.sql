@@ -1,0 +1,3 @@
+INSERT INTO django_session (session_key, session_data, expire_date) VALUES ('eut9z8tqmaxqfcw1sk07ew1hq5olf16p', 'MTQyZDk3YmYzMzNmMGEwOWFhNjRkZTgzNTVmYjljODI0MDdiOTA2Mzp7InVzZXJUeXBlIjoiYWRtaW4iLCJ1c2VySUQiOjF9', '2018-12-25 22:45:23.852037');
+INSERT INTO django_session (session_key, session_data, expire_date) VALUES ('v5o6sxu9w7d9dojig0a2nae8dzgx9e94', 'MjU4YzcxN2M3MjMyZmZiYmEzZmIxOGNlYWY2OGE5MGQzZjUxYmM3NTp7InVzZXJUeXBlIjoidXNlciIsInVzZXJJRCI6OH0=', '2018-12-25 22:03:42.361043');
+INSERT INTO django_session (session_key, session_data, expire_date) VALUES ('z457q5663y5c6jd8fi5le34vyus9mz93', 'ZDViYTlhYWMyZjQzMWVkMGU5ZGMyMzA0YTc5ODVlNzFiMDMwZWUzMjp7InVzZXJUeXBlIjoidXNlciIsInVzZXJJRCI6Mn0=', '2018-12-30 16:58:22.293964');

@@ -20,3 +20,10 @@ INSERT INTO django_migrations (id, app, name, applied) VALUES (19, 'myapp', '000
 INSERT INTO django_migrations (id, app, name, applied) VALUES (20, 'myapp', '0005_auto_20181112_2204', '2018-11-13 03:04:19.052490');
 INSERT INTO django_migrations (id, app, name, applied) VALUES (21, 'myapp', '0006_auto_20181116_1810', '2018-11-16 23:10:43.137761');
 INSERT INTO django_migrations (id, app, name, applied) VALUES (22, 'eproperty', '0001_initial', '2018-12-08 05:02:31.645177');
+INSERT INTO django_migrations (id, app, name, applied) VALUES (23, 'eproperty', '0002_auto_20181208_1038', '2018-12-08 15:40:04.999218');
+INSERT INTO django_migrations (id, app, name, applied) VALUES (24, 'eproperty', '0003_auto_20181208_1314', '2018-12-08 18:15:11.146469');
+INSERT INTO django_migrations (id, app, name, applied) VALUES (25, 'eproperty', '0004_auto_20181208_1809', '2018-12-08 23:09:49.998643');
+INSERT INTO django_migrations (id, app, name, applied) VALUES (26, 'eproperty', '0005_property_user_id', '2018-12-09 15:27:18.376973');
+INSERT INTO django_migrations (id, app, name, applied) VALUES (27, 'eproperty', '0006_propertyimages_user_id', '2018-12-09 21:50:55.459974');
+INSERT INTO django_migrations (id, app, name, applied) VALUES (28, 'eproperty', '0007_remove_propertyimages_user_id', '2018-12-09 22:34:05.651028');
+INSERT INTO django_migrations (id, app, name, applied) VALUES (29, 'eproperty', '0008_auto_20181211_1936', '2018-12-12 00:36:25.572090');

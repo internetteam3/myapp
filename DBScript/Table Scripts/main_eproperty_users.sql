@@ -1,4 +1,11 @@
-INSERT INTO eproperty_users (user_ID, firstName, lastName, email) VALUES (1, 'neel', 'shah', 'neel@gmail.com');
+INSERT INTO eproperty_users (user_ID, firstName, lastName, email) VALUES (1, 'neel', 'shahs12', 'neel@gmail.com');
 INSERT INTO eproperty_users (user_ID, firstName, lastName, email) VALUES (2, 'dhavan', 'mehta', 'dhavan@gmail.com');
 INSERT INTO eproperty_users (user_ID, firstName, lastName, email) VALUES (3, 'sid', 'sid', 'sid@gmail.com');
 INSERT INTO eproperty_users (user_ID, firstName, lastName, email) VALUES (4, 'neel', 'neel', 'neel@gmail.com');
+INSERT INTO eproperty_users (user_ID, firstName, lastName, email) VALUES (5, 'yash', 'mistry', 'team3team@gmail.com');
+INSERT INTO eproperty_users (user_ID, firstName, lastName, email) VALUES (6, 'prince', 'patel', 'prince@gmail.com');
+INSERT INTO eproperty_users (user_ID, firstName, lastName, email) VALUES (7, 'deep', 'patel', 'ddep@gmail.com');
+INSERT INTO eproperty_users (user_ID, firstName, lastName, email) VALUES (8, 'akshay', 'gupta1', 'akshay@gmail.com');
+INSERT INTO eproperty_users (user_ID, firstName, lastName, email) VALUES (9, 'abhushek', 'shah1', 'neel.4747@gmail.com');
+INSERT INTO eproperty_users (user_ID, firstName, lastName, email) VALUES (10, 'jaishal', 'mehta1', 'jaishal@gmail.com');
+INSERT INTO eproperty_users (user_ID, firstName, lastName, email) VALUES (11, 'Ishan', 'Patel', 'shadowofdeath18@gmail.com');
